@@ -1,0 +1,183 @@
+```{r}
+carlians::requeridos(lavaan, ggplot2, tidyr, PerformanceAnalytics, dplyr)
+
+population.model <- ' f1 =~ x1 + 0.8*x2 + 1.2*x3
+                      f2 =~ x4 + 0.5*x5 + 1.5*x6
+                      f3 =~ x7 + 0.1*x8 + 0.9*x9
+
+                      f3 ~ 0.5*f1 + 0.6*f2
+                    '
+
+# generate data
+set.seed(1234)
+myData <- simulateData(population.model, sample.nobs=10000L, kurtosis = 0)
+
+apply(myData, 2, kurtosis) %>% round(1)
+
+kurtosis(c(myData$x1, myData$x2, myData$x3))
+
+# plot the simulated observed variables
+
+myData %>% gather() %>% ggplot(aes(x = value, fill = key)) +
+  facet_grid(~ key) +
+  geom_density() +
+  guides(fill = F) +
+  theme_bw()
+
+# fit model
+myModel <- ' f1 =~ x1 + x2 + x3
+             f2 =~ x4 + x5 + x6
+             f3 =~ x7 + x8 + x9
+             f3 ~ f1 + f2 '
+fit <- sem(myModel, data=myData)
+summary(fit)
+lavCor(fit)
+```
+
+```{r}
+descriptivos(myData, x1)
+descriptivos(myData, x2)
+descriptivos(myData, x3)
+descriptivos(myData, x4)
+descriptivos(myData, x5)
+descriptivos(myData, x6)
+descriptivos(myData, x7)
+descriptivos(myData, x8)
+descriptivos(myData, x9)
+```
+```{r}
+mat_cor <- matrix(1, 9,9)
+
+mat_cor <- diag(1,9,9)
+valores <- cor(myData)[lower.tri(cor(myData))]
+valores[c(1,9)] <- .9
+mat_cor[lower.tri(mat_cor)] <- valores
+
+mat_cor[upper.tri(mat_cor)] <- t(mat_cor)[upper.tri(t(mat_cor))]
+```
+
+```{r}
+sims <- myData
+correlaciones <- mat_cor
+```
+
+
+```{r}
+simulaciones <- names(sims)
+cor_vars <- names(sims)
+
+nombres <- which(simulaciones %in% cor_vars)
+
+sims2 <- sims[, nombres]
+varcov <- var(sims2)
+
+# cholesky decomposition to get independence
+descomp.chol1 <- solve(chol(varcov))
+matriz <- as.matrix(sims2) %*% descomp.chol1 
+
+descomp.chol2 <- Cholesky(as(correlaciones, "dsCMatrix"))@x %>% matrix(.,9,9)
+
+matriz <- matriz %*% descomp.chol2 #* sd(x1) + mean(x1)
+
+matriz <- matriz * (apply(sims2, 2, sd) %>% matrix(nrow=nrow(sims2), ncol=ncol(sims2), byrow = TRUE))
+matriz <- matriz + (apply(sims2, 2, mean) %>% matrix(nrow=nrow(sims2), ncol=ncol(sims2), byrow = TRUE))
+sims <- data.frame(sims[, -nombres], matriz)
+
+
+data <- do.call(cbind, list(data, sims))
+names(data) <- c(variables, simulaciones)
+data
+sims %>% cor
+```
+
+
+
+
+```{r}
+#Generando las matrices de correlaciones
+##Paso 1
+t1 <- paste("x", 1:9, "=c(0,.8,.9,.95)", sep="", collapse = ",")
+
+matriz <- eval(parse(text =paste("expand_grid(", t1, ")")))
+matriz2 <- matrix(cors[12:21], 1048576, 10, byrow = T) %>% data.frame()
+matriz <- do.call(cbind, list(matriz, matriz2)) %>% 
+  mutate(V1=ifelse(V1<.8, X1, V1*sign(X1)),
+         V2=ifelse(V2<.8, X2, V2*sign(X2)),
+         V3=ifelse(V3<.8, X3, V3*sign(X3)),
+         V4=ifelse(V4<.8, X4, V4*sign(X4)),
+         V5=ifelse(V5<.8, X5, V5*sign(X5)),
+         V6=ifelse(V6<.8, X6, V6*sign(X6)),
+         V7=ifelse(V7<.8, X7, V7*sign(X7)),
+         V8=ifelse(V8<.8, X8, V8*sign(X8)),
+         V9=ifelse(V9<.8, X9, V9*sign(X9)),
+         V10=ifelse(V10<.8, X10, V10*sign(X10))) %>% 
+  dplyr::select(V1:V10)
+matriz <- do.call(cbind, list(matrix(cors[1:11], 1048576, 11, byrow = T) %>% data.frame(), matriz))
+
+##Paso 2
+
+###Genero la matriz con todas las combinaciones
+casos <- matriz
+prueba <- mapply(function(casos, fila){
+ resultado <- tryCatch({
+    mat_cor0 <- matrix(1, 7,7)
+    mat_cor0 <- diag(1,7,7)
+    mat_cor0[lower.tri(mat_cor0)] <- casos[fila,] %>% unlist
+    mat_cor0[upper.tri(mat_cor0)] <- t(mat_cor0)[upper.tri(t(mat_cor0))]
+    chol(mat_cor0)
+  }, error=function(e) matrix(1,1,1))
+ 
+ resultado
+},
+fila=1:nrow(matriz),
+MoreArgs = list(casos=matriz), SIMPLIFY = F)
+
+##Paso 3
+
+###Selecciono las matrices por numero de casos con correlacion determinada
+posibles.8 <- matriz[which(sapply(prueba, nrow)>1),]  %>% 
+  apply(1, function(x){
+    sum(x %in% c(-.8,.8))
+  }) 
+
+posibles.9 <- matriz[which(sapply(prueba, nrow)>1),]  %>% 
+  apply(1, function(x){
+    sum(x %in% c(-.9,.9))
+  }) 
+
+posibles.95 <- matriz[which(sapply(prueba, nrow)>1),]  %>% 
+  apply(1, function(x){
+    sum(x %in% c(-.95,.95))
+  }) 
+
+posiciones.8 <- sort(posibles.8)[!duplicated(sort(posibles.8))] %>% names %>% as.numeric
+matriz.8 <- matriz[posiciones.8,] %>% mutate(id=paste("cor.8_vars", 0:(nrow(.)-1), sep=""))
+
+posiciones.9 <- sort(posibles.9)[!duplicated(sort(posibles.9))] %>% names %>% as.numeric
+matriz.9 <- matriz[posiciones.9,] %>% mutate(id=paste("cor.9_vars", 0:(nrow(.)-1), sep=""))
+
+posiciones.95 <- sort(posibles.95)[!duplicated(sort(posibles.95))] %>% names %>% as.numeric
+matriz.95 <- matriz[posiciones.95,] %>% mutate(id=paste("cor.95_vars", 0:(nrow(.)-1), sep=""))
+
+##Paso 4
+
+###Los casos a utilizar son:
+
+vectores <- do.call(rbind, list(matriz.8[-1,], matriz.9[-1,], matriz.95[-1,]))
+
+##Paso 5
+###Se generan las matrices de correlaciones
+vectores <- split(vectores, vectores$id)
+
+matrices <- lapply(vectores, function(x){
+  x <- x[,-22]
+  mat_cor0 <- matrix(1, 7,7)
+  mat_cor0 <- diag(1,7,7)
+  mat_cor0[lower.tri(mat_cor0)] <- unlist(x)
+  mat_cor0[upper.tri(mat_cor0)] <- t(mat_cor0)[upper.tri(t(mat_cor0))]
+  mat_cor0
+})
+
+matrices
+```
+

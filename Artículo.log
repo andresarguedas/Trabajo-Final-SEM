@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.5.16)  18 MAY 2020 14:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.5.20)  21 MAY 2020 15:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Artículo.tex
 (./Artículo.tex
 LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-05-11> (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-
+L3 programming layer <2020-05-15> (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-
 dist/tex/latex/base/article.cls
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
@@ -211,7 +211,7 @@ File: x11nam.def 2016/05/11 v2.12 Predefined colors according to Unix/X11 (UK)
 ))
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.s
 ty
-Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
+Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdftexcmds/pdftexcm
 ds.sty
@@ -249,7 +249,7 @@ Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 \Hy@pagecounter=\count189
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2020-05-15 v7.00e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -262,25 +262,25 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count190
-Package hyperref Info: Option `unicode' set `true' on input line 4421.
+Package hyperref Info: Option `unicode' set `true' on input line 4338.
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2020/01/14 v7.00d Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2020-05-15 v7.00e Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Hyper figures OFF on input line 4547.
-Package hyperref Info: Link nesting OFF on input line 4552.
-Package hyperref Info: Hyper index ON on input line 4555.
-Package hyperref Info: Plain pages OFF on input line 4562.
-Package hyperref Info: Backreferencing OFF on input line 4567.
+Package hyperref Info: Hyper figures OFF on input line 4464.
+Package hyperref Info: Link nesting OFF on input line 4469.
+Package hyperref Info: Hyper index ON on input line 4472.
+Package hyperref Info: Plain pages OFF on input line 4479.
+Package hyperref Info: Backreferencing OFF on input line 4484.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4800.
+Package hyperref Info: Bookmarks ON on input line 4717.
 \c@Hy@tempcnt=\count191
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5159.
+LaTeX Info: Redefining \url on input line 5076.
 \XeTeXLinkMargin=\dimen145
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
@@ -294,15 +294,15 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 \Fld@menulength=\count192
 \Field@Width=\dimen146
 \Fld@charsize=\dimen147
-Package hyperref Info: Hyper figures OFF on input line 6430.
-Package hyperref Info: Link nesting OFF on input line 6435.
-Package hyperref Info: Hyper index ON on input line 6438.
-Package hyperref Info: backreferencing OFF on input line 6445.
-Package hyperref Info: Link coloring OFF on input line 6450.
-Package hyperref Info: Link coloring with OCG OFF on input line 6455.
-Package hyperref Info: PDF/A mode OFF on input line 6460.
-LaTeX Info: Redefining \ref on input line 6500.
-LaTeX Info: Redefining \pageref on input line 6504.
+Package hyperref Info: Hyper figures OFF on input line 6347.
+Package hyperref Info: Link nesting OFF on input line 6352.
+Package hyperref Info: Hyper index ON on input line 6355.
+Package hyperref Info: backreferencing OFF on input line 6362.
+Package hyperref Info: Link coloring OFF on input line 6367.
+Package hyperref Info: Link coloring with OCG OFF on input line 6372.
+Package hyperref Info: PDF/A mode OFF on input line 6377.
+LaTeX Info: Redefining \ref on input line 6417.
+LaTeX Info: Redefining \pageref on input line 6421.
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/atbegshi/atbegshi
 .sty
@@ -316,7 +316,7 @@ Package hyperref Info: Driver (autodetected): hpdftex.
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.de
 f
-File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
+File: hpdftex.def 2020-05-15 v7.00e Hyperref driver for pdfTeX
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/atveryend/atveryend
 .sty
@@ -399,11 +399,12 @@ Package graphics Info: Driver file: pdftex.def on input line 105.
 ty
 Package: setspace 2011/12/19 v6.7a set line spacing
 ) (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2020/04/28 3.43 The Babel package
+Package: babel 2020/05/13 3.44 The Babel package
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/04/28 3.43 Babel common definitions
+File: babel.def 2020/05/13 3.44 Babel common definitions
 \babel@savecnt=\count270
 \U@D=\dimen162
+\l@babelnohyphens=\language6
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/txtbabel.de
 f)
@@ -709,6 +710,7 @@ Package floatrow Info: Modified rotfloat package code loaded on input line 473.
 \flrow@types=\toks37
 )
 \c@chunk=\count304
+\cslhangindent=\skip122
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend
 -pdfmode.def
@@ -721,24 +723,24 @@ LaTeX Info: Redefining \% on input line 24.
 )
 \openout1 = `Artículo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 257.
-LaTeX Font Info:    ... okay on input line 257.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 257.
-LaTeX Font Info:    ... okay on input line 257.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 257.
-LaTeX Font Info:    ... okay on input line 257.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 257.
-LaTeX Font Info:    ... okay on input line 257.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 257.
-LaTeX Font Info:    ... okay on input line 257.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 257.
-LaTeX Font Info:    ... okay on input line 257.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 257.
-LaTeX Font Info:    ... okay on input line 257.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 257.
-LaTeX Font Info:    ... okay on input line 257.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 257.
-LaTeX Font Info:    ... okay on input line 257.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstop
 df-base.sty
@@ -752,7 +754,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box69
-Package hyperref Info: Link coloring ON on input line 257.
+Package hyperref Info: Link coloring ON on input line 263.
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.st
 y
@@ -768,9 +770,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count306
 )
-LaTeX Info: Redefining \ref on input line 257.
-LaTeX Info: Redefining \pageref on input line 257.
-LaTeX Info: Redefining \nameref on input line 257.
+LaTeX Info: Redefining \ref on input line 263.
+LaTeX Info: Redefining \pageref on input line 263.
+LaTeX Info: Redefining \nameref on input line 263.
 (./Artículo.out) (./Artículo.out)
 \@outlinefile=\write4
 \openout4 = `Artículo.out'.
@@ -809,8 +811,8 @@ LaTeX Info: Redefining \nameref on input line 257.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \. on input line 257.
-LaTeX Info: Redefining \% on input line 257.
+LaTeX Info: Redefining \. on input line 263.
+LaTeX Info: Redefining \% on input line 263.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: floatrow package is loaded.
@@ -834,37 +836,37 @@ Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 \c@FBLTpage=\count307
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-59.
+65.
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-59.
+65.
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-259.
+265.
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-259.
+265.
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 259.
+(Font)              <12> on input line 265.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 259.
+(Font)              <8> on input line 265.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 259.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 259
+(Font)              <6> on input line 265.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 265
 .
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 259
+LaTeX Font Info:    Trying to load font information for U+msb on input line 265
 .
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -875,7 +877,14 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.270 ...mph{Palabras clave}}:kkk \cleardoublepage
+l.276 ...mph{Palabras clave}}:kkk \cleardoublepage
+                                                   [1
+
+]pdfTeX warning (ext4): destination with the same identifier (name{page.}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.283 ...mph{Palabras clave}}:kkk \cleardoublepage
                                                    [1
 
 ] (./Artículo.toc
@@ -895,68 +904,68 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.276 \cleardoublepage
+l.289 \cleardoublepage
                        [1
 
 ]
-LaTeX Info: Redefining \. on input line 295.
-LaTeX Info: Redefining \% on input line 295.
+LaTeX Info: Redefining \. on input line 364.
+LaTeX Info: Redefining \% on input line 364.
 [1
 
 ]
-LaTeX Info: Redefining \. on input line 305.
-LaTeX Info: Redefining \% on input line 305.
+LaTeX Info: Redefining \. on input line 400.
+LaTeX Info: Redefining \% on input line 400.
 [2]
-LaTeX Info: Redefining \. on input line 311.
-LaTeX Info: Redefining \% on input line 311.
+LaTeX Info: Redefining \. on input line 406.
+LaTeX Info: Redefining \% on input line 406.
 [3]
-LaTeX Info: Redefining \. on input line 317.
-LaTeX Info: Redefining \% on input line 317.
+LaTeX Info: Redefining \. on input line 412.
+LaTeX Info: Redefining \% on input line 412.
 [4]
-LaTeX Info: Redefining \. on input line 327.
-LaTeX Info: Redefining \% on input line 327.
+LaTeX Info: Redefining \. on input line 422.
+LaTeX Info: Redefining \% on input line 422.
 [5]
 
 Package caption Warning: \captionsetup{type*=...} or \captionof
-(caption)                outside box or environment on input line 333.
+(caption)                outside box or environment on input line 428.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 333.
+(caption)                particular \caption on input line 428.
 See the caption package documentation for explanation.
 
 Package hyperref Info: bookmark level for unknown chunk defaults to 0 on input 
-line 333.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-36.
+line 428.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
+31.
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 337.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 345.
-LaTeX Info: Redefining \. on input line 345.
-LaTeX Info: Redefining \% on input line 345.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 432.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 476.
+LaTeX Info: Redefining \. on input line 476.
+LaTeX Info: Redefining \% on input line 476.
 [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 345.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 476.
 (./Artículo.aux
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 345.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 345.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 476.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 476.
 Package rerunfilecheck Info: File `Artículo.out' has not changed.
-(rerunfilecheck)             Checksum: 71FF97E79A9077106BCCBB8D6D07B81A;3242.
+(rerunfilecheck)             Checksum: EBBA8F49B30BBEE854FA63221303DFAD;2599.
  ) 
 Here is how much of TeX's memory you used:
- 16329 strings out of 482395
- 239219 string characters out of 5944916
- 541077 words of memory out of 5000000
- 31768 multiletter control sequences out of 15000+600000
- 582637 words of font info for 66 fonts, out of 8000000 for 9000
+ 16330 strings out of 482383
+ 239276 string characters out of 5944537
+ 541840 words of memory out of 5000000
+ 31777 multiletter control sequences out of 15000+600000
+ 586900 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 38i,11n,45p,1198b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,11n,45p,1198b,401s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
 c}<c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx1
 0.pfb><c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/l
@@ -965,12 +974,13 @@ lm/lmbxi10.pfb><c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pu
 blic/lm/lmr10.pfb><c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
 /public/lm/lmr12.pfb><c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/ty
 pe1/public/lm/lmr17.pfb><c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts
-/type1/public/lm/lmtk10.pfb><c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/f
-onts/type1/public/lm/lmtt10.pfb>
-Output written on Artículo.pdf (9 pages, 199576 bytes).
+/type1/public/lm/lmri10.pfb><c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/f
+onts/type1/public/lm/lmtk10.pfb><c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-di
+st/fonts/type1/public/lm/lmtt10.pfb>
+Output written on Artículo.pdf (10 pages, 235254 bytes).
 PDF statistics:
- 197 PDF objects out of 1000 (max. 8388607)
- 176 compressed objects within 2 object streams
- 31 named destinations out of 1000 (max. 500000)
- 177 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 206 PDF objects out of 1000 (max. 8388607)
+ 183 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 153 words of extra memory for PDF output out of 10000 (max. 10000000)
 

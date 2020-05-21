@@ -1,20 +1,40 @@
 \subsection{Antecedentes}
 
+Los Modelos de Ecuaciones Estructurales (en adelante SEM, por sus siglas en inglés) representan un compendio de métodos estadísticos que buscan estimar y examinar las relaciones existentes entre varias mediciones fácilmente observables con conceptos más abstractos, denominados constructos, que no pueden ser medidos ni analizados de manera directa. Los SEM trabajan de una manera similar a los modelos de regresión más clásicos, pero representan una mejora pues analizan las relaciones causales lineales entre las variables involucradas al mismo tiempo que los errores de medición [@Beran2010StructuralEM].
 
+Los SEM están presentes en multitud de campos de investigación. Según Beran y Violato (2010), la cantidad de referencias a SEM en 1994 fueron de 164, aumentaron a 343 en el 2000 y llegaron a 742 en el 2009, lo cual es una señal de que muchos investigadores alrededor del mundo están mostrando cada vez más interés en este tipo de estudios, pues representan una potente herramienta para la investigación partiendo de la teoría sustantiva que poseen los diversos estudios. 
+
+Uno de los principales campos de aplicación de los SEM son las ciencias sociales, pues se busca explicar y/o predecir con un grado de validez el comportamiento específico de una o varias personas en grupo. Teniendo siempre en consideración (aunque de forma limitada) las condiciones que afectan a cada individuo involucrado en el estudio, así como las características propias de su entorno, los grupos de investigación pueden definir factores y relaciones latentes que se encuentran implícitas en el comportamiento humano. Este tipo de investigaciones permite entender los fenómenos no solo de forma descriptiva, sino que es posible también determinar relaciones de causalidad [@Tarka].
+
+Las variables indicadoras que sirven para construir las relaciones implícitas en cuestión, llamadas comúnmente constructos, pueden llegar a comportarse de manera muy diversa. Las ciencias sociales, al trabajar con seres humanos, es común trabajar con variables cuyo comportamiento es particularmente irregular, presentando valores muy distintos entre los sujetos de estudio, generando de esta manera que los indicadores de manera multivariada no sigan una distribución normal, lo cual representa un supuesto fundamental al trabajar con SEM [@sura]. El no cumplimiento de este supuesto puede deberse, entre otras cosas, a medidas particularmente altas o bajas de una medida estadística en específico: La kurtosis.
 
 \subsection{El problema}
 
+Si al trabajar con un SEM no se cumple el supuesto de normalidad multivariada y además el modelo se estima vía máxima verosimilitud podría cometerse el error de sobreestimar el estadístico chi-cuadrado, el cual sirve de referencia para conocer la magnitud de la diferencia entre la matriz de covariancias estimadas por el modelo con la obtenida en la muestra. Lo anterior suele llevar al rechazar modelos que en realidad resumen bien la realidad y además a la subestimación de los errores asociados a los parámetros, lo cual genera interpretaciones inadecuadas en lo referente a la significancia de las relaciones planteadas por el modelo teórico. Considerar distintos niveles de kurtosis permite conocer el impacto que esta medida tiene sobre las estimaciones de un SEM dependiendo del tamaño de muestra utilizado [@muthen].
 
 \subsection{Objetivos del estudio}
 
+La presente investigación busca estudiar el efecto que tienen distintos niveles de kurtosis en varios tamaños de muestra sobre las estimaciones de un SEM. Para ello, tomando como base un estudio de la Universidad de California [@gao] se plantean los siguientes objetivos:
 
+\subsubsection{Objetivo general}
+
+Comparar mediante un estudio de simulación las estimaciones de modelos de ecuaciones estructurales en presencia de variables observadas con niveles de kurtosis de 0, 0.62, 6.65, 21.41 y 13.92 en tamaños de muestra de 50, 100, 200, 400 y 800.
+
+\subsubsection{Objetivos específicos}
+
+**1)** Definir como modelo poblacional el obtenido por Sura-Fonseca (2020) **(página 99 de la tesis)** como modelo de referencia teórico cuyas cargas factoriales se utilizarán para la generación de los datos simulados.
+
+**2)** Medir el posible sesgo causado en la estimación de los modelos mediante el estadístico chi-cuadrado del modelo y la raíz del cuadrado medio de error de aproximación (RMSEA), la raíz de residuos de cuadrado medio estandarizado (SRMR) y el índice de bondad de ajuste (GFI).
+
+**3)** Comparar los valores poblacionales de las cargas factoriales con los obtenidos en las simulaciones.
+
+**4)** Publicar en una revista científica con revisión por pares el manuscrito final, en forma de un artículo científico.
 
 \subsection{Metodología de la investigación}
 
-
-\subsection{Justificación del estudio}
-
+**AQUÍ VA UN RESUMEN DE LO QUE PONEMOS EN LA SECCIÓN DE METODOLOGÍA**
 
 
 \subsection{Organización del estudio}
 
+**AQUÍ VA UNA DESCIPCIÓN BREVE DE CADA ETAPA DEL TRABAJO**

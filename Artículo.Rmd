@@ -67,7 +67,15 @@ knit_hooks$set(source = function(x, options) {
 \section*{RESUMEN}
 \pagenumbering{gobble}
 
-bla bla
+El Resumen
+
+***Palabras clave***:kkk 
+\cleardoublepage
+
+\section*{ABSTRACT}
+\pagenumbering{gobble}
+
+El resumen en inglés
 
 ***Palabras clave***:kkk 
 \cleardoublepage
@@ -87,12 +95,6 @@ bla bla
 ```{r, child="01-Introduccion.Rmd"}
 ```
 
-\newpage
-
-\section{MARCO TEÓRICO}
-
-```{r, child="02-Marco_teorico.Rmd"}
-```
 
 \newpage
 

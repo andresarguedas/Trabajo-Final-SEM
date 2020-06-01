@@ -22,7 +22,7 @@ Comparar mediante un estudio de simulación las estimaciones de modelos de ecuac
 
 \subsubsection{Objetivos específicos}
 
-**1)** Definir como modelo poblacional el obtenido por Sura-Fonseca (2020) **(página 99 de la tesis)** como modelo de referencia teórico cuyas cargas factoriales se utilizarán para la generación de los datos simulados.
+**1)** Definir como modelo poblacional el obtenido por Sura-Fonseca (2020) con dos variables exógenas y una endógena con tres variables indicadoras cada uno **(página 99 de la tesis)** como modelo de referencia teórico cuyas cargas factoriales se utilizarán para la generación de los datos simulados.
 
 **2)** Medir el posible sesgo causado en la estimación de los modelos mediante el estadístico chi-cuadrado del modelo y la raíz del cuadrado medio de error de aproximación (RMSEA), la raíz de residuos de cuadrado medio estandarizado (SRMR) y el índice de bondad de ajuste (GFI).
 
@@ -37,4 +37,4 @@ Comparar mediante un estudio de simulación las estimaciones de modelos de ecuac
 
 \subsection{Organización del estudio}
 
-**AQUÍ VA UNA DESCIPCIÓN BREVE DE CADA ETAPA DEL TRABAJO**
+**AQUÍ VA UNA DESCRIPCIÓN BREVE DE CADA ETAPA DEL TRABAJO**

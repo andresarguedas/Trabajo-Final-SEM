@@ -19,7 +19,7 @@ author: |
     |
     |
     | CÉSAR ANDRÉS GAMBOA SANABRIA B12672
-    | ANDRÉS ARGUEDAS LEIVA BXXXXX
+    | ANDRÉS ESTEBAN ARGUEDAS LEIVA B40535
     |
     |
     |
@@ -30,6 +30,8 @@ author: |
     |
 date: "`r format(Sys.time(), '%Y')`"
 always_allow_html: yes
+header-includes:
+   - \usepackage{amssymb}
 output: 
     pdf_document:
         keep_tex: yes

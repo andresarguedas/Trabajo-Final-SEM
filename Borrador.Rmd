@@ -54,9 +54,9 @@ sapply(resumen_kurtosis, colMeans) %>% t %>% as.data.frame
 
 # Ajuste de modelos
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 modelo <- ' CA =~ x1 + x2 + x3
-             PCH =~ x4 + x5 + x6
+             PHC =~ x4 + x5 + x6
              VE =~ x7 + x8 + x9
              VE ~ CA + PHC '
 
@@ -75,6 +75,9 @@ estimaciones <- lapply(modelos, function(x){
   lapply(x, function(y){
     resumen <- summary(y, fit.measures=TRUE)$FIT %>% c
     resultado <- data.frame(chi=resumen[5], rmsea=resumen[17], srmr=resumen[21], cfi=resumen[9])
+    resultado <- if(nrow(resultado)<1){
+      data.frame(chi=NA, rmsea=NA, srmr=NA, cfi=NA)
+    }else(resultado)
     summary(y, fit.measures=TRUE)$PE %>% 
       mutate(termino=paste(lhs, op, rhs, sep="")) %>% 
       dplyr::select(termino, est) %>% 

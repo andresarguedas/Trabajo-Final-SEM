@@ -241,7 +241,8 @@ ESCUELA DE ESTADÍSTICA\\
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{TÍTULO IMPRESIONANTE\\
+\subtitle{EFECTOS DE LA KURTOSIS EN LA ESTIMACIÓN DE MODELOS DE
+ECUACIONES ESTRUCTURALES BAJO DISTINTOS TAMAÑOS DE MUESTRA\\
 ~\\
 ~\\
 ~\\}
@@ -274,14 +275,16 @@ Ciudad Universitaria Rodrigo Facio, Costa Rica\\
 
 El Resumen
 
-\textbf{\emph{Palabras clave}}:kkk \cleardoublepage
+\textbf{\emph{Palabras clave}}:SEM, simulación, kurtosis, lavaan, R
+\cleardoublepage
 
 \section*{ABSTRACT}
 \pagenumbering{gobble}
 
 El resumen en inglés
 
-\textbf{\emph{Palabras clave}}:kkk \cleardoublepage
+\textbf{\emph{Palabras clave}}:SEM, simulation, kurtosis, lavaan, R
+\cleardoublepage
 
 \newpage
 
@@ -407,12 +410,13 @@ METODOLOGÍA}
 
 \subsection{Generación de datos con kurtosis}
 
-Los datos fueron simulados mediante la función \texttt{simulateData} del
-paquete \texttt{lavaan} (Rosseel, \protect\hyperlink{ref-lavaan}{2012}),
-el cual utiliza el método propuesto por Vale y Maurelli (Vale \&
-Maurelli, \protect\hyperlink{ref-Vale1983}{1983}) para la simulación de
-datos no normales multivariados. Este método, comúnmente conocido como
-VM, se basa en el método propuesto por Fleishman (Fleishman,
+Los datos fueron simulados mediante la función \texttt{simulateData()}
+del paquete \texttt{lavaan} (Rosseel,
+\protect\hyperlink{ref-lavaan}{2012}), el cual utiliza el método
+propuesto por Vale y Maurelli (Vale \& Maurelli,
+\protect\hyperlink{ref-Vale1983}{1983}) para la simulación de datos no
+normales multivariados. Este método, comúnmente conocido como VM, se
+basa en el método propuesto por Fleishman (Fleishman,
 \protect\hyperlink{ref-Fleishman1978}{1978}), el cual, con base en una
 variable aleatoria distribuida como una normal estándar, permite simular
 una variable con un promedio, variancia, asimetría y kurtosis dada. El
@@ -476,13 +480,64 @@ mediante el método de Fleishman.
 
 \subsection{Medidas de bondad de ajuste}
 
-\subsection{Software y paquetes}
+\subsection{Simulación y estimación}
 
 La simulación de los datos, junto con la estimación de los modelos, se
 realizó mediante el paquete \texttt{lavaan} (Rosseel,
 \protect\hyperlink{ref-lavaan}{2012}) usando el software R (R Core Team,
 \protect\hyperlink{ref-R}{2020}) mediante la interfaz gráfica de RStudio
-(RStudio Team, \protect\hyperlink{ref-RStudio}{2015}).
+(RStudio Team, \protect\hyperlink{ref-RStudio}{2015}). Para e manejo de
+bases de datos y demás visualizaciones fueron utilizados los paquetes
+\texttt{ggplot2}(Wickham, \protect\hyperlink{ref-ggplot2}{2016}),
+\texttt{tidyr} (Wickham \& Henry, \protect\hyperlink{ref-tidyr}{2020}),
+\texttt{dplyr} (Wickham et~al., \protect\hyperlink{ref-dplyr}{2020}),
+\texttt{ggpubr} (Kassambara, \protect\hyperlink{ref-ggpubr}{2020}),
+\texttt{PerformanceAnalytics} (Peterson \& Carl,
+\protect\hyperlink{ref-PerformanceAnalytics}{2020}) y
+\texttt{kableExtra} (Zhu, \protect\hyperlink{ref-kableExtra}{2019}).
+
+Para poder realizar la simulación deben seguirse varios pasos. Lo
+primero es definir el modelo teórico poblacional que van a seguir los
+datos simulados, como se describió en secciones anteriores este modelo
+cuenta con dos variables exógenas y una endógena, cada una con tres
+variables indicadoras. Los datos se generan mediante la función
+\texttt{simulateData()} la cuál requiere especificar varios argumentos,
+uno de ellos es el modelo poblacional, cuya sintaxis puede encontrarse
+en el \ref{modelo}. Los otros dos argumentos a especificar son el tamaño
+de muestra deseado y el nivel de kurtosis de interés, la definición de
+estos escenarios se obtiene mediante el \ref{escenarios} y se muestran
+en el cuadro \ref{tab:escenarios}:
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-6}\label{tab:escenarios}Escenarios de simulación}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{9}{11}\selectfont
+\begin{tabu} to \linewidth {>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\toprule
+kurtosis & n & kurtosis & n & kurtosis & n & kurtosis & n & kurtosis & n\\
+\midrule
+\rowcolor{gray!6}  0.00 & 50 & 0.00 & 100 & 0.00 & 200 & 0.00 & 400 & 0.00 & 800\\
+0.62 & 50 & 0.62 & 100 & 0.62 & 200 & 0.62 & 400 & 0.62 & 800\\
+\rowcolor{gray!6}  6.65 & 50 & 6.65 & 100 & 6.65 & 200 & 6.65 & 400 & 6.65 & 800\\
+21.41 & 50 & 21.41 & 100 & 21.41 & 200 & 21.41 & 400 & 21.41 & 800\\
+\rowcolor{gray!6}  13.92 & 50 & 13.92 & 100 & 13.92 & 200 & 13.92 & 400 & 13.92 & 800\\
+\bottomrule
+\multicolumn{10}{l}{\textit{Fuente:} Elaboración propia a partir del estudio de la Universidad de California (2008)}\\
+\end{tabu}}
+\end{table}
+
+Con estos escenarios definidos, se generaron entonces, para cada
+combinación de tamaño de muestra y kurtosis un total de 2000 conjuntos
+de datos para cada uno. La sintaxis necesaria para generar esto se
+muestra en el \ref{simulacion}. Una vez que se obtuvieron estos
+conjuntos de datos, el siguiente paso es realizar la estimación de los
+SEM con cada uno de ellos; para ello es necesario definir un modelo de
+una forma similar a como se indicó en el \ref{modelo}, pero esta vez sin
+los valores de las cargas factoriales, pues se busca conocer las
+estimaciones a partir de los datos generados, este proceso se muestra en
+el \ref{modelos_sem}.
 
 \newpage
 
@@ -504,15 +559,75 @@ realizó mediante el paquete \texttt{lavaan} (Rosseel,
 
 \section{ANEXOS}
 
-\subsection{La función funcion\_1}
+\subsection{Modelo poblacional para la función simulateData()}
 
-\captionof{chunk}{Una función}\label{funcion1}
+\captionof{chunk}{Modelo poblacional para simular datos}\label{modelo}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{funcion\_}\DecValTok{1}\NormalTok{ \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x,y)\{}
-\NormalTok{    x}\OperatorTok{+}\NormalTok{y}
-\NormalTok{\}}
+\NormalTok{modelo \textless{}{-}}\StringTok{ \textquotesingle{} CA =\textasciitilde{} 0.88*x1 + 0.77*x2 + 0.73*x3}
+\StringTok{            PHC =\textasciitilde{} 0.85*x4 + 0.80*x5 + 0.82*x6}
+\StringTok{            VE =\textasciitilde{} 0.62*x7 + 0.74*x8 + 0.72*x9}
+
+\StringTok{            VE \textasciitilde{} {-}0.01*CA + 0.41*PHC}
+\StringTok{          \textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Escenarios de simulación para el tamaño de muestra y kurtosis}
+
+\captionof{chunk}{Combinaciones de tamaño de muestra y kurtosis}\label{escenarios}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{casos \textless{}{-}}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{kurtosis=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.62}\NormalTok{, }\FloatTok{6.65}\NormalTok{, }\FloatTok{21.41}\NormalTok{, }\FloatTok{13.92}\NormalTok{), }\DataTypeTok{n=}\KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{800}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Simulación de datos}
+
+\captionof{chunk}{Generación de datos para cada escenario}\label{simulacion}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{  data \textless{}{-}}\StringTok{ }\KeywordTok{mapply}\NormalTok{(simulateData, }\DataTypeTok{sample.nobs=}\NormalTok{casos}\OperatorTok{$}\NormalTok{n, }\DataTypeTok{kurtosis=}\NormalTok{casos}\OperatorTok{$}\NormalTok{kurtosis, }
+                 \DataTypeTok{MoreArgs =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\NormalTok{modelo),}
+                 \DataTypeTok{SIMPLIFY =} \OtherTok{FALSE}\NormalTok{)}
+  
+  \KeywordTok{names}\NormalTok{(data) \textless{}{-}}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"n"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{n, }\StringTok{"k"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{kurtosis, }\DataTypeTok{sep=}\StringTok{""}\NormalTok{)}
+\NormalTok{  data}
+\NormalTok{\})}
+
+\NormalTok{casos\_resultados \textless{}{-}}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{x=}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(datos), }\DataTypeTok{y=}\KeywordTok{names}\NormalTok{(datos[[}\DecValTok{1}\NormalTok{]]))}
+
+\NormalTok{nombres \textless{}{-}}\StringTok{ }\KeywordTok{unique}\NormalTok{(casos\_resultados}\OperatorTok{$}\NormalTok{y) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\NormalTok{paste}
+\NormalTok{datos \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(nombres, }\ControlFlowTok{function}\NormalTok{(y)\{}
+  \KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(datos), }\ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{    datos[[x]][[y]]}
+\NormalTok{  \})}
+\NormalTok{\})}
+
+\KeywordTok{names}\NormalTok{(datos) \textless{}{-}}\StringTok{ }\NormalTok{nombres}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Estimación de los SEM}
+
+\captionof{chunk}{Definición del modelo y estimación para cada conjunto de datos}\label{modelos_sem}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo \textless{}{-}}\StringTok{ \textquotesingle{} CA =\textasciitilde{} x1 + x2 + x3}
+\StringTok{            PHC =\textasciitilde{} x4 + x5 + x6}
+\StringTok{            VE =\textasciitilde{} x7 + x8 + x9}
+\StringTok{            VE \textasciitilde{} CA + PHC \textquotesingle{}}
+
+\NormalTok{modelos \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(datos, }\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{lapply}\NormalTok{(x, }\ControlFlowTok{function}\NormalTok{(y)\{}
+    \KeywordTok{sem}\NormalTok{(modelo, }\DataTypeTok{data=}\NormalTok{y)}
+\NormalTok{  \})}
+\NormalTok{\})}
 \end{Highlighting}
 \end{Shaded}
 
@@ -537,12 +652,21 @@ Data in Structural Equation Models. \emph{Transportation Research
 Record}, \emph{2082}(1), 116-124. Recuperado de
 \href{\%20https://doi.org/10.3141/2082-14}{https://doi.org/10.3141/2082-14}
 
+\leavevmode\hypertarget{ref-ggpubr}{}%
+Kassambara, A. (2020). \emph{ggpubr: 'ggplot2' Based Publication Ready
+Plots}. Recuperado de \url{https://CRAN.R-project.org/package=ggpubr}
+
 \leavevmode\hypertarget{ref-muthen}{}%
 Muthen, B., \& Kaplan, D. (1992). A comparison of some methodologies for
 the factor analysis of non-normal Likert variables: A note on the size
 of the model. \emph{British Journal of Mathematical and Statistical
 Psychology}, \emph{45}(1), 19-30. Recuperado de
 \url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.2044-8317.1992.tb00975.x}
+
+\leavevmode\hypertarget{ref-PerformanceAnalytics}{}%
+Peterson, B. G., \& Carl, P. (2020). \emph{PerformanceAnalytics:
+Econometric Tools for Performance and Risk Analysis}. Recuperado de
+\url{https://CRAN.R-project.org/package=PerformanceAnalytics}
 
 \leavevmode\hypertarget{ref-R}{}%
 R Core Team. (2020). \emph{R: A Language and Environment for Statistical
@@ -575,6 +699,24 @@ Methodology}, \emph{52}(1), 313-354. Recuperado de
 Vale, C. D., \& Maurelli, V. A. (1983). Simulating multivariate
 nonnormal distributions. \emph{Psychometrika}, \emph{48}(3), 465-471.
 \url{https://doi.org/10.1007/BF02293687}
+
+\leavevmode\hypertarget{ref-ggplot2}{}%
+Wickham, H. (2016). \emph{ggplot2: Elegant Graphics for Data Analysis}.
+Recuperado de \url{https://ggplot2.tidyverse.org}
+
+\leavevmode\hypertarget{ref-dplyr}{}%
+Wickham, H., François, R., Henry, L., \& Müller, K. (2020). \emph{dplyr:
+A Grammar of Data Manipulation}. Recuperado de
+\url{https://CRAN.R-project.org/package=dplyr}
+
+\leavevmode\hypertarget{ref-tidyr}{}%
+Wickham, H., \& Henry, L. (2020). \emph{tidyr: Tidy Messy Data}.
+Recuperado de \url{https://CRAN.R-project.org/package=tidyr}
+
+\leavevmode\hypertarget{ref-kableExtra}{}%
+Zhu, H. (2019). \emph{kableExtra: Construct Complex Table with 'kable'
+and Pipe Syntax}. Recuperado de
+\url{https://CRAN.R-project.org/package=kableExtra}
 \end{cslreferences}
 
 \end{document}

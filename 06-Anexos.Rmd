@@ -1,7 +1,55 @@
-\subsection{La función funcion\_1}
+\subsection{Modelo poblacional para la función simulateData()}
 
-```{r, ref="funcion1", codecap = "Una función", echo=TRUE, eval=FALSE}
-funcion_1 <- function(x,y){
-    x+y
-}
+```{r, ref="modelo", codecap = "Modelo poblacional para simular datos", echo=TRUE, eval=FALSE}
+modelo <- ' CA =~ 0.88*x1 + 0.77*x2 + 0.73*x3
+            PHC =~ 0.85*x4 + 0.80*x5 + 0.82*x6
+            VE =~ 0.62*x7 + 0.74*x8 + 0.72*x9
+
+            VE ~ -0.01*CA + 0.41*PHC
+          '
+```
+
+\subsection{Escenarios de simulación para el tamaño de muestra y kurtosis}
+
+```{r, ref="escenarios", codecap = "Combinaciones de tamaño de muestra y kurtosis", echo=TRUE, eval=FALSE}
+casos <- expand.grid(kurtosis=c(0, 0.62, 6.65, 21.41, 13.92), n=c(50, 100, 200, 400, 800))
+```
+
+\subsection{Simulación de datos}
+
+```{r, ref="simulacion", codecap = "Generación de datos para cada escenario", echo=TRUE, eval=FALSE}
+datos <- lapply(1:2000, function(x){
+  data <- mapply(simulateData, sample.nobs=casos$n, kurtosis=casos$kurtosis, 
+                 MoreArgs = list(model=modelo),
+                 SIMPLIFY = FALSE)
+  
+  names(data) <- paste("n", casos$n, "k", casos$kurtosis, sep="")
+  data
+})
+
+casos_resultados <- expand.grid(x=1:length(datos), y=names(datos[[1]]))
+
+nombres <- unique(casos_resultados$y) %>% paste
+datos <- lapply(nombres, function(y){
+  lapply(1:length(datos), function(x){
+    datos[[x]][[y]]
+  })
+})
+
+names(datos) <- nombres
+```
+
+\subsection{Estimación de los SEM}
+
+```{r, ref="modelos_sem", codecap = "Definición del modelo y estimación para cada conjunto de datos", echo=TRUE, eval=FALSE}
+modelo <- ' CA =~ x1 + x2 + x3
+            PHC =~ x4 + x5 + x6
+            VE =~ x7 + x8 + x9
+            VE ~ CA + PHC '
+
+modelos <- lapply(datos, function(x){
+  lapply(x, function(y){
+    sem(modelo, data=y)
+  })
+})
 ```

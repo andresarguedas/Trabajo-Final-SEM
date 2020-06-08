@@ -7,7 +7,7 @@ title: |
     |
     |
 subtitle: |
-    | TÍTULO IMPRESIONANTE
+    | EFECTOS DE LA KURTOSIS EN LA ESTIMACIÓN DE MODELOS DE ECUACIONES ESTRUCTURALES BAJO DISTINTOS TAMAÑOS DE MUESTRA
     |
     |
     |
@@ -71,7 +71,7 @@ knit_hooks$set(source = function(x, options) {
 
 El Resumen
 
-***Palabras clave***:kkk 
+***Palabras clave***:SEM, simulación, kurtosis, lavaan, R
 \cleardoublepage
 
 \section*{ABSTRACT}
@@ -79,7 +79,7 @@ El Resumen
 
 El resumen en inglés
 
-***Palabras clave***:kkk 
+***Palabras clave***:SEM, simulation, kurtosis, lavaan, R
 \cleardoublepage
 
 \newpage

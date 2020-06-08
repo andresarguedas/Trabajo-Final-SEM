@@ -2,7 +2,7 @@
 
 \subsection{Generación de datos con kurtosis}
 
-Los datos fueron simulados mediante la función `simulateData` del paquete `lavaan` \cite{lavaan}, el cual utiliza el método propuesto por Vale y Maurelli \cite{Vale1983} para la simulación de datos no normales multivariados. Este método, comúnmente conocido como VM, se basa en el método propuesto por Fleishman \cite{Fleishman1978}, el cual, con base en una variable aleatoria distribuida como una normal estándar, permite simular una variable con un promedio, variancia, asimetría y kurtosis dada. El método VM permite especificar, adicionalmente, correlaciones entre las variables a estimar. Para utilizar el método de Fleishman, para generar una cierta variable aleatoria $Y$, se utiliza la siguiente ecuación:
+Los datos fueron simulados mediante la función `simulateData` del paquete `lavaan` [@lavaan], el cual utiliza el método propuesto por Vale y Maurelli [@Vale1983] para la simulación de datos no normales multivariados. Este método, comúnmente conocido como VM, se basa en el método propuesto por Fleishman [@Fleishman1978], el cual, con base en una variable aleatoria distribuida como una normal estándar, permite simular una variable con un promedio, variancia, asimetría y kurtosis dada. El método VM permite especificar, adicionalmente, correlaciones entre las variables a estimar. Para utilizar el método de Fleishman, para generar una cierta variable aleatoria $Y$, se utiliza la siguiente ecuación:
 
 \begin{equation} \label{eq:defY}
   Y = a + bX + cX^2 + d X^3
@@ -38,4 +38,4 @@ Y resolviendo esta ecuación en términos de $\rho_{X_1, X_2}$ se puede obtener 
 
 \subsection{Software y paquetes}
 
-La simulación de los datos, junto con la estimación de los modelos, se realizó mediante el paquete `lavaan` \cite{lavaan} usando el software R \cite{R} mediante la interfaz gráfica de RStudio \cite{RStudio}.
+La simulación de los datos, junto con la estimación de los modelos, se realizó mediante el paquete `lavaan` [@lavaan] usando el software R [@R] mediante la interfaz gráfica de RStudio [@RStudio].

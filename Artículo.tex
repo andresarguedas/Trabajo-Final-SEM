@@ -85,7 +85,7 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{graphicx}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -208,7 +208,11 @@
 \makeatletter
 \@addtoreset{chunk}{section}
 \makeatother
+
+%Paquetes adicionales para ecuaciones, símbolos y figuras
 \usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{babel,positioning,shapes.multipart,calc,arrows.meta}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -223,12 +227,6 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newenvironment{cslreferences}%
-  {\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
-  {\par}
 
 \title{UNIVERSIDAD DE COSTA RICA\\
 SISTEMA DE ESTUDIOS DE POSGRADO\\
@@ -241,17 +239,12 @@ ESCUELA DE ESTADÍSTICA\\
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{EFECTOS DE LA KURTOSIS EN LA ESTIMACIÓN DE MODELOS DE
-ECUACIONES ESTRUCTURALES BAJO DISTINTOS TAMAÑOS DE MUESTRA\\
+\subtitle{EFECTOS DE LA KURTOSIS EN LA ESTIMACIÓN DE MODELOS DE ECUACIONES
+ESTRUCTURALES BAJO DISTINTOS TAMAÑOS DE MUESTRA\\
 ~\\
 ~\\
 ~\\}
-\author{\hfill\break
-\hfill\break
-\hfill\break
-\hfill\break
-\hfill\break
-CÉSAR ANDRÉS GAMBOA SANABRIA B12672\\
+\author{CÉSAR ANDRÉS GAMBOA SANABRIA B12672\\
 ANDRÉS ESTEBAN ARGUEDAS LEIVA B40535\\
 ~\\
 ~\\
@@ -406,8 +399,6 @@ METODOLOGÍA}
 
 \section{METODOLOGÍA}
 
-\subsection{Casos de simulación}
-
 \subsection{Generación de datos con kurtosis}
 
 Los datos fueron simulados mediante la función \texttt{simulateData()}
@@ -436,11 +427,11 @@ estándar \(X\) hasta su tercer potencia. Luego, para poder obtener los
 valores de \(a\), \(b\), \(c\) y \(d\), se necesitan resolver las
 siguientes ecuaciones de forma simultánea:
 
-\begin{align}
+\begin{align*}
   b^2 + 6bd + 2c^2 + 15d^2 -1 & = 0 \\
   2c (b^2 + 24bd + 105d^2 + 2) - \gamma_1 & = 0 \\
   24 \left(bd + c^2 (1 + b^2 + 28bd) + d^2 (12 + 48bd + 141c^2 + 225d^2) \right) - \gamma_2 & = 0
-\end{align}
+\end{align*}
 
 donde \(\gamma_1\) es la asimetría deseada y \(\gamma_2\) es la kurtosis
 deseada, además se define \(a = -c\). Con base en las constantes
@@ -476,9 +467,94 @@ obtener una matriz de correlaciones para generar datos normales
 multivariados, que pueden ser transformados en variables no normales
 mediante el método de Fleishman.
 
-\subsection{Modelo teórico a estimar}
+\subsection{Modelo a estimar}
 
-\subsection{Medidas de bondad de ajuste}
+El modelo teórico utilizada para realizar las simulaciones es el
+presentado por (Sura-Fonseca, \protect\hyperlink{ref-sura}{2020}),
+basado en datos de 155 estudiantes de la Universidad de Costa Rica,
+obtenidos de la Prueba de Habilidades Cuantitativas (PHC) del Instituto
+de Investigaciones Psicológicos (IIP) de dicha universidad y de un
+cuestionario autoadministrado aplicado a estos estudiantes. El modelo
+estimado está compuesto por dos variables exógenas (capital y
+habilidades cuantitativas) y una variable endógena (habilidades
+visoespaciales). Con respecto a estas variables: el capital se refiere
+al acceso y tenencia de ciertos bienes en los hogares de los
+estudiantes; las habilidades cuantitativas se refieren a la puntuación
+de los estudiantes en la prueba mencionada anteriormente; y las
+habilidades visoespaciales se refieren a la capacidad de los estudiantes
+para poder trabajar con objetos tridimensionales abstractos y poder
+manipularlos en la imaginación. Para cada una de estas variables
+latentes, se utilizó el método de parcelas para obtener tres variables
+indicadoras para cada uno de los constructos. Los resultados de la
+estimación de dicho modelo, presentados por (Sura-Fonseca,
+\protect\hyperlink{ref-sura}{2020}), se presentan en la Figura
+\ref{fig:mod_teorico}.
+
+\begin{figure}[!h]
+\centering
+\caption{Modelo estimado sobre las habilidades cuantitativas}
+\label{fig:mod_teorico}
+\begin{tikzpicture}
+        [
+    basic/.style={draw, text centered},
+    circ/.style={basic, circle, minimum size=2em, inner sep=1.5pt},
+    rect/.style={basic, text height=1em, text depth=.5em, minimum width=1.5em},
+    >={Stealth[]}
+    ]
+
+    % Variables latentes
+    \node [circ] (ve) {VE};
+    \node [circ, above left=2cm and 2cm of ve] (ca) {CA};
+    \node [circ, below left=2cm and 2cm of ve] (phc) {PHC};
+    \draw [->] (ca) -- node[fill=white] {-0.01} (ve);
+    \draw [->] (phc) -- node[fill=white] {0.41} (ve);
+    % Variancia de VE
+    \node [left=of ve] (delta) {0.83};
+    \draw [->] (delta) -- (ve);
+    % Variables indicadoras de VE
+    \node [rect, above right=1.5cm and 3cm of ve.center] (pve1) {PVE1};
+    \node [rect, right=3cm of ve.center] (pve2) {PVE2};
+    \node [rect, below right=1.5cm and 3cm of ve.center] (pve3) {PVE3};
+    \draw [->] (ve) -- node[fill=white] {0.62} (pve1.west);
+    \draw [->] (ve) -- node[fill=white] {0.74} (pve2.west);
+    \draw [->] (ve) -- node[fill=white] {0.72} (pve3.west);
+    % Variancia de variables indicadoras de VE
+    \node [right=of pve1] (epve1) {0.62};
+    \node [right=of pve2] (epve2) {0.45};
+    \node [right=of pve3] (epve3) {0.48};
+    \draw [->] (epve1) -- (pve1);
+    \draw [->] (epve2) -- (pve2);
+    \draw [->] (epve3) -- (pve3);
+    % Variables indicadoras de CA
+    \node [rect, above left=1.5cm and 3cm of ca.center] (pc1) {PC1};
+    \node [rect, left=3cm of ca.center] (pc2) {PC2};
+    \node [rect, below left=1.5cm and 3cm of ca.center] (pc3) {PC3};
+    \draw [->] (ca) -- node[fill=white] {0.88} (pc1.east);
+    \draw [->] (ca) -- node[fill=white] {0.77} (pc2.east);
+    \draw [->] (ca) -- node[fill=white] {0.73} (pc3.east);
+    % Variancia de variables indicadoras de CA
+    \node [left=of pc1] (epc1) {0.22};
+    \node [left=of pc2] (epc2) {0.41};
+    \node [left=of pc3] (epc3) {0.47};
+    \draw [->] (epc1) -- (pc1);
+    \draw [->] (epc2) -- (pc2);
+    \draw [->] (epc3) -- (pc3);
+    % Variables indicadoras de PHC
+    \node [rect, above left=1.5cm and 3cm of phc.center] (phc1) {PHC1};
+    \node [rect, left=3cm of phc.center] (phc2) {PHC2};
+    \node [rect, below left=1.5cm and 3cm of phc.center] (phc3) {PHC3};
+    \draw [->] (phc) -- node[fill=white] {0.85} (phc1.east);
+    \draw [->] (phc) -- node[fill=white] {0.80} (phc2.east);
+    \draw [->] (phc) -- node[fill=white] {0.82} (phc3.east);
+    % Variancia de variables indicadoras de CA
+    \node [left=of phc1] (ephc1) {0.28};
+    \node [left=of phc2] (ephc2) {0.37};
+    \node [left=of phc3] (ephc3) {0.33};
+    \draw [->] (ephc1) -- (phc1);
+    \draw [->] (ephc2) -- (phc2);
+    \draw [->] (ephc3) -- (phc3);
+\end{tikzpicture}
+\end{figure}
 
 \subsection{Simulación y estimación}
 
@@ -486,7 +562,7 @@ La simulación de los datos, junto con la estimación de los modelos, se
 realizó mediante el paquete \texttt{lavaan} (Rosseel,
 \protect\hyperlink{ref-lavaan}{2012}) usando el software R (R Core Team,
 \protect\hyperlink{ref-R}{2020}) mediante la interfaz gráfica de RStudio
-(RStudio Team, \protect\hyperlink{ref-RStudio}{2015}). Para e manejo de
+(RStudio Team, \protect\hyperlink{ref-RStudio}{2015}). Para el manejo de
 bases de datos y demás visualizaciones fueron utilizados los paquetes
 \texttt{ggplot2}(Wickham, \protect\hyperlink{ref-ggplot2}{2016}),
 \texttt{tidyr} (Wickham \& Henry, \protect\hyperlink{ref-tidyr}{2020}),
@@ -498,7 +574,7 @@ bases de datos y demás visualizaciones fueron utilizados los paquetes
 
 Para poder realizar la simulación deben seguirse varios pasos. Lo
 primero es definir el modelo teórico poblacional que van a seguir los
-datos simulados, como se describió en secciones anteriores este modelo
+datos simulados, como se describió en la sección anterior este modelo
 cuenta con dos variables exógenas y una endógena, cada una con tres
 variables indicadoras. Los datos se generan mediante la función
 \texttt{simulateData()} la cuál requiere especificar varios argumentos,
@@ -539,6 +615,83 @@ los valores de las cargas factoriales, pues se busca conocer las
 estimaciones a partir de los datos generados, este proceso se muestra en
 el \ref{modelos_sem}.
 
+\subsection{Medidas de bondad de ajuste}
+
+Las medidas de bondad de ajuste utilizadas para comparar el ajuste de
+los modelos, para cada uno de los escenarios de simulación son: el
+estadístico chi-cuadrado, el RMSEA, el SRMR y el CFI.
+
+\subsubsection{Estadístico chi-cuadrado}
+
+El estadístico de chi-cuadrado busca cuantificar la diferencia que se
+presenta entre la matriz de covariancias de una muestra con la matriz de
+covariancias estimadas mediante un cierto modelo. Según (Hu \& Bentler,
+\protect\hyperlink{ref-Hu1999}{1999}), su fórmula de cálculo viene dada
+por: \[
+  \chi^2 = (N-1) F_{min}
+\] donde \(N\) es el tamaño de la muestra y \(F_{min}\) es el mínimo
+obtenido mediante la función de ajuste, la cual, normalmente, se asume
+que es la distribución normal multivariada, utilizando el método de
+máxima verosimilitud. Este estadístico tiene una distribución
+chi-cuadrado con grados de libertad igual a la cantidad de piezas de
+información única en la matriz de covariancias menos la cantidad de
+parámetros a estimar del moedlo, bajo el supuesto de normalidad y, si
+este supuesto no se cumple, la distribución asintótica sigue siendo una
+chi-cuadrado con esos mismos grados de libertad. El estadístico
+chi-cuadrado es muy utilizado en los modelos de ecuaciones estructurales
+y da origen a la gran mayoría de las demás medidas de ajuste utilizadas
+en dichos modelos, aunque puede presentar algunos problemas ya que
+depende del tamaño de la muestra, por lo que, con muestras grandes
+tiende a ser significativo, mientras que con muestras pequeños tiende a
+no ser significativo (Kenny, \protect\hyperlink{ref-Kenny2015}{2015}).
+
+\subsubsection{RMSEA}
+
+El Error Cuadrático Medio de Aproximación (RMSEA por sus siglas en
+inglés) es una de las medidas de ajuste más conocidas y utilizadas en
+los modelos de ecuaciones estructurales. Su fórmula, según (Hu \&
+Bentler, \protect\hyperlink{ref-Hu1999}{1999}), viene dada por: \[
+  RMSEA = \sqrt{\max\left\{\frac{\chi^2 - gl}{gl (N-1)} , 0 \right\}}
+\] donde \(\chi^2\) es el valor de la chi-cuadrado, \(gl\) son los
+grados de libertad, y \(N\) es el tamaño de la muestra. Por lo general,
+se considera un valor del RMSEA menor a 0.05 como un indicador de un
+buen ajuste, mientras que un valor mayor a 0.1 representa un mal ajuste
+del modelo (Kenny, \protect\hyperlink{ref-Kenny2015}{2015}).
+
+\subsubsection{SRMR}
+
+La Raíz Estandarizada del Error Cuadrático Medio (SRMR por sus siglas en
+inglés) es una medida de ajuste en la cual se comparan las diferencias
+entre las covariancias estimadas y las de la muestra. La fórmula de
+cálculo, con base en (Hu \& Bentler,
+\protect\hyperlink{ref-Hu1999}{1999}) es: \[
+  SRMR = \sqrt{\left(2 \sum\limits_{i=1}^p \sum\limits_{j=1}^i \left((s_{ij} - \hat\sigma_{ij}) / (s_{ii} s_{jj}) \right)^2 \right)^2 / p(p+1)}
+\] donde \(p\) es el número de variables observadas, \(s_{ij}\) son las
+covariancias observadas y \(\hat\sigma_{ij}\) son las covariancias
+estimadas de las variables \(i\) y \(j\). Dado que se están comparando
+las covariancias observadas y las estimadas, un valor de 0 indica un
+ajuste perfecto del modelo, pero, por lo general, se considera un valor
+menor a 0.08 como un indicador de un buen ajuste (Kenny,
+\protect\hyperlink{ref-Kenny2015}{2015}).
+
+\subsubsection{CFI}
+
+El Índice de Ajuste Comparativo (CFI por sus siglas en inglés) es una
+medida de ajuste que compara el valor de chi-cuadrado del modelo
+estimado con el valor de chi-cuadrado del modelo nulo, agregando una
+penalización por la cantidad de parámetros estimados. La fórmula de
+cálculo presenta por (Hu \& Bentler,
+\protect\hyperlink{ref-Hu1999}{1999}) es la siguiente: \[
+  CFI = 1 - \left( \frac{\max \left\{(\chi^2_T - gl_T), 0  \right\}}{\max \left\{(\chi^2_T - gl_T), (\chi^2_N - gl_N), 0 \right\}} \right)
+\] donde \(\chi^2_T\) y \(\chi^2_N\) son los valores del estadístico
+chi-cuadrado para el modelo estimado y el nulo, respectivamente, y
+\(gl_T\) y \(gl_N\) son los grados de libertad de los modelos estimado y
+nulo, respectivamente. Esta medida de ajuste puede tomar un valor entre
+0 y 1 y se considera que el modelo tiene un buen ajuste cuando es mayor
+a 0.95, un buen ajuste cuando el valor está entre 0.9 y 0.95 y un mal
+ajuste cuando es menor que 0.9 (Kenny,
+\protect\hyperlink{ref-Kenny2015}{2015}).
+
 \newpage
 
 \section{RESULTADOS}
@@ -565,12 +718,12 @@ el \ref{modelos_sem}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelo \textless{}{-}}\StringTok{ \textquotesingle{} CA =\textasciitilde{} 0.88*x1 + 0.77*x2 + 0.73*x3}
-\StringTok{            PHC =\textasciitilde{} 0.85*x4 + 0.80*x5 + 0.82*x6}
-\StringTok{            VE =\textasciitilde{} 0.62*x7 + 0.74*x8 + 0.72*x9}
+\NormalTok{modelo <-}\StringTok{ ' CA =~ 0.88*x1 + 0.77*x2 + 0.73*x3}
+\StringTok{            PHC =~ 0.85*x4 + 0.80*x5 + 0.82*x6}
+\StringTok{            VE =~ 0.62*x7 + 0.74*x8 + 0.72*x9}
 
-\StringTok{            VE \textasciitilde{} {-}0.01*CA + 0.41*PHC}
-\StringTok{          \textquotesingle{}}
+\StringTok{            VE ~ -0.01*CA + 0.41*PHC}
+\StringTok{          '}
 \end{Highlighting}
 \end{Shaded}
 
@@ -580,7 +733,7 @@ el \ref{modelos_sem}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{casos \textless{}{-}}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{kurtosis=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.62}\NormalTok{, }\FloatTok{6.65}\NormalTok{, }\FloatTok{21.41}\NormalTok{, }\FloatTok{13.92}\NormalTok{), }\DataTypeTok{n=}\KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{800}\NormalTok{))}
+\NormalTok{casos <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{kurtosis=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.62}\NormalTok{, }\FloatTok{6.65}\NormalTok{, }\FloatTok{21.41}\NormalTok{, }\FloatTok{13.92}\NormalTok{), }\DataTypeTok{n=}\KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{800}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -590,25 +743,25 @@ el \ref{modelos_sem}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{datos \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x)\{}
-\NormalTok{  data \textless{}{-}}\StringTok{ }\KeywordTok{mapply}\NormalTok{(simulateData, }\DataTypeTok{sample.nobs=}\NormalTok{casos}\OperatorTok{$}\NormalTok{n, }\DataTypeTok{kurtosis=}\NormalTok{casos}\OperatorTok{$}\NormalTok{kurtosis, }
+\NormalTok{datos <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{  data <-}\StringTok{ }\KeywordTok{mapply}\NormalTok{(simulateData, }\DataTypeTok{sample.nobs=}\NormalTok{casos}\OperatorTok{$}\NormalTok{n, }\DataTypeTok{kurtosis=}\NormalTok{casos}\OperatorTok{$}\NormalTok{kurtosis, }
                  \DataTypeTok{MoreArgs =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\NormalTok{modelo),}
                  \DataTypeTok{SIMPLIFY =} \OtherTok{FALSE}\NormalTok{)}
   
-  \KeywordTok{names}\NormalTok{(data) \textless{}{-}}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"n"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{n, }\StringTok{"k"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{kurtosis, }\DataTypeTok{sep=}\StringTok{""}\NormalTok{)}
+  \KeywordTok{names}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"n"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{n, }\StringTok{"k"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{kurtosis, }\DataTypeTok{sep=}\StringTok{""}\NormalTok{)}
 \NormalTok{  data}
 \NormalTok{\})}
 
-\NormalTok{casos\_resultados \textless{}{-}}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{x=}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(datos), }\DataTypeTok{y=}\KeywordTok{names}\NormalTok{(datos[[}\DecValTok{1}\NormalTok{]]))}
+\NormalTok{casos_resultados <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{x=}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(datos), }\DataTypeTok{y=}\KeywordTok{names}\NormalTok{(datos[[}\DecValTok{1}\NormalTok{]]))}
 
-\NormalTok{nombres \textless{}{-}}\StringTok{ }\KeywordTok{unique}\NormalTok{(casos\_resultados}\OperatorTok{$}\NormalTok{y) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\NormalTok{paste}
-\NormalTok{datos \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(nombres, }\ControlFlowTok{function}\NormalTok{(y)\{}
+\NormalTok{nombres <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(casos_resultados}\OperatorTok{$}\NormalTok{y) }\OperatorTok{%>%}\StringTok{ }\NormalTok{paste}
+\NormalTok{datos <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(nombres, }\ControlFlowTok{function}\NormalTok{(y)\{}
   \KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(datos), }\ControlFlowTok{function}\NormalTok{(x)\{}
 \NormalTok{    datos[[x]][[y]]}
 \NormalTok{  \})}
 \NormalTok{\})}
 
-\KeywordTok{names}\NormalTok{(datos) \textless{}{-}}\StringTok{ }\NormalTok{nombres}
+\KeywordTok{names}\NormalTok{(datos) <-}\StringTok{ }\NormalTok{nombres}
 \end{Highlighting}
 \end{Shaded}
 
@@ -618,12 +771,12 @@ el \ref{modelos_sem}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelo \textless{}{-}}\StringTok{ \textquotesingle{} CA =\textasciitilde{} x1 + x2 + x3}
-\StringTok{            PHC =\textasciitilde{} x4 + x5 + x6}
-\StringTok{            VE =\textasciitilde{} x7 + x8 + x9}
-\StringTok{            VE \textasciitilde{} CA + PHC \textquotesingle{}}
+\NormalTok{modelo <-}\StringTok{ ' CA =~ x1 + x2 + x3}
+\StringTok{            PHC =~ x4 + x5 + x6}
+\StringTok{            VE =~ x7 + x8 + x9}
+\StringTok{            VE ~ CA + PHC '}
 
-\NormalTok{modelos \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(datos, }\ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{modelos <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(datos, }\ControlFlowTok{function}\NormalTok{(x)\{}
   \KeywordTok{lapply}\NormalTok{(x, }\ControlFlowTok{function}\NormalTok{(y)\{}
     \KeywordTok{sem}\NormalTok{(modelo, }\DataTypeTok{data=}\NormalTok{y)}
 \NormalTok{  \})}
@@ -634,7 +787,6 @@ el \ref{modelos_sem}.
 \section{REFERENCIAS}
 
 \hypertarget{refs}{}
-\begin{cslreferences}
 \leavevmode\hypertarget{ref-Beran2010StructuralEM}{}%
 Beran, T. N., \& Violato, C. (2010). Structural equation modeling in
 medical research: a primer. \emph{BMC Research Notes}, \emph{3},
@@ -652,9 +804,19 @@ Data in Structural Equation Models. \emph{Transportation Research
 Record}, \emph{2082}(1), 116-124. Recuperado de
 \href{\%20https://doi.org/10.3141/2082-14}{https://doi.org/10.3141/2082-14}
 
+\leavevmode\hypertarget{ref-Hu1999}{}%
+Hu, L. T., \& Bentler, P. M. (1999). Cutoff criteria for fit indexes in
+covariance structure analysis: Conventional criteria versus new
+alternatives. \emph{Structural Equation Modeling}, \emph{6}(1), 1-55.
+\url{https://doi.org/10.1080/10705519909540118}
+
 \leavevmode\hypertarget{ref-ggpubr}{}%
 Kassambara, A. (2020). \emph{ggpubr: 'ggplot2' Based Publication Ready
 Plots}. Recuperado de \url{https://CRAN.R-project.org/package=ggpubr}
+
+\leavevmode\hypertarget{ref-Kenny2015}{}%
+Kenny, D. A. (2015). \emph{SEM: Fit (David A. Kenny)}. Recuperado de
+\url{http://www.davidakenny.net/cm/fit.htm}
 
 \leavevmode\hypertarget{ref-muthen}{}%
 Muthen, B., \& Kaplan, D. (1992). A comparison of some methodologies for
@@ -717,6 +879,5 @@ Recuperado de \url{https://CRAN.R-project.org/package=tidyr}
 Zhu, H. (2019). \emph{kableExtra: Construct Complex Table with 'kable'
 and Pipe Syntax}. Recuperado de
 \url{https://CRAN.R-project.org/package=kableExtra}
-\end{cslreferences}
 
 \end{document}

@@ -30,8 +30,6 @@ author: |
     |
 date: "`r format(Sys.time(), '%Y')`"
 always_allow_html: yes
-header-includes:
-   - \usepackage{amssymb}
 output: 
     pdf_document:
         keep_tex: yes

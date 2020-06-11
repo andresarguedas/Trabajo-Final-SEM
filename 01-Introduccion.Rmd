@@ -22,7 +22,7 @@ Comparar mediante un estudio de simulación las estimaciones de modelos de ecuac
 
 \subsubsection{Objetivos específicos}
 
-**1)** Definir como modelo poblacional el obtenido por Sura-Fonseca (2020) con dos variables exógenas y una endógena con tres variables indicadoras cada uno **(página 99 de la tesis)** como modelo de referencia teórico cuyas cargas factoriales se utilizarán para la generación de los datos simulados.
+**1)** Definir como modelo poblacional el obtenido por Sura-Fonseca (2020) con dos variables exógenas y una endógena con tres variables indicadoras cada uno como modelo de referencia teórico cuyas cargas factoriales se utilizarán para la generación de los datos simulados.
 
 **2)** Medir el posible sesgo causado en la estimación de los modelos mediante el estadístico chi-cuadrado del modelo y la raíz del cuadrado medio de error de aproximación (RMSEA), la raíz de residuos de cuadrado medio estandarizado (SRMR) y el índice de bondad de ajuste (GFI).
 
@@ -32,9 +32,4 @@ Comparar mediante un estudio de simulación las estimaciones de modelos de ecuac
 
 \subsection{Metodología de la investigación}
 
-**AQUÍ VA UN RESUMEN DE LO QUE PONEMOS EN LA SECCIÓN DE METODOLOGÍA**
-
-
-\subsection{Organización del estudio}
-
-**AQUÍ VA UNA DESCRIPCIÓN BREVE DE CADA ETAPA DEL TRABAJO**
+De esta manera, el presente estudio consiste en en simular datos no normales multivariados con diferentes tamaños de muestra y kurtosis para la estimación de SEM tomando como punto modelo de referencia el obtenido por Sura-Fonseca para las habilidades cuantitativas, el cual consiste en dos variables exógenas y una endógena. Se realizaron 2000 conjuntos de datos para cada escenario de simulación y se comparan las estimaciones de tanto de las cargas factoriales como de varios estadísticos de bondad de ajuste que serán descritos más adelante.

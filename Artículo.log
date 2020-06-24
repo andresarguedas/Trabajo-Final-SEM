@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.5.20)  10 JUN 2020 19:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.6.22)  24 JUN 2020 12:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Artículo.tex
 (./Artículo.tex
 LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-05-15> (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-
+L3 programming layer <2020-06-18> (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-
 dist/tex/latex/base/article.cls
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
@@ -155,7 +155,7 @@ Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/parskip/parskip.sty
-Package: parskip 2020-05-19 v2.0e non-zero parskip adjustments
+Package: parskip 2020-06-15 v2.0f non-zero parskip adjustments
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions
 .sty
@@ -215,7 +215,7 @@ Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdftexcmds/pdftexcm
 ds.sty
-Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2020-06-04 v0.32 Utility functions of pdfTeX for LuaTeX (HO
 )
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infware
@@ -399,9 +399,9 @@ Package graphics Info: Driver file: pdftex.def on input line 105.
 ty
 Package: setspace 2011/12/19 v6.7a set line spacing
 ) (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2020/05/13 3.44 The Babel package
+Package: babel 2020/06/10 3.45 The Babel package
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/05/13 3.44 Babel common definitions
+File: babel.def 2020/06/10 3.45 Babel common definitions
 \babel@savecnt=\count270
 \U@D=\dimen162
 \l@babelnohyphens=\language6
@@ -489,11 +489,11 @@ Package: titlesec 2019/10/16 v2.13 Sectioning titles
 \titlewidthfirst=\dimen167
 )
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2020/05/10 v3.4j Customizing captions (AR)
+Package: caption 2020/05/30 v3.4k Customizing captions (AR)
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.st
 y
-Package: caption3 2020/05/10 v1.11 caption3 kernel (AR)
+Package: caption3 2020/05/30 v1.12 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
 \captionmargin=\dimen168
 \captionmargin@=\dimen169
@@ -1075,12 +1075,12 @@ File: pgflibraryarrows.meta.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend
 -pdfmode.def
-File: l3backend-pdfmode.def 2020-05-05 L3 backend support: PDF mode
+File: l3backend-pdfmode.def 2020-06-18 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count326
 \l__pdf_internal_box=\box99
 ) (./Artículo.aux
-LaTeX Info: Redefining \. on input line 24.
-LaTeX Info: Redefining \% on input line 24.
+LaTeX Info: Redefining \. on input line 25.
+LaTeX Info: Redefining \% on input line 25.
 )
 \openout1 = `Artículo.aux'.
 
@@ -1181,7 +1181,7 @@ Package caption Info: longtable package is loaded.
 
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/ltcaption.s
 ty
-Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
+Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: Fixing longtable code of `floatrow' package.
 Package caption Info: threeparttable package is loaded.
@@ -1269,106 +1269,114 @@ l.297 \cleardoublepage
                        [1
 
 ]
-LaTeX Info: Redefining \. on input line 372.
-LaTeX Info: Redefining \% on input line 372.
+LaTeX Info: Redefining \. on input line 387.
+LaTeX Info: Redefining \% on input line 387.
 [1
 
 ]
-LaTeX Info: Redefining \. on input line 410.
-LaTeX Info: Redefining \% on input line 410.
+LaTeX Info: Redefining \. on input line 440.
+LaTeX Info: Redefining \% on input line 440.
 [2]
+LaTeX Info: Redefining \. on input line 454.
+LaTeX Info: Redefining \% on input line 454.
+[3]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
-16.
+60.
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Info: Redefining \. on input line 475.
-LaTeX Info: Redefining \% on input line 475.
-[3]
-LaTeX Info: Redefining \. on input line 586.
-LaTeX Info: Redefining \% on input line 586.
+LaTeX Info: Redefining \. on input line 519.
+LaTeX Info: Redefining \% on input line 519.
 [4]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 616.
-LaTeX Info: Redefining \. on input line 659.
-LaTeX Info: Redefining \% on input line 659.
+LaTeX Info: Redefining \. on input line 630.
+LaTeX Info: Redefining \% on input line 630.
 [5]
-LaTeX Info: Redefining \. on input line 698.
-LaTeX Info: Redefining \% on input line 698.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 660.
+LaTeX Info: Redefining \. on input line 703.
+LaTeX Info: Redefining \% on input line 703.
 [6]
-LaTeX Info: Redefining \. on input line 707.
-LaTeX Info: Redefining \% on input line 707.
+LaTeX Info: Redefining \. on input line 742.
+LaTeX Info: Redefining \% on input line 742.
 [7]
-LaTeX Info: Redefining \. on input line 713.
-LaTeX Info: Redefining \% on input line 713.
+LaTeX Info: Redefining \. on input line 751.
+LaTeX Info: Redefining \% on input line 751.
 [8]
-LaTeX Info: Redefining \. on input line 723.
-LaTeX Info: Redefining \% on input line 723.
+LaTeX Info: Redefining \. on input line 757.
+LaTeX Info: Redefining \% on input line 757.
 [9]
+LaTeX Info: Redefining \. on input line 767.
+LaTeX Info: Redefining \% on input line 767.
+[10]
 
 Package caption Warning: \captionsetup{type*=...} or \captionof
-(caption)                outside box or environment on input line 729.
+(caption)                outside box or environment on input line 773.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 729.
+(caption)                particular \caption on input line 773.
 See the caption package documentation for explanation.
 
 Package hyperref Info: bookmark level for unknown chunk defaults to 0 on input 
-line 729.
+line 773.
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-733.
+777.
 (c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 744.
+(caption)                particular \caption on input line 788.
 See the caption package documentation for explanation.
 
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 748.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 792.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 754.
+(caption)                particular \caption on input line 798.
 See the caption package documentation for explanation.
 
-LaTeX Info: Redefining \. on input line 778.
-LaTeX Info: Redefining \% on input line 778.
-[10]
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 782.
-See the caption package documentation for explanation.
-
-LaTeX Info: Redefining \. on input line 855.
-LaTeX Info: Redefining \% on input line 855.
+LaTeX Info: Redefining \. on input line 822.
+LaTeX Info: Redefining \% on input line 822.
 [11]
-LaTeX Info: Redefining \. on input line 897.
-LaTeX Info: Redefining \% on input line 897.
-[12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 897.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 897.
-(./Artículo.aux
-LaTeX Info: Redefining \. on input line 24.
-LaTeX Info: Redefining \% on input line 24.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 826.
+See the caption package documentation for explanation.
+
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 8
+84.
+(c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 897.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 897.
+LaTeX Info: Redefining \. on input line 894.
+LaTeX Info: Redefining \% on input line 894.
+[12]
+LaTeX Info: Redefining \. on input line 983.
+LaTeX Info: Redefining \% on input line 983.
+[13]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 983.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 983.
+(./Artículo.aux
+LaTeX Info: Redefining \. on input line 25.
+LaTeX Info: Redefining \% on input line 25.
+)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 983.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 983.
 Package rerunfilecheck Info: File `Artículo.out' has not changed.
 (rerunfilecheck)             Checksum: E6CD4F3BAEA7B8919C6503999CB0F2AA;4406.
  ) 
 Here is how much of TeX's memory you used:
- 27391 strings out of 482383
- 490674 string characters out of 5944537
- 776692 words of memory out of 5000000
- 42563 multiletter control sequences out of 15000+600000
- 598479 words of font info for 75 fonts, out of 8000000 for 9000
+ 27439 strings out of 482378
+ 491704 string characters out of 5944356
+ 776131 words of memory out of 5000000
+ 42604 multiletter control sequences out of 15000+600000
+ 598844 words of font info for 76 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,16n,69p,1198b,843s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
-c}{c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.e
+{c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.e
+nc}{c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.e
 nc}{c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.e
 nc}{c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-math
 it.enc}{c:/Users/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-
@@ -1392,10 +1400,10 @@ Data/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/Dell
 /AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/D
 ell/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Use
 rs/Dell/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Artículo.pdf (16 pages, 379178 bytes).
+Output written on Artículo.pdf (17 pages, 384614 bytes).
 PDF statistics:
- 399 PDF objects out of 1000 (max. 8388607)
- 359 compressed objects within 4 object streams
- 68 named destinations out of 1000 (max. 500000)
+ 438 PDF objects out of 1000 (max. 8388607)
+ 397 compressed objects within 4 object streams
+ 76 named destinations out of 1000 (max. 500000)
  237 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -69,7 +69,7 @@ knit_hooks$set(source = function(x, options) {
 
 El Resumen
 
-***Palabras clave***:SEM, simulación, kurtosis, lavaan, R
+***Palabras clave***:SEM, simulación, kurtosis, lavaan
 \cleardoublepage
 
 \section*{ABSTRACT}
@@ -77,7 +77,7 @@ El Resumen
 
 El resumen en inglés
 
-***Palabras clave***:SEM, simulation, kurtosis, lavaan, R
+***Palabras clave***:SEM, simulation, kurtosis, lavaan
 \cleardoublepage
 
 \newpage

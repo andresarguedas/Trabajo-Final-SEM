@@ -279,7 +279,7 @@ Ciudad Universitaria Rodrigo Facio, Costa Rica\\
 
 El Resumen
 
-\textbf{\emph{Palabras clave}}:SEM, simulación, kurtosis, lavaan, R
+\textbf{\emph{Palabras clave}}:SEM, simulación, kurtosis, lavaan
 \cleardoublepage
 
 \section*{ABSTRACT}
@@ -287,7 +287,7 @@ El Resumen
 
 El resumen en inglés
 
-\textbf{\emph{Palabras clave}}:SEM, simulation, kurtosis, lavaan, R
+\textbf{\emph{Palabras clave}}:SEM, simulation, kurtosis, lavaan
 \cleardoublepage
 
 \newpage
@@ -305,22 +305,38 @@ El resumen en inglés
 
 Los Modelos de Ecuaciones Estructurales (en adelante SEM, por sus siglas
 en inglés) representan un compendio de métodos estadísticos que buscan
-estimar y examinar las relaciones existentes entre varias mediciones
-fácilmente observables con conceptos más abstractos, denominados
-constructos, que no pueden ser medidos ni analizados de manera directa.
-Los SEM trabajan de una manera similar a los modelos de regresión más
-clásicos, pero representan una mejora pues analizan las relaciones
-causales lineales entre las variables involucradas al mismo tiempo que
-los errores de medición (Beran \& Violato,
-\protect\hyperlink{ref-Beran2010StructuralEM}{2010}).
+estimar y examinar las relaciones causales existentes entre varias
+mediciones fácilmente observables con conceptos más abstractos,
+denominados constructos, que no pueden ser medidos ni analizados de
+manera directa. Los SEM trabajan de una manera similar a los modelos de
+regresión más clásicos, pero representan una mejora pues analizan las
+relaciones causales lineales entre las variables involucradas al mismo
+tiempo que los errores de medición (Beran \& Violato,
+\protect\hyperlink{ref-Beran2010StructuralEM}{2010}). Para medir estas
+relaciones causales, los SEM cuentan con dos grandes componentes: 1) El
+modelo estructural, cuya función es cuantificar las relaciones causales
+presentes entre cada uno de los constructos planteados desde la teoría;
+y 2) un modelo de medición, cuyo objetivo último es brindar una
+descripción acerca de cuáles son los indicadores que sirven para medir
+los constructos en cuestión (Kaplan,
+\protect\hyperlink{ref-kaplan}{2008}).
 
-Los SEM están presentes en multitud de campos de investigación. Según
-Beran y Violato (2010), la cantidad de referencias a SEM en 1994 fueron
-de 164, aumentaron a 343 en el 2000 y llegaron a 742 en el 2009, lo cual
-es una señal de que muchos investigadores alrededor del mundo están
-mostrando cada vez más interés en este tipo de estudios, pues
-representan una potente herramienta para la investigación partiendo de
-la teoría sustantiva que poseen los diversos estudios.
+Los SEM están presentes en multitud de campos de investigación como la
+psicología, la sociología, las políticas públicas y ciencias
+relacionadas a la familia (Tarka,
+\protect\hyperlink{ref-tarka}{2018}\protect\hyperlink{ref-tarka}{a}),
+además, trabajos como el de Thomas Golob (Golob,
+\protect\hyperlink{ref-golob}{2011}) muestran la aplicación de los SEM
+en fenómenos económicos, o bien en investigación de mercados como
+sugieren los trabajos de Bagozzi (Horton,
+\protect\hyperlink{ref-bagozzi}{1980}) y Chin (Chin, Peterson, \& Brown,
+\protect\hyperlink{ref-chin}{2008}). Según Beran y Violato (2010), la
+cantidad de referencias a SEM en 1994 fueron de 164, aumentaron a 343 en
+el 2000 y llegaron a 742 en el 2009, lo cual es una señal de que muchos
+investigadores alrededor del mundo están mostrando cada vez más interés
+en este tipo de estudios, pues representan una potente herramienta para
+la investigación partiendo de la teoría sustantiva que poseen los
+diversos estudios.
 
 Uno de los principales campos de aplicación de los SEM son las ciencias
 sociales, pues se busca explicar y/o predecir con un grado de validez el
@@ -328,54 +344,82 @@ comportamiento específico de una o varias personas en grupo. Teniendo
 siempre en consideración (aunque de forma limitada) las condiciones que
 afectan a cada individuo involucrado en el estudio, así como las
 características propias de su entorno, los grupos de investigación
-pueden definir factores y relaciones latentes que se encuentran
-implícitas en el comportamiento humano. Este tipo de investigaciones
-permite entender los fenómenos no solo de forma descriptiva, sino que es
-posible también determinar relaciones de causalidad (Tarka,
-\protect\hyperlink{ref-Tarka}{2018}).
+pueden definir factores, las relaciones latentes y de causalidad entre
+ellos que se encuentran implícitas en el comportamiento humano. Este
+tipo de investigaciones permite entender los fenómenos no solo de forma
+descriptiva, sino que es posible también determinar relaciones de
+causalidad (Tarka,
+\protect\hyperlink{ref-Tarka}{2018}\protect\hyperlink{ref-Tarka}{b}).
 
 Las variables indicadoras que sirven para construir las relaciones
-implícitas en cuestión, llamadas comúnmente constructos, pueden llegar a
-comportarse de manera muy diversa. Las ciencias sociales, al trabajar
-con seres humanos, es común trabajar con variables cuyo comportamiento
-es particularmente irregular, presentando valores muy distintos entre
-los sujetos de estudio, generando de esta manera que los indicadores de
-manera multivariada no sigan una distribución normal, lo cual representa
-un supuesto fundamental al trabajar con SEM (Sura-Fonseca,
-\protect\hyperlink{ref-sura}{2020}). El no cumplimiento de este supuesto
-puede deberse, entre otras cosas, a medidas particularmente altas o
-bajas de una medida estadística en específico: La kurtosis.
+implícitas en cuestión, estas relaciones implícitas son llamadas
+comúnmente llamadas constructos, pueden llegar a comportarse de manera
+muy diversa. Las ciencias sociales, al trabajar con seres humanos, es
+común trabajar con variables cuyo comportamiento es particularmente
+irregular, presentando valores muy distintos entre los sujetos de
+estudio, generando de esta manera que los indicadores de manera
+multivariada no sigan una distribución normal, lo cual representa un
+supuesto fundamental al trabajar con SEM (Sura-Fonseca,
+\protect\hyperlink{ref-sura}{2020}),esta condición puede afectar
+negativamente la estimación del modelo y sus estadísticos de bondad de
+ajuste, llevando a pérdidas en la potencia (Foss, Jöreskog, \& Olsson,
+\protect\hyperlink{ref-foss}{2011}) o al caso de descartar modelos que
+podrían ser adecuados solo por presentar un mal ajuste (Andreassen,
+Lorentzen, \& Olsson, \protect\hyperlink{ref-andreassen}{2006}). El no
+cumplimiento de este supuesto puede deberse, entre otras cosas, a
+medidas particularmente altas o bajas de una medida estadística en
+específico: La kurtosis.
 
 \subsection{El problema}
 
 Si al trabajar con un SEM no se cumple el supuesto de normalidad
-multivariada y además el modelo se estima vía máxima verosimilitud
+multivariada y además el modelo se estima vía máxima verosimilitud, que
+al día de hoy se mantiene como el método de estimación más extendido,
 podría cometerse el error de sobreestimar el estadístico chi-cuadrado,
 el cual sirve de referencia para conocer la magnitud de la diferencia
 entre la matriz de covariancias estimadas por el modelo con la obtenida
 en la muestra. Lo anterior suele llevar al rechazar modelos que en
-realidad resumen bien la realidad y además a la subestimación de los
-errores asociados a los parámetros, lo cual genera interpretaciones
-inadecuadas en lo referente a la significancia de las relaciones
-planteadas por el modelo teórico. Considerar distintos niveles de
-kurtosis permite conocer el impacto que esta medida tiene sobre las
-estimaciones de un SEM dependiendo del tamaño de muestra utilizado
-(Muthen \& Kaplan, \protect\hyperlink{ref-muthen}{1992}).
+realidad resumen bien la realidad para dar una mejor explicación del por
+qué sucede un fenómeno, y además a la subestimación de los errores
+asociados a los parámetros, lo cual genera interpretaciones inadecuadas
+en lo referente a la significancia estadística de las relaciones
+planteadas por el modelo teórico.
+
+Es posible toparse con conjuntos de datos que, en su conjunto, no
+presenten una distribución normal multivariada debido a la muy alta o
+muy baja concentración de datos alrededor de la zona central de su
+distribución. Este comportamiento se mide mediante un estadístico
+llamado kurtosis, que describe qué tan aplanada o empinada es la
+distribución, dependiendo de este estadístico, es posible saber si los
+datos atentan contra la presencia de una distribución normal. Trabajos
+como el de Sura-Fonseca (Sura-Fonseca,
+\protect\hyperlink{ref-sura}{2020}) o el de Tor (Andreassen et~al.,
+\protect\hyperlink{ref-andreassen}{2006}) han abierto brechas de
+investigación para esta problemática.
+
+Considerar distintos niveles de kurtosis permite conocer el impacto que
+esta medida tiene sobre las estimaciones de un SEM dependiendo del
+tamaño de muestra utilizado (Muthen \& Kaplan,
+\protect\hyperlink{ref-muthen}{1992}).
 
 \subsection{Objetivos del estudio}
 
 La presente investigación busca estudiar el efecto que tienen distintos
 niveles de kurtosis en varios tamaños de muestra sobre las estimaciones
-de un SEM. Para ello, tomando como base un estudio de la Universidad de
-California (Gao, Mokhtarian, \& Johnston,
-\protect\hyperlink{ref-gao}{2008}) se plantean los siguientes objetivos:
+de un SEM. Para ello, se ha tomado tomado como base un estudio de la
+Universidad de California (Gao, Mokhtarian, \& Johnston,
+\protect\hyperlink{ref-gao}{2008}), por ser uno de los trabajos más
+recientes en cuanto a planteamiento de tamaños de muestra y kurtosis
+para la simulación de datos multivariados. Se plantean los siguientes
+objetivos:
 
 \subsubsection{Objetivo general}
 
-Comparar mediante un estudio de simulación las estimaciones de modelos
-de ecuaciones estructurales en presencia de variables observadas con
-niveles de kurtosis de 0, 0.62, 6.65, 21.41 y 13.92 en tamaños de
-muestra de 50, 100, 200, 400 y 800.
+Comparar mediante un estudio de simulación los efectos en las
+estimaciones de cargas factoriales y medidas de ajuste de modelos de
+ecuaciones estructurales estimados mediante máxima verosimilitud en
+presencia de variables observadas con niveles de kurtosis de 0, 0.62,
+6.65, 21.41 y 13.92 en tamaños de muestra de 50, 100, 120, 200 y 300.
 
 \subsubsection{Objetivos específicos}
 
@@ -800,16 +844,33 @@ ajuste cuando es menor que 0.9 (Kenny,
 
 \hypertarget{refs}{}
 \begin{cslreferences}
+\leavevmode\hypertarget{ref-andreassen}{}%
+Andreassen, T. W., Lorentzen, B. G., \& Olsson, U. H. (2006). The impact
+of non-normality and estimation methods in SEM on satisfaction research
+in marketing. \emph{Quality and Quantity}, \emph{40}(1), 39-58.
+
 \leavevmode\hypertarget{ref-Beran2010StructuralEM}{}%
 Beran, T. N., \& Violato, C. (2010). Structural equation modeling in
 medical research: a primer. \emph{BMC Research Notes}, \emph{3},
 267-267. Recuperado de
 \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2987867/\#}
 
+\leavevmode\hypertarget{ref-chin}{}%
+Chin, W. W., Peterson, R. A., \& Brown, S. P. (2008). Structural
+Equation Modeling in Marketing: Some Practical Reminders. \emph{Journal
+of Marketing Theory and Practice}, \emph{16}(4), 287-298.
+\url{https://doi.org/10.2753/MTP1069-6679160402}
+
 \leavevmode\hypertarget{ref-Fleishman1978}{}%
 Fleishman, A. I. (1978). A method for simulating non-normal
 distributions. \emph{Psychometrika}, \emph{43}(4), 521-532.
 \url{https://doi.org/10.1007/BF02293811}
+
+\leavevmode\hypertarget{ref-foss}{}%
+Foss, T., Jöreskog, K. G., \& Olsson, U. H. (2011). Testing structural
+equation models: The effect of kurtosis. \emph{Computational Statistics
+\& Data Analysis}, \emph{55}(7), 2263-2275. Recuperado de
+\url{https://EconPapers.repec.org/RePEc:eee:csdana:v:55:y:2011:i:7:p:2263-2275}
 
 \leavevmode\hypertarget{ref-gao}{}%
 Gao, S., Mokhtarian, P. L., \& Johnston, R. A. (2008). Nonnormality of
@@ -817,11 +878,29 @@ Data in Structural Equation Models. \emph{Transportation Research
 Record}, \emph{2082}(1), 116-124. Recuperado de
 \href{\%20https://doi.org/10.3141/2082-14}{https://doi.org/10.3141/2082-14}
 
+\leavevmode\hypertarget{ref-golob}{}%
+Golob, T. F. (2011). \emph{Structural Equation Modeling For Travel
+Behavior Research} (University of California Transportation Center,
+Working Papers N.º qt2pn5j58n). Recuperado de University of California
+Transportation Center website:
+\url{https://ideas.repec.org/p/cdl/uctcwp/qt2pn5j58n.html}
+
+\leavevmode\hypertarget{ref-bagozzi}{}%
+Horton, R. L. (1980). Book Reviews : CAUSAL MODELS IN MARKETING by
+Richard P. Bagozzi (New York: Wiley, 1980. 303 pp., \$14.95).
+\emph{Journal of the Academy of Marketing Science}, \emph{8}(3),
+304-305. \url{https://doi.org/10.1177/009207038000800316}
+
 \leavevmode\hypertarget{ref-Hu1999}{}%
 Hu, L. T., \& Bentler, P. M. (1999). Cutoff criteria for fit indexes in
 covariance structure analysis: Conventional criteria versus new
 alternatives. \emph{Structural Equation Modeling}, \emph{6}(1), 1-55.
 \url{https://doi.org/10.1080/10705519909540118}
+
+\leavevmode\hypertarget{ref-kaplan}{}%
+Kaplan, D. (2008). \emph{Structural Equation Modeling: Foundations and
+Extensions}. Recuperado de
+\url{https://books.google.co.cr/books?id=MdYgAQAAQBAJ}
 
 \leavevmode\hypertarget{ref-ggpubr}{}%
 Kassambara, A. (2020). \emph{ggpubr: 'ggplot2' Based Publication Ready
@@ -863,8 +942,15 @@ sobre las estimaciones puntuales de sus coeficientes y la bondad de
 ajuste}. Recuperado de
 \url{http://www.kerwa.ucr.ac.cr/handle/10669/80716}
 
+\leavevmode\hypertarget{ref-tarka}{}%
+Tarka, P. (2018a). An overview of structural equation modeling: its
+beginnings, historical development, usefulness and controversies in the
+social sciences. \emph{Quality \& Quantity: International Journal of
+Methodology}, \emph{52}(1), 313-354.
+\url{https://doi.org/10.1007/s11135-017-0469-8}
+
 \leavevmode\hypertarget{ref-Tarka}{}%
-Tarka, P. (2018). An overview of structural equation modeling: its
+Tarka, P. (2018b). An overview of structural equation modeling: its
 beginnings, historical development, usefulness and controversies in the
 social sciences. \emph{Quality \& Quantity: International Journal of
 Methodology}, \emph{52}(1), 313-354. Recuperado de

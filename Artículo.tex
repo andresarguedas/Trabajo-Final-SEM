@@ -85,7 +85,7 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{graphicx}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -227,12 +227,6 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newenvironment{cslreferences}%
-  {\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
-  {\par}
 
 \title{UNIVERSIDAD DE COSTA RICA\\
 SISTEMA DE ESTUDIOS DE POSGRADO\\
@@ -245,17 +239,12 @@ ESCUELA DE ESTADÍSTICA\\
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{EFECTOS DE LA KURTOSIS EN LA ESTIMACIÓN DE MODELOS DE
-ECUACIONES ESTRUCTURALES BAJO DISTINTOS TAMAÑOS DE MUESTRA\\
+\subtitle{EFECTOS DE LA KURTOSIS EN LA ESTIMACIÓN DE MODELOS DE ECUACIONES
+ESTRUCTURALES BAJO DISTINTOS TAMAÑOS DE MUESTRA\\
 ~\\
 ~\\
 ~\\}
-\author{\hfill\break
-\hfill\break
-\hfill\break
-\hfill\break
-\hfill\break
-CÉSAR ANDRÉS GAMBOA SANABRIA B12672\\
+\author{CÉSAR ANDRÉS GAMBOA SANABRIA B12672\\
 ANDRÉS ESTEBAN ARGUEDAS LEIVA B40535\\
 ~\\
 ~\\
@@ -344,22 +333,21 @@ comportamiento específico de una o varias personas en grupo. Teniendo
 siempre en consideración (aunque de forma limitada) las condiciones que
 afectan a cada individuo involucrado en el estudio, así como las
 características propias de su entorno, los grupos de investigación
-pueden definir factores, las relaciones latentes y de causalidad entre
-ellos que se encuentran implícitas en el comportamiento humano. Este
-tipo de investigaciones permite entender los fenómenos no solo de forma
-descriptiva, sino que es posible también determinar relaciones de
-causalidad (Tarka,
+pueden definir factores, además de las relaciones latentes y de
+causalidad entre ellos que se encuentran implícitas en el comportamiento
+humano. Este tipo de investigaciones permite entender los fenómenos no
+solo de forma descriptiva, sino que es posible también determinar
+relaciones de causalidad (Tarka,
 \protect\hyperlink{ref-Tarka}{2018}\protect\hyperlink{ref-Tarka}{b}).
 
-Las variables indicadoras que sirven para construir las relaciones
-implícitas en cuestión, estas relaciones implícitas son llamadas
-comúnmente llamadas constructos, pueden llegar a comportarse de manera
-muy diversa. Las ciencias sociales, al trabajar con seres humanos, es
-común trabajar con variables cuyo comportamiento es particularmente
-irregular, presentando valores muy distintos entre los sujetos de
-estudio, generando de esta manera que los indicadores de manera
-multivariada no sigan una distribución normal, lo cual representa un
-supuesto fundamental al trabajar con SEM (Sura-Fonseca,
+Las variables indicadoras, las cuales se utilizan para construir los
+llamados constructos, pueden llegar a comportarse de manera muy diversa.
+Las ciencias sociales, al trabajar con seres humanos, es común trabajar
+con variables cuyo comportamiento es particularmente irregular,
+presentando valores muy distintos entre los sujetos de estudio,
+generando de esta manera que los indicadores de manera multivariada no
+sigan una distribución normal, lo cual representa un supuesto
+fundamental al trabajar con SEM (Sura-Fonseca,
 \protect\hyperlink{ref-sura}{2020}),esta condición puede afectar
 negativamente la estimación del modelo y sus estadísticos de bondad de
 ajuste, llevando a pérdidas en la potencia (Foss, Jöreskog, \& Olsson,
@@ -374,28 +362,28 @@ específico: La kurtosis.
 
 Si al trabajar con un SEM no se cumple el supuesto de normalidad
 multivariada y además el modelo se estima vía máxima verosimilitud, que
-al día de hoy se mantiene como el método de estimación más extendido,
-podría cometerse el error de sobreestimar el estadístico chi-cuadrado,
-el cual sirve de referencia para conocer la magnitud de la diferencia
-entre la matriz de covariancias estimadas por el modelo con la obtenida
-en la muestra. Lo anterior suele llevar al rechazar modelos que en
-realidad resumen bien la realidad para dar una mejor explicación del por
-qué sucede un fenómeno, y además a la subestimación de los errores
-asociados a los parámetros, lo cual genera interpretaciones inadecuadas
-en lo referente a la significancia estadística de las relaciones
-planteadas por el modelo teórico.
+al día de hoy se mantiene como el método de estimación más extendido y
+popular, podría cometerse el error de sobreestimar el estadístico
+chi-cuadrado, el cual sirve de referencia para conocer la magnitud de la
+diferencia entre la matriz de covariancias estimadas por el modelo con
+la obtenida en la muestra. Lo anterior suele llevar a rechazar modelos
+que en realidad resumen bien la realidad para dar una mejor explicación
+del por qué sucede un fenómeno, y además a la subestimación de los
+errores asociados a los parámetros, lo cual genera interpretaciones
+inadecuadas en lo referente a la significancia estadística de las
+relaciones planteadas por el modelo teórico.
 
-Es posible toparse con conjuntos de datos que, en su conjunto, no
-presenten una distribución normal multivariada debido a la muy alta o
-muy baja concentración de datos alrededor de la zona central de su
-distribución. Este comportamiento se mide mediante un estadístico
+Por otro lado, es posible toparse con conjuntos de datos que, en su
+conjunto, no presenten una distribución normal multivariada debido a la
+muy alta o muy baja concentración de datos alrededor de la zona central
+de su distribución. Este comportamiento se mide mediante un estadístico
 llamado kurtosis, que describe qué tan aplanada o empinada es la
 distribución, dependiendo de este estadístico, es posible saber si los
 datos atentan contra la presencia de una distribución normal. Trabajos
 como el de Sura-Fonseca (Sura-Fonseca,
 \protect\hyperlink{ref-sura}{2020}) o el de Tor (Andreassen et~al.,
-\protect\hyperlink{ref-andreassen}{2006}) han abierto brechas de
-investigación para esta problemática.
+\protect\hyperlink{ref-andreassen}{2006}) han abierto espacioes de
+investigación para esta temática
 
 Considerar distintos niveles de kurtosis permite conocer el impacto que
 esta medida tiene sobre las estimaciones de un SEM dependiendo del
@@ -691,7 +679,7 @@ que es la distribución normal multivariada, utilizando el método de
 máxima verosimilitud. Este estadístico tiene una distribución
 chi-cuadrado con grados de libertad igual a la cantidad de piezas de
 información única en la matriz de covariancias menos la cantidad de
-parámetros a estimar del moedlo, bajo el supuesto de normalidad y, si
+parámetros a estimar del modelo, bajo el supuesto de normalidad y, si
 este supuesto no se cumple, la distribución asintótica sigue siendo una
 chi-cuadrado con esos mismos grados de libertad. El estadístico
 chi-cuadrado es muy utilizado en los modelos de ecuaciones estructurales
@@ -774,12 +762,12 @@ ajuste cuando es menor que 0.9 (Kenny,
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelo \textless{}{-}}\StringTok{ \textquotesingle{} CA =\textasciitilde{} 0.88*x1 + 0.77*x2 + 0.73*x3}
-\StringTok{            PHC =\textasciitilde{} 0.85*x4 + 0.80*x5 + 0.82*x6}
-\StringTok{            VE =\textasciitilde{} 0.62*x7 + 0.74*x8 + 0.72*x9}
+\NormalTok{modelo <-}\StringTok{ ' CA =~ 0.88*x1 + 0.77*x2 + 0.73*x3}
+\StringTok{            PHC =~ 0.85*x4 + 0.80*x5 + 0.82*x6}
+\StringTok{            VE =~ 0.62*x7 + 0.74*x8 + 0.72*x9}
 
-\StringTok{            VE \textasciitilde{} {-}0.01*CA + 0.41*PHC}
-\StringTok{          \textquotesingle{}}
+\StringTok{            VE ~ -0.01*CA + 0.41*PHC}
+\StringTok{          '}
 \end{Highlighting}
 \end{Shaded}
 
@@ -789,7 +777,7 @@ ajuste cuando es menor que 0.9 (Kenny,
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{casos \textless{}{-}}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{kurtosis=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.62}\NormalTok{, }\FloatTok{6.65}\NormalTok{, }\FloatTok{21.41}\NormalTok{, }\FloatTok{13.92}\NormalTok{), }\DataTypeTok{n=}\KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{800}\NormalTok{))}
+\NormalTok{casos <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{kurtosis=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.62}\NormalTok{, }\FloatTok{6.65}\NormalTok{, }\FloatTok{21.41}\NormalTok{, }\FloatTok{13.92}\NormalTok{), }\DataTypeTok{n=}\KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{800}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -799,25 +787,25 @@ ajuste cuando es menor que 0.9 (Kenny,
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{datos \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x)\{}
-\NormalTok{  data \textless{}{-}}\StringTok{ }\KeywordTok{mapply}\NormalTok{(simulateData, }\DataTypeTok{sample.nobs=}\NormalTok{casos}\OperatorTok{$}\NormalTok{n, }\DataTypeTok{kurtosis=}\NormalTok{casos}\OperatorTok{$}\NormalTok{kurtosis, }
+\NormalTok{datos <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{  data <-}\StringTok{ }\KeywordTok{mapply}\NormalTok{(simulateData, }\DataTypeTok{sample.nobs=}\NormalTok{casos}\OperatorTok{$}\NormalTok{n, }\DataTypeTok{kurtosis=}\NormalTok{casos}\OperatorTok{$}\NormalTok{kurtosis, }
                  \DataTypeTok{MoreArgs =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\NormalTok{modelo),}
                  \DataTypeTok{SIMPLIFY =} \OtherTok{FALSE}\NormalTok{)}
   
-  \KeywordTok{names}\NormalTok{(data) \textless{}{-}}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"n"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{n, }\StringTok{"k"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{kurtosis, }\DataTypeTok{sep=}\StringTok{""}\NormalTok{)}
+  \KeywordTok{names}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"n"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{n, }\StringTok{"k"}\NormalTok{, casos}\OperatorTok{$}\NormalTok{kurtosis, }\DataTypeTok{sep=}\StringTok{""}\NormalTok{)}
 \NormalTok{  data}
 \NormalTok{\})}
 
-\NormalTok{casos\_resultados \textless{}{-}}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{x=}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(datos), }\DataTypeTok{y=}\KeywordTok{names}\NormalTok{(datos[[}\DecValTok{1}\NormalTok{]]))}
+\NormalTok{casos_resultados <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{x=}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(datos), }\DataTypeTok{y=}\KeywordTok{names}\NormalTok{(datos[[}\DecValTok{1}\NormalTok{]]))}
 
-\NormalTok{nombres \textless{}{-}}\StringTok{ }\KeywordTok{unique}\NormalTok{(casos\_resultados}\OperatorTok{$}\NormalTok{y) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\NormalTok{paste}
-\NormalTok{datos \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(nombres, }\ControlFlowTok{function}\NormalTok{(y)\{}
+\NormalTok{nombres <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(casos_resultados}\OperatorTok{$}\NormalTok{y) }\OperatorTok{%>%}\StringTok{ }\NormalTok{paste}
+\NormalTok{datos <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(nombres, }\ControlFlowTok{function}\NormalTok{(y)\{}
   \KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(datos), }\ControlFlowTok{function}\NormalTok{(x)\{}
 \NormalTok{    datos[[x]][[y]]}
 \NormalTok{  \})}
 \NormalTok{\})}
 
-\KeywordTok{names}\NormalTok{(datos) \textless{}{-}}\StringTok{ }\NormalTok{nombres}
+\KeywordTok{names}\NormalTok{(datos) <-}\StringTok{ }\NormalTok{nombres}
 \end{Highlighting}
 \end{Shaded}
 
@@ -827,12 +815,12 @@ ajuste cuando es menor que 0.9 (Kenny,
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelo \textless{}{-}}\StringTok{ \textquotesingle{} CA =\textasciitilde{} x1 + x2 + x3}
-\StringTok{            PHC =\textasciitilde{} x4 + x5 + x6}
-\StringTok{            VE =\textasciitilde{} x7 + x8 + x9}
-\StringTok{            VE \textasciitilde{} CA + PHC \textquotesingle{}}
+\NormalTok{modelo <-}\StringTok{ ' CA =~ x1 + x2 + x3}
+\StringTok{            PHC =~ x4 + x5 + x6}
+\StringTok{            VE =~ x7 + x8 + x9}
+\StringTok{            VE ~ CA + PHC '}
 
-\NormalTok{modelos \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(datos, }\ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{modelos <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(datos, }\ControlFlowTok{function}\NormalTok{(x)\{}
   \KeywordTok{lapply}\NormalTok{(x, }\ControlFlowTok{function}\NormalTok{(y)\{}
     \KeywordTok{sem}\NormalTok{(modelo, }\DataTypeTok{data=}\NormalTok{y)}
 \NormalTok{  \})}
@@ -843,7 +831,6 @@ ajuste cuando es menor que 0.9 (Kenny,
 \section{REFERENCIAS}
 
 \hypertarget{refs}{}
-\begin{cslreferences}
 \leavevmode\hypertarget{ref-andreassen}{}%
 Andreassen, T. W., Lorentzen, B. G., \& Olsson, U. H. (2006). The impact
 of non-normality and estimation methods in SEM on satisfaction research
@@ -978,6 +965,5 @@ Recuperado de \url{https://CRAN.R-project.org/package=tidyr}
 Zhu, H. (2019). \emph{kableExtra: Construct Complex Table with 'kable'
 and Pipe Syntax}. Recuperado de
 \url{https://CRAN.R-project.org/package=kableExtra}
-\end{cslreferences}
 
 \end{document}

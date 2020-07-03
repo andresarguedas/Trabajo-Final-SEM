@@ -1,0 +1,86 @@
+---
+output: 
+    pdf_document:
+        keep_tex: yes
+        include:
+          in_header: header.tex
+urlcolor: blue
+bibliography: mybibfile.bib
+link-citations: yes
+linkcolor: blue
+csl: apa.csl
+documentclass: revcoles
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, dpi=1000,
+                      dev="jpeg", out.width = '100%', out.height='100%', fig.pos="!h",
+                      echo=FALSE)
+
+library(carlians)
+requeridos(knitr, ggplot2, tidyr, dplyr, kableExtra)
+```
+\begin{title}
+\title[maintitle = Kurtosis effects on Estimating Structural Equation Models Over Different Sample Sizes,
+       secondtitle = Efectos de la Kurtosis en la estimación de Modelos de Ecuaciones Estructurales bajo distintos tamaños de muestra,
+       shorttitle = Short title in English
+]
+\end{title}
+
+\begin{authors}
+\author[firstname = César,
+        surname = Gamboa-Sanabria,
+        numberinstitution = 1,
+        affiliation = Statistics Department University of Costa Rica, 
+        email = info@cesargamboasanabria.com] \orcidicon{0000-0001-6733-4759}\,
+\author[firstname = Andrés,
+        surname = Arguedas-Leiva,
+        numberinstitution = 1,
+        affiliation = Statistics Department University of Costa Rica, 
+        email = email]
+\end{authors}
+
+\begin{institutions}
+     \institute[subdivision = {Statistics Department},
+                division = Economic Sciences Faculty,
+                institution = University of Costa Rica,
+                city = San José,
+                country = Costa Rica]
+\end{institutions}
+
+\begin{mainabstract}
+ Insert your abstract here.
+\keywords{SEM, simulation, kurtosis, lavaan}
+\end{mainabstract}
+
+\begin{secondaryabstract}
+Inserte su resumen en aquí.
+\keywords{SEM, simulación, kurtosis, lavaan}
+\end{secondaryabstract}
+
+\section{Introduction}  
+
+```{r, child="01-Introduccion.Rmd"}
+```
+
+\section{Methodolgy} 
+
+```{r, child="03-Metodologia.Rmd"}
+```
+
+\section{Results} 
+
+```{r, child="04-Resultados.Rmd"}
+```
+
+\section{Conclusions}
+
+```{r, child="05-Conclusiones.Rmd"}
+```
+
+\section{Appendices}
+
+```{r, child="06-Anexos.Rmd"}
+```
+
+\section*{References}

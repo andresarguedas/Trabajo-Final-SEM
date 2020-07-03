@@ -104,7 +104,7 @@ El modelo teórico utilizada para realizar las simulaciones es el presentado por
 
 La simulación de los datos, junto con la estimación de los modelos, se realizó mediante el paquete `lavaan` [@lavaan] usando el software R [@R] mediante la interfaz gráfica de RStudio [@RStudio]. Para el manejo de bases de datos y demás visualizaciones fueron utilizados los paquetes `ggplot2`[@ggplot2], `tidyr` [@tidyr], `dplyr` [@dplyr], `ggpubr` [@ggpubr], `PerformanceAnalytics` [@PerformanceAnalytics] y `kableExtra` [@kableExtra].
 
-Para poder realizar la simulación deben seguirse varios pasos. Lo primero es definir el modelo teórico poblacional que van a seguir los datos simulados, como se describió en la sección anterior este modelo cuenta con dos variables exógenas y una endógena, cada una con tres variables indicadoras. Los datos se generan mediante la función `simulateData()` la cuál requiere especificar varios argumentos, uno de ellos es el modelo poblacional, cuya sintaxis puede encontrarse en el \ref{modelo}. Los otros dos argumentos a especificar son el tamaño de muestra deseado y el nivel de kurtosis de interés, la definición de estos escenarios se obtiene mediante el \ref{escenarios} y se muestran en el cuadro \ref{tab:escenarios}:
+Para poder realizar la simulación deben seguirse varios pasos. Lo primero es definir el modelo teórico poblacional que van a seguir los datos simulados, como se describió en la sección anterior este modelo cuenta con dos variables exógenas y una endógena, cada una con tres variables indicadoras. Los datos se generan mediante la función `simulateData()` la cuál requiere especificar varios argumentos, uno de ellos es el modelo poblacional. Los otros dos argumentos a especificar son el tamaño de muestra deseado y el nivel de kurtosis de interés, la definición de estos escenarios se muestran en el cuadro \ref{tab:escenarios}:
 
 ```{r, echo=FALSE}
 cuadro <- expand.grid(kurtosis=c(0, 0.62, 6.65, 21.41, 13.92), n=c(50, 100, 200, 400, 800))
@@ -116,7 +116,7 @@ footnote(general = "Elaboración propia a partir del estudio de la Universidad d
     kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), repeat_header_text = "(cont.)", font_size = 9,full_width = T) 
 ```
 
-Con estos escenarios definidos, se generaron entonces, para cada combinación de tamaño de muestra y kurtosis un total de 2000 conjuntos de datos para cada uno. La sintaxis necesaria para generar esto se muestra en el \ref{simulacion}. Una vez que se obtuvieron estos conjuntos de datos, el siguiente paso es realizar la estimación de los SEM con cada uno de ellos; para ello es necesario definir un modelo de una forma similar a como se indicó en el \ref{modelo}, pero esta vez sin los valores de las cargas factoriales, pues se busca conocer las estimaciones a partir de los datos generados, este proceso se muestra en el \ref{modelos_sem}.
+Con estos escenarios definidos, se generaron entonces, para cada combinación de tamaño de muestra y kurtosis un total de 2000 conjuntos de datos para cada uno. Una vez que se obtuvieron estos conjuntos de datos, el siguiente paso es realizar la estimación de los SEM con cada uno de ellos; para ello es necesario definir un modelo sin los valores de las cargas factoriales, pues se busca conocer las estimaciones a partir de los datos generados.
 
 \subsection{Medidas de bondad de ajuste}
 

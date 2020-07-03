@@ -1,37 +1,11 @@
 
-
-%\usepackage{fancyhdr}
-%\pagestyle{fancy}
-%\rhead{\includegraphics[width = 1\textwidth]{marca.jpg}}
-
-
-\usepackage{geometry}
-\geometry{a4paper, left=10mm, right=10mm, bottom=15mm}
-\usepackage{setspace}
-\doublespacing
-\usepackage[spanish]{babel}
-\usepackage{color}
-\usepackage{xcolor}
-\usepackage{framed}
-\colorlet{shadecolor}{gray!20}
-\setcounter{secnumdepth}{0}
-\usepackage{sectsty}
-
-
-\chapternumberfont{\Large}
-\chaptertitlefont{\Large}
 \setcounter{tocdepth}{5}
 \setcounter{secnumdepth}{5}
-\setlength{\footskip}{20pt}%Esto sube el número de página
-\usepackage{graphics}
-\usepackage{setspace} %paquete para el doble espaciado
-\doublespacing %inicia el doble espaciado
  %Esto quita el punto final en la numeracion de cada seccion
 \usepackage{tocloft}
 
 \usepackage{titlesec}
-\titleformat{\section}
-{\Large\bfseries}{\thesection}{0.5em}{}
+
 \titleformat{\subsection}
 {\large\bfseries}{\thesubsection}{0.5em}{}
 \titleformat{\subsubsection}
@@ -41,69 +15,28 @@
 \renewcommand\cftsecaftersnum{}
 \renewcommand\thesection{\arabic{section}}
 \renewcommand\thesubsection{\thesection.\arabic{subsection}}
-\usepackage{caption}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[R]{\rightmark}
-\fancyfoot[R]{\thepage}
-%\fancyfoot[C]{Teléfono  2511-1400    /    posgrado@sep.ucr.ac.cr  /   www.sep.ucr.ac.cr}
-\setlength{\headheight}{21.9pt}
-\renewcommand\sectionmark[1]{%
-\markright{\thesection\ #1}}
-%\renewcommand{\footrulewidth}{0.4pt}
 
+\usepackage{scalerel}
+\usepackage{tikz}
+\usetikzlibrary{svg.path}
 
-%\renewcommand{\footnoterule}{%
-%  \kern -1pt
-%  \hrule width \textwidth height 1pt
-%  \kern 4pt
-%}
+\definecolor{orcidlogocol}{HTML}{A6CE39}
+\tikzset{
+  orcidlogo/.pic={
+    \fill[orcidlogocol] svg{M256,128c0,70.7-57.3,128-128,128C57.3,256,0,198.7,0,128C0,57.3,57.3,0,128,0C198.7,0,256,57.3,256,128z};
+    \fill[white] svg{M86.3,186.2H70.9V79.1h15.4v48.4V186.2z}
+                 svg{M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z}
+                 svg{M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1C84.2,46.7,88.7,51.3,88.7,56.8z};
+  }
+}
 
+\newcommand\orcidicon[1]{\href{https://orcid.org/#1}{\mbox{\scalerel*{
+\begin{tikzpicture}[yscale=-1,transform shape]
+\pic{orcidlogo};
+\end{tikzpicture}
+}{|}}}}
 
-%MARCA DE AGUA
-%\usepackage{graphicx}
-% \usepackage{fancyhdr}
-%  \pagestyle{fancy}
-%  \setlength\headheight{28pt}
-%   \fancyhead[L]{\includegraphics[width=16cm]{marca.jpg}}
-%   \fancyfoot[LE,RO]{}
-
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-%\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
-
-\usepackage{tocloft}
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
-
-%\renewcommand{\familydefault}{\sfdefault} %Para cambiar la fuente
-
-
-%Para referenciar chunks
-\usepackage{caption}
-\usepackage{floatrow}
-\floatsetup[figure]{capposition=top}
-\floatsetup[table]{capposition=top}
-\floatplacement{figure}{H}
-\floatplacement{table}{H}
-
-\DeclareNewFloatType{chunk}{placement=H, fileext=chk, name=}
-\captionsetup{options=chunk}
-\renewcommand{\thechunk}{Código~\arabic{chunk}}
-\makeatletter
-\@addtoreset{chunk}{section}
-\makeatother
+\usepackage{hyperref}
 
 %Paquetes adicionales para ecuaciones, símbolos y figuras
 \usepackage{amssymb}

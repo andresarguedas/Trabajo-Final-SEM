@@ -1,20 +1,14 @@
 \documentclass{article}
 \usepackage{tikz}
-\usetikzlibrary{babel,positioning,shapes.multipart,calc,arrows.meta}
+\usetikzlibrary{babel,positioning,shapes.multipart,calc,arrows.meta,external}
 
-% set up externalization
-\usetikzlibrary{external}
-\tikzset{external/system call={latex \tikzexternalcheckshellescape -halt-on-error
--interaction=batchmode -jobname "\image" "\texsource" &&
-dvips -o "\image".ps "\image".dvi &&
-ps2eps "\image.ps"}}
-\tikzexternalize
+\tikzexternalize[shell escape=-enable-write18] % activate externalisation
+
+\tikzset{external/system call={pdflatex \tikzexternalcheckshellescape -halt-on-error
+-interaction=batchmode -jobname "\image" "\texsource" && 
+pdftops -eps "\image.pdf"}}
 
 \begin{document}
-%\begin{figure}[!h]
-%\centering
-%\caption{Modelo estimado sobre las habilidades cuantitativas}
-%\label{fig:mod_teorico}
 \begin{tikzpicture}
     [
     basic/.style={draw, text centered},
@@ -25,8 +19,8 @@ ps2eps "\image.ps"}}
 
     % Variables latentes
     \node [circ] (ve) {VE};
-    \node [circ, above left=1.5cm and 1cm of ve] (ca) {CA};
-    \node [circ, below left=1.5cm and 1cm of ve] (phc) {PHC};
+    \node [circ, above left=1.5cm and 0.8cm of ve] (ca) {CA};
+    \node [circ, below left=1.5cm and 0.8cm of ve] (phc) {PHC};
     \draw [->] (ca) -- node[fill=white] {-0.01} (ve);
     \draw [->] (phc) -- node[fill=white] {0.41} (ve);
     % Variancia de VE
@@ -40,9 +34,9 @@ ps2eps "\image.ps"}}
     \draw [->] (ve) -- node[fill=white] {0.74} (pve2.west);
     \draw [->] (ve) -- node[fill=white] {0.72} (pve3.west);
     % Variancia de variables indicadoras de VE
-    \node [right=0.5cm of pve1] (epve1) {0.62};
-    \node [right=0.5cm of pve2] (epve2) {0.45};
-    \node [right=0.5cm of pve3] (epve3) {0.48};
+    \node [right=of pve1] (epve1) {0.62};
+    \node [right=of pve2] (epve2) {0.45};
+    \node [right=of pve3] (epve3) {0.48};
     \draw [->] (epve1) -- (pve1);
     \draw [->] (epve2) -- (pve2);
     \draw [->] (epve3) -- (pve3);
@@ -54,9 +48,9 @@ ps2eps "\image.ps"}}
     \draw [->] (ca) -- node[fill=white] {0.77} (pc2.east);
     \draw [->] (ca) -- node[fill=white] {0.73} (pc3.east);
     % Variancia de variables indicadoras de CA
-    \node [left=0.5cm of pc1] (epc1) {0.22};
-    \node [left=0.5cm of pc2] (epc2) {0.41};
-    \node [left=0.5cm of pc3] (epc3) {0.47};
+    \node [left=of pc1] (epc1) {0.22};
+    \node [left=of pc2] (epc2) {0.41};
+    \node [left=of pc3] (epc3) {0.47};
     \draw [->] (epc1) -- (pc1);
     \draw [->] (epc2) -- (pc2);
     \draw [->] (epc3) -- (pc3);
@@ -68,12 +62,11 @@ ps2eps "\image.ps"}}
     \draw [->] (phc) -- node[fill=white] {0.80} (phc2.east);
     \draw [->] (phc) -- node[fill=white] {0.82} (phc3.east);
     % Variancia de variables indicadoras de CA
-    \node [left=0.5cm of phc1] (ephc1) {0.28};
-    \node [left=0.5cm of phc2] (ephc2) {0.37};
-    \node [left=0.5cm of phc3] (ephc3) {0.33};
+    \node [left=of phc1] (ephc1) {0.28};
+    \node [left=of phc2] (ephc2) {0.37};
+    \node [left=of phc3] (ephc3) {0.33};
     \draw [->] (ephc1) -- (phc1);
     \draw [->] (ephc2) -- (phc2);
     \draw [->] (ephc3) -- (phc3);
 \end{tikzpicture}
-%\end{figure}
 \end{document}

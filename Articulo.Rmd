@@ -22,10 +22,11 @@ library(carlians)
 requeridos(knitr, ggplot2, tidyr, dplyr, kableExtra)
 ```
 
+```{=latex}
 \begin{title}
-\title[maintitle = Kurtosis effects on Estimating Structural Equation Models Over Different Sample Sizes,
-       secondtitle = Efectos de la Kurtosis en la estimación de Modelos de Ecuaciones Estructurales bajo distintos tamaños de muestra,
-       shorttitle = Short title in English
+\title[maintitle = The Effects of Kurtosis on the Estimation of Structural Equation Models Over Different Sample Sizes,
+    secondtitle = Efectos de la Kurtosis en la estimación de Modelos de Ecuaciones Estructurales bajo distintos tamaños de muestra,
+    shorttitle = Effect of Kurtosis on SEM Estimation
 ]
 \end{title}
 
@@ -33,12 +34,12 @@ requeridos(knitr, ggplot2, tidyr, dplyr, kableExtra)
 \author[firstname = César,
         surname = Gamboa-Sanabria,
         numberinstitution = 1,
-        affiliation = School of Statistics, University of Costa Rica, 
+        affiliation = {School of Statistics, University of Costa Rica}, 
         email = info@cesargamboasanabria.com] \orcidicon{0000-0001-6733-4759}\,
 \author[firstname = Andrés,
         surname = Arguedas-Leiva,
         numberinstitution = 1,
-        affiliation = School of Statistics, University of Costa Rica, 
+        affiliation = {School of Statistics, University of Costa Rica}, 
         email = andres.arguedasleiva@ucr.ac.cr] \orcidicon{0000-0001-6299-052X}
 \end{authors}
 
@@ -59,30 +60,31 @@ requeridos(knitr, ggplot2, tidyr, dplyr, kableExtra)
 Inserte su resumen aquí.
 \keywords{SEM, simulación, kurtosis, lavaan}
 \end{secondaryabstract}
+```
 
-\section{Introduction}  
+\section{Introduction} 
 
 ```{r, child="01-Introduccion.Rmd"}
 ```
 
 \section{Methodology} 
 
-```{r, child="03-Metodologia.Rmd"}
+```{r, child="02-Metodologia.Rmd"}
 ```
 
 \section{Results} 
 
-```{r, child="04-Resultados.Rmd"}
+```{r, child="03-Resultados.Rmd"}
 ```
 
 \section{Conclusions}
 
-```{r, child="05-Conclusiones.Rmd"}
+```{r, child="04-Conclusiones.Rmd"}
 ```
 
 \section{Appendices}
 
-```{r, child="06-Anexos.Rmd"}
+```{r, child="05-Anexos.Rmd"}
 ```
 
 \section*{References}

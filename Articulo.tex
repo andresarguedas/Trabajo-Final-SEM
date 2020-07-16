@@ -44,7 +44,7 @@
   urlcolor=blue,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -118,27 +118,37 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
 
 \author{}
 \date{\vspace{-2.5em}}
 
 \begin{document}
 
-\textbackslash begin\{title\} \textbackslash title{[}maintitle =
-Kurtosis effects on Estimating Structural Equation Models Over Different
-Sample Sizes, secondtitle = Efectos de la Kurtosis en la estimación de
-Modelos de Ecuaciones Estructurales bajo distintos tamaños de muestra,
-shorttitle = Short title in English{]} \textbackslash end\{title\}
+\begin{title}
+\title[maintitle = Kurtosis effects on Estimating Structural Equation Models Over Different Sample Sizes,
+       secondtitle = Efectos de la Kurtosis en la estimación de Modelos de Ecuaciones Estructurales bajo distintos tamaños de muestra,
+       shorttitle = Short title in English
+]
+\end{title}
 
-\textbackslash begin\{authors\} \textbackslash author{[}firstname =
-César, surname = Gamboa-Sanabria, numberinstitution = 1, affiliation =
-School of Statistics, University of Costa Rica, email =
-\href{mailto:info@cesargamboasanabria.com}{\nolinkurl{info@cesargamboasanabria.com}}{]}
-\orcidicon{0000-0001-6733-4759}, \textbackslash author{[}firstname =
-Andrés, surname = Arguedas-Leiva, numberinstitution = 1, affiliation =
-School of Statistics, University of Costa Rica, email =
-\href{mailto:andres.arguedasleiva@ucr.ac.cr}{\nolinkurl{andres.arguedasleiva@ucr.ac.cr}}{]}
-\orcidicon{0000-0001-6299-052X} \textbackslash end\{authors\}
+\begin{authors}
+\author[firstname = César,
+        surname = Gamboa-Sanabria,
+        numberinstitution = 1,
+        affiliation = {School of Statistics, University of Costa Rica}, 
+        email = info@cesargamboasanabria.com] \orcidicon{0000-0001-6733-4759}\,
+\author[firstname = Andrés,
+        surname = Arguedas-Leiva,
+        numberinstitution = 1,
+        affiliation = {School of Statistics, University of Costa Rica}, 
+        email = andres.arguedasleiva@ucr.ac.cr] \orcidicon{0000-0001-6299-052X}
+\end{authors}
 
 \begin{institutions}
      \institute[subdivision = {School of Statistics},
@@ -171,31 +181,30 @@ manera directa. Los SEM trabajan de una manera similar a los modelos de
 regresión más clásicos, pero representan una mejora pues analizan las
 relaciones causales lineales entre las variables involucradas al mismo
 tiempo que los errores de medición (Beran \& Violato,
-\protect\hyperlink{ref-Beran2010StructuralEM}{2010}). Para medir estas
-relaciones causales, los SEM cuentan con dos grandes componentes: 1) El
-modelo estructural, cuya función es cuantificar las relaciones causales
+\protect\hyperlink{ref-Beran2010}{2010}). Para medir estas relaciones
+causales, los SEM cuentan con dos grandes componentes: 1) el modelo
+estructural, cuya función es cuantificar las relaciones causales
 presentes entre cada uno de los constructos planteados desde la teoría;
 y 2) un modelo de medición, cuyo objetivo último es brindar una
 descripción acerca de cuáles son los indicadores que sirven para medir
 los constructos en cuestión (Kaplan,
-\protect\hyperlink{ref-kaplan}{2008}).
+\protect\hyperlink{ref-Kaplan2012}{2012}).
 
 Los SEM están presentes en multitud de campos de investigación como la
 psicología, la sociología, las políticas públicas y ciencias
 relacionadas a la familia (Tarka,
-\protect\hyperlink{ref-tarka}{2018}\protect\hyperlink{ref-tarka}{a}),
-además, trabajos como el de Thomas Golob (Golob,
-\protect\hyperlink{ref-golob}{2011}) muestran la aplicación de los SEM
-en fenómenos económicos, o bien en investigación de mercados como
-sugieren los trabajos de Bagozzi (Horton,
-\protect\hyperlink{ref-bagozzi}{1980}) y Chin (Chin, Peterson, \& Brown,
-\protect\hyperlink{ref-chin}{2008}). Según Beran y Violato (2010), la
-cantidad de referencias a SEM en 1994 fueron de 164, aumentaron a 343 en
-el 2000 y llegaron a 742 en el 2009, lo cual es una señal de que muchos
-investigadores alrededor del mundo están mostrando cada vez más interés
-en este tipo de estudios, pues representan una potente herramienta para
-la investigación partiendo de la teoría sustantiva que poseen los
-diversos estudios.
+\protect\hyperlink{ref-Tarka2018}{2018}), además, trabajos como el de
+Golob (\protect\hyperlink{ref-Golob2003}{2003}) muestran la aplicación
+de los SEM en fenómenos económicos, o bien en investigación de mercados
+como sugieren los trabajos de Bagozzi
+(\protect\hyperlink{ref-Bagozzi1980}{1980}) y Chin, Peterson, \& Brown
+(\protect\hyperlink{ref-Chin2008}{2008}). Según Beran \& Violato
+(\protect\hyperlink{ref-Beran2010}{2010}), la cantidad de referencias a
+SEM en 1994 fueron de 164, aumentaron a 343 en el 2000 y llegaron a 742
+en el 2009, lo cual es una señal de que muchos investigadores alrededor
+del mundo están mostrando cada vez más interés en este tipo de estudios,
+pues representan una potente herramienta para la investigación partiendo
+de la teoría sustantiva que poseen los diversos estudios.
 
 Uno de los principales campos de aplicación de los SEM son las ciencias
 sociales, pues se busca explicar y/o predecir con un grado de validez el
@@ -208,7 +217,7 @@ causalidad entre ellos que se encuentran implícitas en el comportamiento
 humano. Este tipo de investigaciones permite entender los fenómenos no
 solo de forma descriptiva, sino que es posible también determinar
 relaciones de causalidad (Tarka,
-\protect\hyperlink{ref-Tarka}{2018}\protect\hyperlink{ref-Tarka}{b}).
+\protect\hyperlink{ref-Tarka2018}{2018}).
 
 Las variables indicadoras, las cuales se utilizan para construir los
 llamados constructos, pueden llegar a comportarse de manera muy diversa.
@@ -218,15 +227,16 @@ presentando valores muy distintos entre los sujetos de estudio,
 generando de esta manera que los indicadores de manera multivariada no
 sigan una distribución normal, lo cual representa un supuesto
 fundamental al trabajar con SEM (Sura-Fonseca,
-\protect\hyperlink{ref-sura}{2020}),esta condición puede afectar
-negativamente la estimación del modelo y sus estadísticos de bondad de
-ajuste, llevando a pérdidas en la potencia (Foss, Jöreskog, \& Olsson,
-\protect\hyperlink{ref-foss}{2011}) o al caso de descartar modelos que
-podrían ser adecuados solo por presentar un mal ajuste (Andreassen,
-Lorentzen, \& Olsson, \protect\hyperlink{ref-andreassen}{2006}). El no
-cumplimiento de este supuesto puede deberse, entre otras cosas, a
-medidas particularmente altas o bajas de una medida estadística en
-específico: La kurtosis.
+\protect\hyperlink{ref-SuraFonseca2020}{2020}), esta condición puede
+afectar negativamente la estimación del modelo y sus estadísticos de
+bondad de ajuste, llevando a pérdidas en la potencia (Foss, Jreskog, \&
+Olsson, \protect\hyperlink{ref-Foss2011}{2011}) o al caso de descartar
+modelos que podrían ser adecuados solo por presentar un mal ajuste
+(Andreassen, Lorentzen, \& Olsson,
+\protect\hyperlink{ref-Andreassen2006}{2006}). El no cumplimiento de
+este supuesto puede deberse, entre otras cosas, a medidas
+particularmente altas o bajas de una medida estadística en específico:
+la kurtosis.
 
 \subsection{El problema}
 
@@ -250,15 +260,14 @@ de su distribución. Este comportamiento se mide mediante un estadístico
 llamado kurtosis, que describe qué tan aplanada o empinada es la
 distribución, dependiendo de este estadístico, es posible saber si los
 datos atentan contra la presencia de una distribución normal. Trabajos
-como el de Sura-Fonseca (Sura-Fonseca,
-\protect\hyperlink{ref-sura}{2020}) o el de Tor (Andreassen et~al.,
-\protect\hyperlink{ref-andreassen}{2006}) han abierto espacioes de
-investigación para esta temática
+como el de Sura-Fonseca (\protect\hyperlink{ref-SuraFonseca2020}{2020})
+o el de Andreassen et~al. (\protect\hyperlink{ref-Andreassen2006}{2006})
+han abierto espacios de investigación para esta temática
 
 Considerar distintos niveles de kurtosis permite conocer el impacto que
 esta medida tiene sobre las estimaciones de un SEM dependiendo del
 tamaño de muestra utilizado (Muthen \& Kaplan,
-\protect\hyperlink{ref-muthen}{1992}).
+\protect\hyperlink{ref-Muthen1992}{1992}).
 
 \subsection{Objetivos del estudio}
 
@@ -266,7 +275,7 @@ La presente investigación busca estudiar el efecto que tienen distintos
 niveles de kurtosis en varios tamaños de muestra sobre las estimaciones
 de un SEM. Para ello, se ha tomado tomado como base un estudio de la
 Universidad de California (Gao, Mokhtarian, \& Johnston,
-\protect\hyperlink{ref-gao}{2008}), por ser uno de los trabajos más
+\protect\hyperlink{ref-Gao2008}{2008}), por ser uno de los trabajos más
 recientes en cuanto a planteamiento de tamaños de muestra y kurtosis
 para la simulación de datos multivariados. Se plantean los siguientes
 objetivos:
@@ -282,9 +291,10 @@ presencia de variables observadas con niveles de kurtosis de 0, 0.62,
 \subsubsection{Objetivos específicos}
 
 \textbf{1)} Definir como modelo poblacional el obtenido por Sura-Fonseca
-(2020) con dos variables exógenas y una endógena con tres variables
-indicadoras cada uno como modelo de referencia teórico cuyas cargas
-factoriales se utilizarán para la generación de los datos simulados.
+(\protect\hyperlink{ref-SuraFonseca2020}{2020}) con dos variables
+exógenas y una endógena con tres variables indicadoras cada uno como
+modelo de referencia teórico cuyas cargas factoriales se utilizarán para
+la generación de los datos simulados.
 
 \textbf{2)} Medir el posible sesgo causado en la estimación de los
 modelos mediante el estadístico chi-cuadrado del modelo y la raíz del
@@ -303,11 +313,12 @@ manuscrito final, en forma de un artículo científico.
 De esta manera, el presente estudio consiste en en simular datos no
 normales multivariados con diferentes tamaños de muestra y kurtosis para
 la estimación de SEM tomando como punto modelo de referencia el obtenido
-por Sura-Fonseca para las habilidades cuantitativas, el cual consiste en
-dos variables exógenas y una endógena. Se realizaron 2000 conjuntos de
-datos para cada escenario de simulación y se comparan las estimaciones
-de tanto de las cargas factoriales como de varios estadísticos de bondad
-de ajuste que serán descritos más adelante.
+por Sura-Fonseca (\protect\hyperlink{ref-SuraFonseca2020}{2020}) para
+las habilidades cuantitativas, el cual consiste en dos variables
+exógenas y una endógena. Se realizaron 2000 conjuntos de datos para cada
+escenario de simulación y se comparan las estimaciones de tanto de las
+cargas factoriales como de varios estadísticos de bondad de ajuste que
+serán descritos más adelante.
 
 \section{Methodology}
 
@@ -382,25 +393,26 @@ mediante el método de Fleishman.
 \subsection{Modelo a estimar}
 
 El modelo teórico utilizada para realizar las simulaciones es el
-presentado por Sura-Fonseca (\protect\hyperlink{ref-sura}{2020}), basado
-en datos de 155 estudiantes de la Universidad de Costa Rica, obtenidos
-de la Prueba de Habilidades Cuantitativas (PHC) del Instituto de
-Investigaciones Psicológicos (IIP) de dicha universidad y de un
-cuestionario autoadministrado aplicado a estos estudiantes. El modelo
-estimado está compuesto por dos variables exógenas (capital y
-habilidades cuantitativas) y una variable endógena (habilidades
-visoespaciales). Con respecto a estas variables: el capital se refiere
-al acceso y tenencia de ciertos bienes en los hogares de los
-estudiantes; las habilidades cuantitativas se refieren a la puntuación
-de los estudiantes en la prueba mencionada anteriormente; y las
-habilidades visoespaciales se refieren a la capacidad de los estudiantes
-para poder trabajar con objetos tridimensionales abstractos y poder
-manipularlos en la imaginación. Para cada una de estas variables
-latentes, se utilizó el método de parcelas para obtener tres variables
-indicadoras para cada uno de los constructos. Los resultados de la
-estimación de dicho modelo, presentados por Sura-Fonseca
-(\protect\hyperlink{ref-sura}{2020}), se presentan en la Figura
-\ref{fig:mod_teorico}.
+presentado por Sura-Fonseca
+(\protect\hyperlink{ref-SuraFonseca2020}{2020}), basado en datos de 155
+estudiantes de la Universidad de Costa Rica, obtenidos de la Prueba de
+Habilidades Cuantitativas (PHC) del Instituto de Investigaciones
+Psicológicos (IIP) de dicha universidad y de un cuestionario
+autoadministrado aplicado a estos estudiantes. El modelo estimado está
+compuesto por dos variables exógenas (capital y habilidades
+cuantitativas) y una variable endógena (habilidades visoespaciales). Con
+respecto a estas variables: el capital se refiere al acceso y tenencia
+de ciertos bienes en los hogares de los estudiantes; las habilidades
+cuantitativas se refieren a la puntuación de los estudiantes en la
+prueba mencionada anteriormente; y las habilidades visoespaciales se
+refieren a la capacidad de los estudiantes para poder trabajar con
+objetos tridimensionales abstractos y poder manipularlos en la
+imaginación. Para cada una de estas variables latentes, se utilizó el
+método de parcelas para obtener tres variables indicadoras para cada uno
+de los constructos. Los resultados de la estimación de dicho modelo,
+presentados por Sura-Fonseca
+(\protect\hyperlink{ref-SuraFonseca2020}{2020}), se presentan en la
+Figura \ref{fig:mod_teorico}.
 
 \begin{figure}[!h]
 \centering
@@ -505,11 +517,11 @@ interés, la definición de estos escenarios se muestran en el cuadro
 \toprule
 kurtosis & n & kurtosis & n & kurtosis & n & kurtosis & n & kurtosis & n\\
 \midrule
-\rowcolor{gray!6}  0.00 & 50 & 0.00 & 100 & 0.00 & 200 & 0.00 & 400 & 0.00 & 800\\
-0.62 & 50 & 0.62 & 100 & 0.62 & 200 & 0.62 & 400 & 0.62 & 800\\
-\rowcolor{gray!6}  6.65 & 50 & 6.65 & 100 & 6.65 & 200 & 6.65 & 400 & 6.65 & 800\\
-21.41 & 50 & 21.41 & 100 & 21.41 & 200 & 21.41 & 400 & 21.41 & 800\\
-\rowcolor{gray!6}  13.92 & 50 & 13.92 & 100 & 13.92 & 200 & 13.92 & 400 & 13.92 & 800\\
+\rowcolor{gray!6}  0.00 & 50 & 0.00 & 100 & 0.00 & 120 & 0.00 & 200 & 0.00 & 300\\
+0.62 & 50 & 0.62 & 100 & 0.62 & 120 & 0.62 & 200 & 0.62 & 300\\
+\rowcolor{gray!6}  6.65 & 50 & 6.65 & 100 & 6.65 & 120 & 6.65 & 200 & 6.65 & 300\\
+21.41 & 50 & 21.41 & 100 & 21.41 & 120 & 21.41 & 200 & 21.41 & 300\\
+\rowcolor{gray!6}  13.92 & 50 & 13.92 & 100 & 13.92 & 120 & 13.92 & 200 & 13.92 & 300\\
 \bottomrule
 \multicolumn{10}{l}{\textit{Fuente:} Elaboración propia a partir del estudio de la Universidad de California (2008)}\\
 \end{tabu}}
@@ -617,20 +629,25 @@ ajuste cuando es menor que 0.9 (Kenny,
 \section*{References}
 
 \hypertarget{refs}{}
-\leavevmode\hypertarget{ref-andreassen}{}%
+\begin{cslreferences}
+\leavevmode\hypertarget{ref-Andreassen2006}{}%
 Andreassen, T. W., Lorentzen, B. G., \& Olsson, U. H. (2006). The impact
 of non-normality and estimation methods in SEM on satisfaction research
 in marketing. \emph{Quality and Quantity}, \emph{40}(1), 39-58.
+\url{https://doi.org/10.1007/s11135-005-4510-y}
 
-\leavevmode\hypertarget{ref-Beran2010StructuralEM}{}%
+\leavevmode\hypertarget{ref-Bagozzi1980}{}%
+Bagozzi, R. P. (1980). \emph{Causal models in marketing}. New York, NY:
+Wiley.
+
+\leavevmode\hypertarget{ref-Beran2010}{}%
 Beran, T. N., \& Violato, C. (2010). Structural equation modeling in
-medical research: a primer. \emph{BMC Research Notes}, \emph{3},
-267-267. Recuperado de
-\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2987867/\#}
+medical research: A primer. \emph{BMC Research Notes}, \emph{3}(1), 267.
+\url{https://doi.org/10.1186/1756-0500-3-267}
 
-\leavevmode\hypertarget{ref-chin}{}%
+\leavevmode\hypertarget{ref-Chin2008}{}%
 Chin, W. W., Peterson, R. A., \& Brown, S. P. (2008). Structural
-Equation Modeling in Marketing: Some Practical Reminders. \emph{Journal
+equation modeling in marketing: Some practical reminders. \emph{Journal
 of Marketing Theory and Practice}, \emph{16}(4), 287-298.
 \url{https://doi.org/10.2753/MTP1069-6679160402}
 
@@ -639,30 +656,20 @@ Fleishman, A. I. (1978). A method for simulating non-normal
 distributions. \emph{Psychometrika}, \emph{43}(4), 521-532.
 \url{https://doi.org/10.1007/BF02293811}
 
-\leavevmode\hypertarget{ref-foss}{}%
-Foss, T., Jöreskog, K. G., \& Olsson, U. H. (2011). Testing structural
+\leavevmode\hypertarget{ref-Foss2011}{}%
+Foss, T., Jreskog, K. G., \& Olsson, U. H. (2011). Testing structural
 equation models: The effect of kurtosis. \emph{Computational Statistics
-\& Data Analysis}, \emph{55}(7), 2263-2275. Recuperado de
-\url{https://EconPapers.repec.org/RePEc:eee:csdana:v:55:y:2011:i:7:p:2263-2275}
+and Data Analysis}, \emph{55}(7), 2263-2275.
+\url{https://doi.org/10.1016/j.csda.2011.01.012}
 
-\leavevmode\hypertarget{ref-gao}{}%
+\leavevmode\hypertarget{ref-Gao2008}{}%
 Gao, S., Mokhtarian, P. L., \& Johnston, R. A. (2008). Nonnormality of
-Data in Structural Equation Models. \emph{Transportation Research
-Record}, \emph{2082}(1), 116-124. Recuperado de
-\href{\%20https://doi.org/10.3141/2082-14}{https://doi.org/10.3141/2082-14}
+data in structural equation models. \emph{Transportation Research
+Record}, (2082), 116-124. \url{https://doi.org/10.3141/2082-14}
 
-\leavevmode\hypertarget{ref-golob}{}%
-Golob, T. F. (2011). \emph{Structural Equation Modeling For Travel
-Behavior Research} (University of California Transportation Center,
-Working Papers N.º qt2pn5j58n). Recuperado de University of California
-Transportation Center website:
-\url{https://ideas.repec.org/p/cdl/uctcwp/qt2pn5j58n.html}
-
-\leavevmode\hypertarget{ref-bagozzi}{}%
-Horton, R. L. (1980). Book Reviews : CAUSAL MODELS IN MARKETING by
-Richard P. Bagozzi (New York: Wiley, 1980. 303 pp., \$14.95).
-\emph{Journal of the Academy of Marketing Science}, \emph{8}(3),
-304-305. \url{https://doi.org/10.1177/009207038000800316}
+\leavevmode\hypertarget{ref-Golob2003}{}%
+Golob, T. F. (2003). \emph{Structural equation modeling for travel
+behavior research}. \url{https://doi.org/10.1016/S0191-2615(01)00046-7}
 
 \leavevmode\hypertarget{ref-Hu1999}{}%
 Hu, L. T., \& Bentler, P. M. (1999). Cutoff criteria for fit indexes in
@@ -670,10 +677,9 @@ covariance structure analysis: Conventional criteria versus new
 alternatives. \emph{Structural Equation Modeling}, \emph{6}(1), 1-55.
 \url{https://doi.org/10.1080/10705519909540118}
 
-\leavevmode\hypertarget{ref-kaplan}{}%
-Kaplan, D. (2008). \emph{Structural Equation Modeling: Foundations and
-Extensions}. Recuperado de
-\url{https://books.google.co.cr/books?id=MdYgAQAAQBAJ}
+\leavevmode\hypertarget{ref-Kaplan2012}{}%
+Kaplan, D. (2012). \emph{Structural Equation Modeling (2nd ed.):
+Foundations and Extensions}. \url{https://doi.org/10.4135/9781452226576}
 
 \leavevmode\hypertarget{ref-ggpubr}{}%
 Kassambara, A. (2020). \emph{ggpubr: 'ggplot2' Based Publication Ready
@@ -683,12 +689,12 @@ Plots}. Recuperado de \url{https://CRAN.R-project.org/package=ggpubr}
 Kenny, D. A. (2015). \emph{SEM: Fit (David A. Kenny)}. Recuperado de
 \url{http://www.davidakenny.net/cm/fit.htm}
 
-\leavevmode\hypertarget{ref-muthen}{}%
+\leavevmode\hypertarget{ref-Muthen1992}{}%
 Muthen, B., \& Kaplan, D. (1992). A comparison of some methodologies for
-the factor analysis of non-normal Likert variables: A note on the size
+the factor analysis of non‐normal Likert variables: A note on the size
 of the model. \emph{British Journal of Mathematical and Statistical
-Psychology}, \emph{45}(1), 19-30. Recuperado de
-\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.2044-8317.1992.tb00975.x}
+Psychology}, \emph{45}(1), 19-30.
+\url{https://doi.org/10.1111/j.2044-8317.1992.tb00975.x}
 
 \leavevmode\hypertarget{ref-PerformanceAnalytics}{}%
 Peterson, B. G., \& Carl, P. (2020). \emph{PerformanceAnalytics:
@@ -708,26 +714,18 @@ Recuperado de \url{http://www.jstatsoft.org/v48/i02/}
 RStudio Team. (2015). \emph{RStudio: Integrated Development Environment
 for R}. Recuperado de \url{http://www.rstudio.com/}
 
-\leavevmode\hypertarget{ref-sura}{}%
+\leavevmode\hypertarget{ref-SuraFonseca2020}{}%
 Sura-Fonseca, R. (2020). \emph{Modelos de ecuaciones estructurales:
 consecuencias de la asimetría positiva en los indicadores endógenos
 sobre las estimaciones puntuales de sus coeficientes y la bondad de
-ajuste}. Recuperado de
+ajuste} (Master's Thesis, University of Costa Rica). Recuperado de
 \url{http://www.kerwa.ucr.ac.cr/handle/10669/80716}
 
-\leavevmode\hypertarget{ref-tarka}{}%
-Tarka, P. (2018a). An overview of structural equation modeling: its
+\leavevmode\hypertarget{ref-Tarka2018}{}%
+Tarka, P. (2018). An overview of structural equation modeling: its
 beginnings, historical development, usefulness and controversies in the
-social sciences. \emph{Quality \& Quantity: International Journal of
-Methodology}, \emph{52}(1), 313-354.
+social sciences. \emph{Quality and Quantity}, \emph{52}(1), 313-354.
 \url{https://doi.org/10.1007/s11135-017-0469-8}
-
-\leavevmode\hypertarget{ref-Tarka}{}%
-Tarka, P. (2018b). An overview of structural equation modeling: its
-beginnings, historical development, usefulness and controversies in the
-social sciences. \emph{Quality \& Quantity: International Journal of
-Methodology}, \emph{52}(1), 313-354. Recuperado de
-\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5794813/}
 
 \leavevmode\hypertarget{ref-Vale1983}{}%
 Vale, C. D., \& Maurelli, V. A. (1983). Simulating multivariate
@@ -751,5 +749,6 @@ Recuperado de \url{https://CRAN.R-project.org/package=tidyr}
 Zhu, H. (2019). \emph{kableExtra: Construct Complex Table with 'kable'
 and Pipe Syntax}. Recuperado de
 \url{https://CRAN.R-project.org/package=kableExtra}
+\end{cslreferences}
 
 \end{document}

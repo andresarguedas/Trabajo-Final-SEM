@@ -18,8 +18,9 @@ knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, dpi = 1000
                       dev = "jpeg", out.width = '100%', out.height = '100%', 
                       fig.pos = "!h", echo = FALSE)
 
+#devtools::install_github("cgamboasanabria/carlians")
 library(carlians)
-requeridos(knitr, ggplot2, tidyr, dplyr, kableExtra)
+requeridos(knitr, kableExtra, lavaan, ggplot2, tidyr, PerformanceAnalytics, ggpubr, dplyr)
 ```
 
 \begin{title}
@@ -33,12 +34,12 @@ requeridos(knitr, ggplot2, tidyr, dplyr, kableExtra)
 \author[firstname = César,
         surname = Gamboa-Sanabria,
         numberinstitution = 1,
-        affiliation = School of Statistics, University of Costa Rica, 
+        affiliation = {School of Statistics, University of Costa Rica}, 
         email = info@cesargamboasanabria.com] \orcidicon{0000-0001-6733-4759}\,
 \author[firstname = Andrés,
         surname = Arguedas-Leiva,
         numberinstitution = 1,
-        affiliation = School of Statistics, University of Costa Rica, 
+        affiliation = {School of Statistics, University of Costa Rica}, 
         email = andres.arguedasleiva@ucr.ac.cr] \orcidicon{0000-0001-6299-052X}
 \end{authors}
 

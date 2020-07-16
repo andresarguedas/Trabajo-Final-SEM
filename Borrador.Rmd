@@ -12,13 +12,14 @@ modelo <- ' CA =~ 0.88*x1 + 0.77*x2 + 0.73*x3
 # Casos a evaluar
 
 ```{r}
-casos <- expand.grid(kurtosis=c(0, 0.62, 6.65, 21.41, 13.92), n=c(50, 100, 200, 400, 800))
+casos <- expand.grid(kurtosis=c(0, 0.62, 6.65, 21.41, 13.92), n=c(100, 120, 155, 200, 300))
 ```
 
 # Simulación de los datos
 
 ```{r}
-datos <- lapply(1:10, function(x){
+simulaciones <- 1000
+datos <- lapply(1:simulaciones, function(x){
   data <- mapply(simulateData, sample.nobs=casos$n, kurtosis=casos$kurtosis, 
                 MoreArgs = list(model=modelo),
                 SIMPLIFY = FALSE)
@@ -43,7 +44,7 @@ names(datos) <- nombres
 
 ```{r}
 resumen_kurtosis <- lapply(datos, function(x){
-  lapply(1:10, function(y){
+  lapply(1:simulaciones, function(y){
     apply(x[[y]],2, kurtosis)
   }) %>% do.call(rbind, .)
 })
@@ -89,7 +90,7 @@ estimaciones <- lapply(modelos, function(x){
 })
 sink(NULL)
 
-estimaciones$n50k0
+#estimaciones$n50k0
 ```
 
 #Análisis

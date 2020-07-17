@@ -1,7 +1,12 @@
 base
 carlians
 knitr
+kableExtra
+lavaan
 ggplot2
 tidyr
+zoo
+xts
+PerformanceAnalytics
+ggpubr
 dplyr
-kableExtra

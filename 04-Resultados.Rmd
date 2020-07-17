@@ -3,68 +3,355 @@
 
 \subsection{Análisis exploratorio}
 
-```{r}
-kurtosis((scale(resumen_kurtosis$n100k0)))
-kurtosis(c(resumen_kurtosis$n100k0))
-kurtosis(c(resumen_kurtosis$n100k21.41))
-```
+Como se mencionó anteriormente, la función `simulateData()` del paquete `lavaan` permite simular conjuntos de datos a partir de un SEM de referencia, que en este caso es el propuesto por @SuraFonseca2020; y cuyos datos pueden tener un determinado nivel de kurtosis especificado por el usuario mediante el argumento `kurtosis`. Como el nivel especificado de kurtosis solo se alcanza en tamaños de muestra muy superiores a los que son de interés en esta investigación, es importante analizar los niveles de kurtosis que realmente se obtuvieron en las simulaciones. Para ello, se calculó la kurtosis de cada variable indicadora en cada una de las 2000 iteraciones de cada escenario de simulación. Esta comparación se hace calculando la mediana y los percentiles 0.025 y 0.950 para los datos simulados.
 
 ```{r}
-population.model <- ' f1 =~ x1 + 0.8*x2 + 1.2*x3
-                      f2 =~ x4 + 0.5*x5 + 1.5*x6
-                      f3 =~ x7 + 0.1*x8 + 0.9*x9
-
-                      f3 ~ 0.5*f1 + 0.6*f2
-                    '
-
-# generate data
-
-
+load("resumen_kurtosis.RData")
+df_n50 <- lapply(resumen_kurtosis[1:5], function(x){
   
-  myData <- simulateData(population.model, sample.nobs=1e5, kurtosis = rep(24, 9))
-psych::describe(myData)
+  x %>% 
+  as.data.frame() %>% 
+  gather(variable, valor) %>% 
+  group_by(variable) %>% 
+  summarise(Median=quantile(valor, .5),
+            Lower=quantile(valor, 0.05/2),
+            Upper=quantile(valor, 1-(0.05/2))) %>% 
+  gather(Measure, Value, -variable) %>% 
+  pivot_wider(names_from = variable, values_from=Value)
+  
+}) %>% 
+  do.call(rbind,.) %>% 
+  data.frame(.,row.names = NULL) %>% 
+  mutate(Kurtosis=rep(c(0, 0.62, 6.65, 21.41, 13.92), each=3),
+         Measure=factor(Measure, levels = c("Lower", "Median", "Upper"), ordered = TRUE)) %>% 
+  select(Kurtosis, Measure:x9) %>% 
+  arrange(Kurtosis, Measure)
 
+diff_n50 <- df_n50 %>% 
+  filter(Measure=="Median") %>% 
+  summarise(Kurtosis=Kurtosis,
+            x1=Kurtosis-abs(x1), 
+            x2=Kurtosis-abs(x2),
+            x3=Kurtosis-abs(x3),
+            x4=Kurtosis-abs(x4),
+            x5=Kurtosis-abs(x5),
+            x6=Kurtosis-abs(x6),
+            x7=Kurtosis-abs(x7),
+            x8=Kurtosis-abs(x8),
+            x9=Kurtosis-abs(x9)) %>% 
+  gather(var, val, -Kurtosis) %>% 
+  group_by(Kurtosis) %>% 
+  summarise(val=mean(val)) %>% 
+  mutate_all(round, 2) %>% 
+  mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
+```
 
-mod1 <- ' f1 =~ x1 + x2 + x3
-            f2 =~ x4 + x5 + x6
-            f3 =~ x7 + x8 + x9
+El cuadro \ref{tab:n50_table} muestra los resultados obtenidos al definir un tamaño de muestra de 50. Con este tamaño de muestra y `r paste(diff_n50$diff, collapse = ", ")`. 
 
-            f3 ~ f1 + f2
-          '
-
-fit <- sem(mod1, data = myData)
-standardizedSolution(fit)
+```{r}
+ df_n50 %>% 
+  kable(., "latex", booktabs=T, escape = F, longtable=F, 
+        caption = "\\label{tab:n50_table}Kurtosis range for each variable by spicified Kurtosis and n=50", linesep="", digits = 2) %>% 
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
+                repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
+  collapse_rows(1, latex_hline = "major") %>% 
+  column_spec(1, width = ".9cm")
 ```
 
 ```{r}
-  myData <- simulateData(population.model, sample.nobs=1e5, kurtosis = rep(3, 9))
-psych::describe(myData)
+df_n100 <- lapply(resumen_kurtosis[6:10], function(x){
+  
+  x %>% 
+  as.data.frame() %>% 
+  gather(variable, valor) %>% 
+  group_by(variable) %>% 
+  summarise(Median=quantile(valor, .5),
+            Lower=quantile(valor, 0.05/2),
+            Upper=quantile(valor, 1-(0.05/2))) %>% 
+  gather(Measure, Value, -variable) %>% 
+  pivot_wider(names_from = variable, values_from=Value)
+  
+}) %>% 
+  do.call(rbind,.) %>% 
+  data.frame(.,row.names = NULL) %>% 
+  mutate(Kurtosis=rep(c(0, 0.62, 6.65, 21.41, 13.92), each=3),
+         Measure=factor(Measure, levels = c("Lower", "Median", "Upper"), ordered = TRUE)) %>% 
+  select(Kurtosis, Measure:x9) %>% 
+  arrange(Kurtosis, Measure)
 
+diff_n100 <- df_n100 %>% 
+  filter(Measure=="Median") %>% 
+  summarise(Kurtosis=Kurtosis,
+            x1=Kurtosis-abs(x1), 
+            x2=Kurtosis-abs(x2),
+            x3=Kurtosis-abs(x3),
+            x4=Kurtosis-abs(x4),
+            x5=Kurtosis-abs(x5),
+            x6=Kurtosis-abs(x6),
+            x7=Kurtosis-abs(x7),
+            x8=Kurtosis-abs(x8),
+            x9=Kurtosis-abs(x9)) %>% 
+  gather(var, val, -Kurtosis) %>% 
+  group_by(Kurtosis) %>% 
+  summarise(val=mean(val)) %>% 
+  mutate_all(round, 2) %>% 
+  mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
+```
 
-mod1 <- ' f1 =~ x1 + x2 + x3
-            f2 =~ x4 + x5 + x6
-            f3 =~ x7 + x8 + x9
+De manera similar, el cuadro \ref{tab:n100_table} muestra los resultados obtenidos al definir un tamaño de muestra de 100. Con este tamaño de muestra y `r paste(diff_n100$diff, collapse = ", ")`. 
 
-            f3 ~ f1 + f2
-          '
-
-fit <- sem(mod1, data = myData)
-standardizedSolution(fit)
+```{r}
+ df_n100 %>% 
+  kable(., "latex", booktabs=T, escape = F, longtable=F, 
+        caption = "\\label{tab:n100_table}Kurtosis range for each variable by spicified Kurtosis and n=100", linesep="", digits = 2) %>% 
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
+                repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
+  collapse_rows(1, latex_hline = "major") %>% 
+  column_spec(1, width = ".9cm")
 ```
 
 ```{r}
-  myData <- simulateData(population.model, sample.nobs=1e5, kurtosis  = rep(12, 9))
-psych::describe(myData)
+df_n120 <- lapply(resumen_kurtosis[11:15], function(x){
+  
+  x %>% 
+  as.data.frame() %>% 
+  gather(variable, valor) %>% 
+  group_by(variable) %>% 
+  summarise(Median=quantile(valor, .5),
+            Lower=quantile(valor, 0.05/2),
+            Upper=quantile(valor, 1-(0.05/2))) %>% 
+  gather(Measure, Value, -variable) %>% 
+  pivot_wider(names_from = variable, values_from=Value)
+  
+}) %>% 
+  do.call(rbind,.) %>% 
+  data.frame(.,row.names = NULL) %>% 
+  mutate(Kurtosis=rep(c(0, 0.62, 6.65, 21.41, 13.92), each=3),
+         Measure=factor(Measure, levels = c("Lower", "Median", "Upper"), ordered = TRUE)) %>% 
+  select(Kurtosis, Measure:x9) %>% 
+  arrange(Kurtosis, Measure)
 
-mod1 <- ' f1 =~ x1 + x2 + x3
-            f2 =~ x4 + x5 + x6
-            f3 =~ x7 + x8 + x9
-
-            f3 ~ f1 + f2'
-
-fit <- sem(mod1, data = myData)
-standardizedSolution(fit)
+diff_n120 <- df_n120 %>% 
+  filter(Measure=="Median") %>% 
+  summarise(Kurtosis=Kurtosis,
+            x1=Kurtosis-abs(x1), 
+            x2=Kurtosis-abs(x2),
+            x3=Kurtosis-abs(x3),
+            x4=Kurtosis-abs(x4),
+            x5=Kurtosis-abs(x5),
+            x6=Kurtosis-abs(x6),
+            x7=Kurtosis-abs(x7),
+            x8=Kurtosis-abs(x8),
+            x9=Kurtosis-abs(x9)) %>% 
+  gather(var, val, -Kurtosis) %>% 
+  group_by(Kurtosis) %>% 
+  summarise(val=mean(val)) %>% 
+  mutate_all(round, 2) %>% 
+  mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
 ```
+
+Por su parte, el cuadro \ref{tab:n120_table} muestra los resultados obtenidos al definir un tamaño de muestra de 120. Con este tamaño de muestra y `r paste(diff_n120$diff, collapse = ", ")`. 
+
+```{r}
+ df_n120 %>% 
+  kable(., "latex", booktabs=T, escape = F, longtable=F, 
+        caption = "\\label{tab:n120_table}Kurtosis range for each variable by spicified Kurtosis and n=120", linesep="", digits = 2) %>% 
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
+                repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
+  collapse_rows(1, latex_hline = "major") %>% 
+  column_spec(1, width = ".9cm")
+```
+
+```{r}
+df_n200 <- lapply(resumen_kurtosis[16:20], function(x){
+  
+  x %>% 
+  as.data.frame() %>% 
+  gather(variable, valor) %>% 
+  group_by(variable) %>% 
+  summarise(Median=quantile(valor, .5),
+            Lower=quantile(valor, 0.05/2),
+            Upper=quantile(valor, 1-(0.05/2))) %>% 
+  gather(Measure, Value, -variable) %>% 
+  pivot_wider(names_from = variable, values_from=Value)
+  
+}) %>% 
+  do.call(rbind,.) %>% 
+  data.frame(.,row.names = NULL) %>% 
+  mutate(Kurtosis=rep(c(0, 0.62, 6.65, 21.41, 13.92), each=3),
+         Measure=factor(Measure, levels = c("Lower", "Median", "Upper"), ordered = TRUE)) %>% 
+  select(Kurtosis, Measure:x9) %>% 
+  arrange(Kurtosis, Measure)
+
+diff_n200 <- df_n200 %>% 
+  filter(Measure=="Median") %>% 
+  summarise(Kurtosis=Kurtosis,
+            x1=Kurtosis-abs(x1), 
+            x2=Kurtosis-abs(x2),
+            x3=Kurtosis-abs(x3),
+            x4=Kurtosis-abs(x4),
+            x5=Kurtosis-abs(x5),
+            x6=Kurtosis-abs(x6),
+            x7=Kurtosis-abs(x7),
+            x8=Kurtosis-abs(x8),
+            x9=Kurtosis-abs(x9)) %>% 
+  gather(var, val, -Kurtosis) %>% 
+  group_by(Kurtosis) %>% 
+  summarise(val=mean(val)) %>% 
+  mutate_all(round, 2) %>% 
+  mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
+```
+
+De manera análoga, el cuadro \ref{tab:n200_table} muestra los resultados obtenidos al definir un tamaño de muestra de 200. Con este tamaño de muestra y `r paste(diff_n200$diff, collapse = ", ")`. 
+
+```{r}
+ df_n200 %>% 
+  kable(., "latex", booktabs=T, escape = F, longtable=F, 
+        caption = "\\label{tab:n200_table}Kurtosis range for each variable by spicified Kurtosis and n=200", linesep="", digits = 2) %>% 
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
+                repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
+  collapse_rows(1, latex_hline = "major") %>% 
+  column_spec(1, width = ".9cm")
+```
+
+```{r}
+df_n300 <- lapply(resumen_kurtosis[21:25], function(x){
+  
+  x %>% 
+  as.data.frame() %>% 
+  gather(variable, valor) %>% 
+  group_by(variable) %>% 
+  summarise(Median=quantile(valor, .5),
+            Lower=quantile(valor, 0.05/2),
+            Upper=quantile(valor, 1-(0.05/2))) %>% 
+  gather(Measure, Value, -variable) %>% 
+  pivot_wider(names_from = variable, values_from=Value)
+  
+}) %>% 
+  do.call(rbind,.) %>% 
+  data.frame(.,row.names = NULL) %>% 
+  mutate(Kurtosis=rep(c(0, 0.62, 6.65, 21.41, 13.92), each=3),
+         Measure=factor(Measure, levels = c("Lower", "Median", "Upper"), ordered = TRUE)) %>% 
+  select(Kurtosis, Measure:x9) %>% 
+  arrange(Kurtosis, Measure)
+
+diff_n300 <- df_n300 %>% 
+  filter(Measure=="Median") %>% 
+  summarise(Kurtosis=Kurtosis,
+            x1=Kurtosis-abs(x1), 
+            x2=Kurtosis-abs(x2),
+            x3=Kurtosis-abs(x3),
+            x4=Kurtosis-abs(x4),
+            x5=Kurtosis-abs(x5),
+            x6=Kurtosis-abs(x6),
+            x7=Kurtosis-abs(x7),
+            x8=Kurtosis-abs(x8),
+            x9=Kurtosis-abs(x9)) %>% 
+  gather(var, val, -Kurtosis) %>% 
+  group_by(Kurtosis) %>% 
+  summarise(val=mean(val)) %>% 
+  mutate_all(round, 2) %>% 
+  mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
+```
+
+Finalmente, el cuadro \ref{tab:n300_table} muestra los resultados obtenidos al definir un tamaño de muestra de 300. Con este tamaño de muestra y `r paste(diff_n300$diff, collapse = ", ")`. 
+
+```{r}
+ df_n300 %>% 
+  kable(., "latex", booktabs=T, escape = F, longtable=F, 
+        caption = "\\label{tab:n300_table}Kurtosis range for each variable by spicified Kurtosis and n=300", linesep="", digits = 2) %>% 
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
+                repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
+  collapse_rows(1, latex_hline = "major") %>% 
+  column_spec(1, width = ".9cm")
+```
+
+\subsubsection{Medidas de ajuste}
+
+En el cuadro \ref{tab:fit_table} se presentan, para cada escenario de simulación, los valores de la mediana y los percentiles 0.025 y 0.975 para la prueba Chi-Cuadrado, el RMSEA, el SRMR y el CFI. Las estimaciones de la prueba Chi-Cuadrado sugieren que los modelos no poseen un buen ajuste, pues su valor mediano es bastante superior a 0.05 y, además, los intervalos que contienen estas probabilidades son bastante amplios. El RMSEA, por su parte, parece presentar mayores problemas en el tamaño de muestra de 50 para todos los niveles de kurtosis, pues este es el único escenario de simulación en donde la cota superior llega a ser estrictamente superior a 0.10. El otro indicador de interés es el SRMR, donde de manera similar a lo que ocurre con el RMSEA, las peores mediciones se obtienen en el tamaño de muestra de 50, pues en todos los demás casos es menor o igual a 0.08 con excepción del tamaño de muestra 100 con kurtosis de 21.41. Finalmente, el CFI sugiere que, a mayor amaño de muestra, myor será el ajuste, pues conforme se aumenta la cantidad de datos el límite inferior de las estimaciones se vuelve cada vez más alto, y a partir del tamaño de muestra de 120 se puede decir que los modelos poseen un buen ajuste, independientemente del nivel de kurtosis.
+
+```{r}
+load("ajustes.RData")
+
+resumen_ajustes <- lapply(ajustes, function(x){
+  x %>% 
+    #gather(Measure, Value, -medida) %>% 
+    pivot_wider(names_from = medida, values_from=c(estimacion, LI, LS)) %>% 
+    select(contains(c("pvalue", "rmsea", "srmr", "cfi")))
+}) %>% 
+  do.call(rbind, .) %>% 
+  mutate(escenario=sub("k","_k",names(ajustes))) %>% 
+  select(escenario, estimacion_pvalue:LS_cfi) %>% 
+  separate(., escenario, c("n", "Kurtosis"), sep="_") %>% 
+  mutate_at(vars(n, Kurtosis), function(x) as.numeric(sub("[[:alpha:]]", "", x))) %>% 
+  arrange(n, Kurtosis)
+
+resumen_ajustes %>%
+  mutate_at(vars(estimacion_pvalue:LS_cfi), function(x){
+    cell_spec(format(round(x, 2), nsmall = 2), "latex", align = "r")
+  }) %>% 
+  #rename_all(function(x) gsub("_", "", x)) %>% 
+  kable(., "latex", booktabs=T, escape = F, longtable=F, 
+        caption = "\\label{tab:fit_table}Goodness of fit measures by simulation scenario", linesep="", 
+        col.names = c("n", "Kurtosis", rep(c("Median", "Lower", "Upper"), 4)),
+        align = "r") %>% 
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
+                repeat_header_text = "(cont.)", full_width = T, font_size = 7) %>% 
+  column_spec(1, width = ".05cm") %>% 
+  column_spec(2, width = ".9cm", border_right=T) %>% 
+  column_spec(3:14, width = ".65cm") %>% 
+  add_header_above(c(" ", " ", "Chi-Square p-value"=3, "RMSEA"=3, "SRMR"=3, "CFI"=3)) %>% 
+  collapse_rows(1, latex_hline = "major")
+```
+
+\subsubsection{Estimación del modelo de medición}
+
+El cuadro \ref{tab:estimates_table} muestra las estimaciones de las cargas factoriales del modelo de medición en cada uno de los escenarios de simulación. Para cada una de las variables indicadoras, los valores medianos estimados en el ajuste de los modelos con los datos simulados son muy estables, pues la diferencia decimal es ínfima; y además, todas las cargas estimadas resultan ser significativas. Algo de particular interés es comparar estas cargas factoriales estimadas con las que se definieron en el modelo de medición poblacional. Los valores estimados son, de manera general, alrededor de 0.20 veces menores que las definidas en el modelo de medición poblacional; sin embargo, las cargas factoriales de ambos modelos son considerablemente altas en el contexto de la investigación social, por lo que las conclusiones obtenidas serían escencialmente las mismas.
+
+```{r}
+load("estimaciones.RData")
+modelo <- ' CA =~ 0.88*x1 + 0.77*x2 + 0.73*x3
+            PHC =~ 0.85*x4 + 0.80*x5 + 0.82*x6
+            VE =~ 0.62*x7 + 0.74*x8 + 0.72*x9
+
+            VE ~ -0.01*CA + 0.41*PHC
+          '
+#Modelo de medición
+resumen_ajustes_medicion <- lapply(estimaciones, function(x){
+  x %>%
+    filter(op=="=~") %>% 
+    mutate(relacion=paste(lhs, op, rhs),
+           significativo=ifelse(LI*LS<0, 0, 1),
+           estimacion=cell_spec(format(round(estimacion, 2), nsmall = 2), "latex", align = "r", 
+                                color = ifelse(significativo<1, "red", "black"))) %>% 
+    select(relacion, estimacion) %>% 
+    pivot_wider(names_from = relacion, values_from=estimacion)
+})%>% 
+  do.call(rbind, .) %>% 
+  mutate(escenario=sub("k","_k",names(estimaciones))) %>% 
+  select(escenario, `CA =~ x1`:`VE =~ x9`) %>% 
+  separate(., escenario, c("n", "Kurtosis"), sep="_") %>% 
+  mutate_at(vars(n, Kurtosis), function(x) as.numeric(sub("[[:alpha:]]", "", x))) %>% 
+  arrange(n, Kurtosis)
+
+resumen_ajustes_medicion %>% 
+  #rename_all(function(x) gsub("_", "", x)) %>% 
+  kable(., "latex", booktabs=T, escape = F, longtable=F, 
+        caption = "\\label{tab:estimates_table}Measure model estimates by simulation scenario", linesep="", digits = 2, 
+        col.names = c("n", "Kurtosis", paste("x", 1:9, sep="")),
+        align = "r") %>% 
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
+                repeat_header_text = "(cont.)", full_width = T, font_size = 7) %>% 
+  column_spec(1, width = ".05cm") %>% 
+  column_spec(2, width = ".9cm", border_right=T) %>% 
+  #column_spec(3:14, width = ".65cm") %>% 
+  add_header_above(c(" ", " ", "CA"=3, "PHC"=3, "VE"=3)) %>% 
+  collapse_rows(1, latex_hline = "major")
+```
+
+\subsubsection{Estimación del modelo estructural}
+
+El cuadro \ref{tab:structural_table} muestra las estimaciones de las cargas factoriales del modelo estructural en cada uno de los escenarios de simulación. De manera similar a lo comentado para le modelo de medición, los valores medianos estimados en el ajuste de los modelos con los datos simulados son muy estables, pues la diferencia decimal es pequeña; y además, pero en este caso no todas las cargas resultan ser significativas. Al comparar estas cargas factoriales estimadas con las que se definieron en el modelo de medición poblacional, los valores estimados son muy cercanos a los establecidos en el modelo de medición poblacional por lo que las conclusiones obtenidas serían las mismas.
 
 ```{r}
 modelo <- ' CA =~ 0.88*x1 + 0.77*x2 + 0.73*x3
@@ -73,52 +360,37 @@ modelo <- ' CA =~ 0.88*x1 + 0.77*x2 + 0.73*x3
 
             VE ~ -0.01*CA + 0.41*PHC
           '
+#Modelo de medición
+resumen_ajustes_estructural <- lapply(estimaciones, function(x){
+  x %>%
+    filter(op=="~") %>% 
+    mutate(relacion=paste(lhs, op, rhs),
+           significativo=ifelse(LI*LS<0, 0, 1),
+           estimacion=cell_spec(format(round(estimacion, 2), nsmall = 2), "latex", align = "r", 
+                                color = ifelse(significativo<1, "red", "black"))) %>% 
+    select(relacion, estimacion) %>% 
+    pivot_wider(names_from = relacion, values_from=estimacion)
+})%>% 
+  do.call(rbind, .) %>% 
+  mutate(escenario=sub("k","_k",names(estimaciones))) %>% 
+  select(escenario, `VE ~ CA`:`VE ~ PHC`) %>% 
+  separate(., escenario, c("n", "Kurtosis"), sep="_") %>% 
+  mutate_at(vars(n, Kurtosis), function(x) as.numeric(sub("[[:alpha:]]", "", x))) %>% 
+  arrange(n, Kurtosis) %>% 
+  rename_all(function(x) sub("~", "=", x))
 
-library(semPlot)
-semPaths(semPlotModel_lavaanModel(modelo))
-
-library(mnormt)
-set.seed(123)
-# Define sample size
-N <- 10000
-# Define the Fixed Parameters
-alpha <- c(0, 0, 0)  # latent means
-Phi <- matrix(c(1, 0, -0.01, 
-                0, 1, 0.41,
-                -0.01, 0.41, 1.1682), nrow = 3)  # latent variances/covariances
-Lambda <- cbind(c(0.88, 0.77, 0.73, 0, 0, 0, 0, 0, 0), 
-                c(0, 0, 0, 0.85, 0.80, 0.82, 0, 0, 0),
-                c(0, 0, 0, 0, 0, 0, 0.62, 0.74, 0.72))  # factor loadings
-Theta <- diag(1, nrow = 9)
-# Generate latent factor scores
-eta <- rmnorm(N, mean = alpha, varcov = Phi)
-#eta[,3] <- -0.01 * eta[,1] + 0.41 * eta[,2] + rnorm(N)
-# Generate residuals:
-e <- rmnorm(N, varcov = Theta)
-# Compute outcome scores: y_i = t(Lambda %*% eta_i) + e
-y <- tcrossprod(eta, Lambda) + e
-# Make it a data frame
-colnames(y) <- paste0("x", 1:9)
-df <- as.data.frame(y)
-
-
-library(lavaan)
-
-mod1 <- ' CA =~ x1 + x2 + x3
-            PHC =~ x4 + x5 + x6
-            VE =~ x7 + x8 + x9
-
-            VE ~ CA + PHC
-          '
-
-fit <- sem(mod1, data = df, std.lv = F, orthogonal = T)
-summary(fit, standardize = T)
-
-
-set.seed(123)
-df1 <- simulateData(modelo, std.lv = F, sample.nobs = 1e5)
-fit <- sem(mod1, data = df1, std.lv = F, orthogonal = T)
-summary(fit, standardize = T)
-
+resumen_ajustes_estructural %>% 
+  #rename_all(function(x) gsub("_", "", x)) %>% 
+  kable(., "latex", booktabs=T, escape = F, longtable=F, 
+        caption = "\\label{tab:structural_table}Structural model estimates by simulation scenario", linesep="", digits = 2, 
+        #col.names = c("n", "Kurtosis", paste("x", 1:9, sep="")),
+        align = "r") %>% 
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
+                repeat_header_text = "(cont.)", full_width = T, font_size = 7) %>% 
+  column_spec(1, width = ".05cm") %>% 
+  column_spec(2, width = ".9cm", border_right=T) %>% 
+  #column_spec(3:14, width = ".65cm") %>% 
+  #add_header_above(c(" ", " ", "CA"=3, "PHC"=3, "VE"=3)) %>% 
+  collapse_rows(1, latex_hline = "major")
 ```
 

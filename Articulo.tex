@@ -616,6 +616,526 @@ ajuste cuando es menor que 0.9 (Kenny,
 
 \subsection{Introducción}
 
+\subsection{Análisis exploratorio}
+
+Como se mencionó anteriormente, la función \texttt{simulateData()} del
+paquete \texttt{lavaan} permite simular conjuntos de datos a partir de
+un SEM de referencia, que en este caso es el propuesto por Sura-Fonseca
+(\protect\hyperlink{ref-SuraFonseca2020}{2020}); y cuyos datos pueden
+tener un determinado nivel de kurtosis especificado por el usuario
+mediante el argumento \texttt{kurtosis}. Como el nivel especificado de
+kurtosis solo se alcanza en tamaños de muestra muy superiores a los que
+son de interés en esta investigación, es importante analizar los niveles
+de kurtosis que realmente se obtuvieron en las simulaciones. Para ello,
+se calculó la kurtosis de cada variable indicadora en cada una de las
+2000 iteraciones de cada escenario de simulación. Esta comparación se
+hace calculando la mediana y los percentiles 0.025 y 0.950 para los
+datos simulados.
+
+El cuadro \ref{tab:n50_table} muestra los resultados obtenidos al
+definir un tamaño de muestra de 50. Con este tamaño de muestra y
+definiendo kurtosis = 0 se obtienen en promedio valores 0.23 veces
+menores, definiendo kurtosis = 0.62 se obtienen en promedio valores 0.08
+veces menores, definiendo kurtosis = 6.65 se obtienen en promedio
+valores 2.03 veces menores, definiendo kurtosis = 13.92 se obtienen en
+promedio valores 3.64 veces menores, definiendo kurtosis = 21.41 se
+obtienen en promedio valores 5.19 veces menores.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-8}\label{tab:n50_table}Kurtosis range for each variable by spicified Kurtosis and n=50}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{8.5}{10.5}\selectfont
+\begin{tabu} to \linewidth {>{\raggedleft\arraybackslash}p{.9cm}>{\raggedright}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\toprule
+Kurtosis & Measure & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
+\midrule
+\rowcolor{gray!6}   & Lower & -0.96 & -0.95 & -0.93 & -0.94 & -0.93 & -0.93 & -0.93 & -0.92 & -0.93\\
+
+ & Median & -0.24 & -0.22 & -0.24 & -0.22 & -0.22 & -0.21 & -0.24 & -0.21 & -0.23\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 0.00} & Upper & 1.29 & 1.31 & 1.24 & 1.27 & 1.31 & 1.38 & 1.27 & 1.38 & 1.37\\
+\cmidrule{1-11}
+ & Lower & -0.79 & -0.81 & -0.78 & -0.84 & -0.86 & -0.85 & -0.83 & -0.84 & -0.79\\
+
+\rowcolor{gray!6}   & Median & 0.09 & 0.07 & 0.09 & 0.05 & 0.09 & 0.05 & 0.07 & 0.10 & 0.09\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 0.62} & Upper & 2.70 & 2.57 & 2.87 & 2.60 & 3.04 & 2.94 & 2.73 & 2.72 & 2.77\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & -0.23 & -0.22 & -0.15 & -0.22 & -0.18 & -0.26 & -0.17 & -0.21 & -0.27\\
+
+ & Median & 2.03 & 2.04 & 2.06 & 2.01 & 1.96 & 1.95 & 2.20 & 2.04 & 1.95\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 6.65} & Upper & 12.45 & 11.93 & 11.40 & 12.24 & 12.24 & 12.94 & 12.00 & 12.16 & 11.68\\
+\cmidrule{1-11}
+ & Lower & 0.29 & 0.31 & 0.41 & 0.37 & 0.40 & 0.33 & 0.42 & 0.37 & 0.33\\
+
+\rowcolor{gray!6}   & Median & 3.64 & 3.60 & 3.66 & 3.73 & 3.76 & 3.70 & 3.68 & 3.47 & 3.56\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 13.92} & Upper & 18.48 & 17.59 & 18.21 & 19.21 & 19.01 & 19.08 & 18.68 & 18.65 & 20.11\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & 0.77 & 0.82 & 0.87 & 0.85 & 0.86 & 0.86 & 0.87 & 0.96 & 0.76\\
+
+ & Median & 5.05 & 5.35 & 5.21 & 5.02 & 5.13 & 5.24 & 5.30 & 5.23 & 5.16\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 21.41} & Upper & 23.86 & 22.97 & 21.95 & 21.80 & 23.28 & 23.90 & 22.29 & 23.09 & 24.66\\
+\bottomrule
+\end{tabu}}
+\end{table}
+
+De manera similar, el cuadro \ref{tab:n100_table} muestra los resultados
+obtenidos al definir un tamaño de muestra de 100. Con este tamaño de
+muestra y definiendo kurtosis = 0 se obtienen en promedio valores 0.13
+veces menores, definiendo kurtosis = 0.62 se obtienen en promedio
+valores 0.27 veces menores, definiendo kurtosis = 6.65 se obtienen en
+promedio valores 2.97 veces menores, definiendo kurtosis = 13.92 se
+obtienen en promedio valores 5.35 veces menores, definiendo kurtosis =
+21.41 se obtienen en promedio valores 7.52 veces menores.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-10}\label{tab:n100_table}Kurtosis range for each variable by spicified Kurtosis and n=100}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{8.5}{10.5}\selectfont
+\begin{tabu} to \linewidth {>{\raggedleft\arraybackslash}p{.9cm}>{\raggedright}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\toprule
+Kurtosis & Measure & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
+\midrule
+\rowcolor{gray!6}   & Lower & -0.72 & -0.73 & -0.72 & -0.71 & -0.71 & -0.77 & -0.73 & -0.73 & -0.73\\
+
+ & Median & -0.13 & -0.14 & -0.13 & -0.11 & -0.12 & -0.14 & -0.12 & -0.14 & -0.12\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 0.00} & Upper & 1.06 & 0.92 & 1.01 & 1.01 & 1.02 & 1.03 & 0.97 & 0.99 & 0.96\\
+\cmidrule{1-11}
+ & Lower & -0.56 & -0.56 & -0.58 & -0.57 & -0.57 & -0.55 & -0.57 & -0.55 & -0.59\\
+
+\rowcolor{gray!6}   & Median & 0.25 & 0.28 & 0.28 & 0.24 & 0.28 & 0.28 & 0.29 & 0.25 & 0.29\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 0.62} & Upper & 2.61 & 2.81 & 2.45 & 2.37 & 2.55 & 2.62 & 2.52 & 2.57 & 2.56\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & 0.43 & 0.43 & 0.38 & 0.48 & 0.39 & 0.35 & 0.37 & 0.34 & 0.41\\
+
+ & Median & 2.96 & 2.94 & 3.03 & 3.05 & 2.99 & 2.90 & 2.92 & 2.97 & 2.94\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 6.65} & Upper & 14.53 & 15.14 & 16.37 & 15.92 & 15.46 & 15.57 & 13.38 & 14.51 & 16.62\\
+\cmidrule{1-11}
+ & Lower & 1.12 & 1.29 & 1.35 & 1.32 & 1.29 & 1.20 & 1.27 & 1.31 & 1.38\\
+
+\rowcolor{gray!6}   & Median & 5.21 & 5.54 & 5.36 & 5.59 & 5.36 & 5.14 & 5.41 & 5.21 & 5.36\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 13.92} & Upper & 24.01 & 25.03 & 24.87 & 26.91 & 26.08 & 24.16 & 25.23 & 26.25 & 28.72\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & 2.19 & 2.09 & 2.20 & 2.30 & 2.25 & 2.22 & 2.05 & 2.26 & 2.08\\
+
+ & Median & 7.58 & 7.57 & 7.41 & 7.48 & 7.28 & 7.48 & 7.76 & 7.54 & 7.58\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 21.41} & Upper & 33.44 & 32.74 & 33.70 & 33.05 & 29.86 & 37.91 & 32.38 & 35.23 & 31.96\\
+\bottomrule
+\end{tabu}}
+\end{table}
+
+Por su parte, el cuadro \ref{tab:n120_table} muestra los resultados
+obtenidos al definir un tamaño de muestra de 120. Con este tamaño de
+muestra y definiendo kurtosis = 0 se obtienen en promedio valores 0.11
+veces menores, definiendo kurtosis = 0.62 se obtienen en promedio
+valores 0.32 veces menores, definiendo kurtosis = 6.65 se obtienen en
+promedio valores 3.18 veces menores, definiendo kurtosis = 13.92 se
+obtienen en promedio valores 5.89 veces menores, definiendo kurtosis =
+21.41 se obtienen en promedio valores 8.24 veces menores.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-12}\label{tab:n120_table}Kurtosis range for each variable by spicified Kurtosis and n=120}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{8.5}{10.5}\selectfont
+\begin{tabu} to \linewidth {>{\raggedleft\arraybackslash}p{.9cm}>{\raggedright}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\toprule
+Kurtosis & Measure & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
+\midrule
+\rowcolor{gray!6}   & Lower & -0.70 & -0.67 & -0.67 & -0.68 & -0.70 & -0.69 & -0.65 & -0.69 & -0.65\\
+
+ & Median & -0.11 & -0.13 & -0.12 & -0.11 & -0.11 & -0.10 & -0.10 & -0.11 & -0.10\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 0.00} & Upper & 0.98 & 0.95 & 0.95 & 0.97 & 0.89 & 0.87 & 1.00 & 0.92 & 0.89\\
+\cmidrule{1-11}
+ & Lower & -0.45 & -0.48 & -0.47 & -0.49 & -0.49 & -0.48 & -0.52 & -0.50 & -0.53\\
+
+\rowcolor{gray!6}   & Median & 0.32 & 0.32 & 0.29 & 0.32 & 0.33 & 0.31 & 0.32 & 0.29 & 0.33\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 0.62} & Upper & 2.33 & 2.53 & 2.65 & 2.60 & 2.50 & 2.42 & 2.44 & 2.40 & 2.44\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & 0.55 & 0.69 & 0.64 & 0.58 & 0.66 & 0.59 & 0.54 & 0.60 & 0.60\\
+
+ & Median & 3.29 & 3.08 & 3.18 & 3.18 & 3.17 & 3.11 & 3.26 & 3.20 & 3.19\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 6.65} & Upper & 16.18 & 14.79 & 16.40 & 15.89 & 14.28 & 13.95 & 17.27 & 16.14 & 15.89\\
+\cmidrule{1-11}
+ & Lower & 1.69 & 1.50 & 1.57 & 1.57 & 1.49 & 1.55 & 1.50 & 1.65 & 1.58\\
+
+\rowcolor{gray!6}   & Median & 5.81 & 5.82 & 6.04 & 6.07 & 5.87 & 6.02 & 5.83 & 5.72 & 5.79\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 13.92} & Upper & 24.94 & 26.14 & 28.37 & 26.25 & 26.73 & 28.98 & 27.52 & 26.67 & 26.68\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & 2.49 & 2.62 & 2.60 & 2.45 & 2.47 & 2.65 & 2.30 & 2.58 & 2.59\\
+
+ & Median & 8.27 & 8.24 & 8.38 & 8.23 & 8.26 & 8.45 & 8.03 & 8.25 & 8.03\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 21.41} & Upper & 37.31 & 39.34 & 33.90 & 33.24 & 34.20 & 36.10 & 34.12 & 40.59 & 36.78\\
+\bottomrule
+\end{tabu}}
+\end{table}
+
+De manera análoga, el cuadro \ref{tab:n200_table} muestra los resultados
+obtenidos al definir un tamaño de muestra de 200. Con este tamaño de
+muestra y definiendo kurtosis = 0 se obtienen en promedio valores 0.07
+veces menores, definiendo kurtosis = 0.62 se obtienen en promedio
+valores 0.41 veces menores, definiendo kurtosis = 6.65 se obtienen en
+promedio valores 3.77 veces menores, definiendo kurtosis = 13.92 se
+obtienen en promedio valores 7 veces menores, definiendo kurtosis =
+21.41 se obtienen en promedio valores 10.03 veces menores.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-14}\label{tab:n200_table}Kurtosis range for each variable by spicified Kurtosis and n=200}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{8.5}{10.5}\selectfont
+\begin{tabu} to \linewidth {>{\raggedleft\arraybackslash}p{.9cm}>{\raggedright}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\toprule
+Kurtosis & Measure & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
+\midrule
+\rowcolor{gray!6}   & Lower & -0.56 & -0.56 & -0.55 & -0.56 & -0.55 & -0.55 & -0.57 & -0.55 & -0.55\\
+
+ & Median & -0.09 & -0.07 & -0.07 & -0.08 & -0.08 & -0.07 & -0.07 & -0.07 & -0.06\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 0.00} & Upper & 0.75 & 0.76 & 0.71 & 0.67 & 0.73 & 0.75 & 0.68 & 0.71 & 0.79\\
+\cmidrule{1-11}
+ & Lower & -0.33 & -0.33 & -0.32 & -0.34 & -0.33 & -0.32 & -0.29 & -0.33 & -0.32\\
+
+\rowcolor{gray!6}   & Median & 0.39 & 0.41 & 0.43 & 0.42 & 0.41 & 0.38 & 0.43 & 0.39 & 0.40\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 0.62} & Upper & 2.14 & 2.35 & 2.25 & 2.08 & 2.21 & 2.16 & 2.30 & 2.11 & 2.18\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & 1.02 & 1.09 & 1.14 & 1.04 & 1.06 & 1.16 & 1.08 & 1.10 & 1.12\\
+
+ & Median & 3.75 & 3.75 & 3.85 & 3.78 & 3.70 & 3.80 & 3.75 & 3.86 & 3.71\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 6.65} & Upper & 15.89 & 18.54 & 17.49 & 17.24 & 14.24 & 17.67 & 16.43 & 18.03 & 16.29\\
+\cmidrule{1-11}
+ & Lower & 2.41 & 2.37 & 2.39 & 2.25 & 2.36 & 2.33 & 2.43 & 2.40 & 2.50\\
+
+\rowcolor{gray!6}   & Median & 7.06 & 6.85 & 7.02 & 7.11 & 7.08 & 7.03 & 6.98 & 6.81 & 7.04\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 13.92} & Upper & 30.90 & 31.40 & 29.01 & 28.43 & 30.65 & 28.99 & 28.09 & 30.94 & 28.70\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & 3.74 & 3.64 & 3.62 & 3.76 & 3.47 & 3.64 & 3.45 & 3.75 & 3.85\\
+
+ & Median & 10.07 & 10.14 & 9.98 & 9.94 & 9.90 & 9.91 & 9.91 & 10.23 & 10.19\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 21.41} & Upper & 44.81 & 41.01 & 43.69 & 42.85 & 43.63 & 45.96 & 43.00 & 43.14 & 40.86\\
+\bottomrule
+\end{tabu}}
+\end{table}
+
+Finalmente, el cuadro \ref{tab:n300_table} muestra los resultados
+obtenidos al definir un tamaño de muestra de 300. Con este tamaño de
+muestra y definiendo kurtosis = 0 se obtienen en promedio valores 0.05
+veces menores, definiendo kurtosis = 0.62 se obtienen en promedio
+valores 0.45 veces menores, definiendo kurtosis = 6.65 se obtienen en
+promedio valores 4.22 veces menores, definiendo kurtosis = 13.92 se
+obtienen en promedio valores 7.91 veces menores, definiendo kurtosis =
+21.41 se obtienen en promedio valores 11.44 veces menores.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-16}\label{tab:n300_table}Kurtosis range for each variable by spicified Kurtosis and n=300}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{8.5}{10.5}\selectfont
+\begin{tabu} to \linewidth {>{\raggedleft\arraybackslash}p{.9cm}>{\raggedright}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\toprule
+Kurtosis & Measure & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
+\midrule
+\rowcolor{gray!6}   & Lower & -0.44 & -0.47 & -0.46 & -0.47 & -0.46 & -0.48 & -0.46 & -0.47 & -0.46\\
+
+ & Median & -0.05 & -0.05 & -0.06 & -0.04 & -0.05 & -0.04 & -0.06 & -0.05 & -0.05\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 0.00} & Upper & 0.57 & 0.64 & 0.60 & 0.61 & 0.59 & 0.60 & 0.61 & 0.60 & 0.60\\
+\cmidrule{1-11}
+ & Lower & -0.22 & -0.21 & -0.19 & -0.23 & -0.18 & -0.21 & -0.18 & -0.18 & -0.21\\
+
+\rowcolor{gray!6}   & Median & 0.46 & 0.47 & 0.44 & 0.45 & 0.45 & 0.44 & 0.45 & 0.46 & 0.46\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 0.62} & Upper & 1.84 & 1.94 & 1.93 & 2.03 & 1.99 & 1.90 & 1.88 & 1.92 & 1.92\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & 1.50 & 1.50 & 1.58 & 1.57 & 1.52 & 1.50 & 1.56 & 1.48 & 1.46\\
+
+ & Median & 4.31 & 4.10 & 4.17 & 4.22 & 4.19 & 4.29 & 4.24 & 4.20 & 4.30\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 6.65} & Upper & 17.03 & 16.77 & 16.47 & 17.11 & 15.36 & 16.67 & 17.53 & 16.81 & 16.09\\
+\cmidrule{1-11}
+ & Lower & 3.14 & 3.17 & 3.06 & 3.02 & 3.13 & 3.21 & 3.05 & 3.14 & 3.16\\
+
+\rowcolor{gray!6}   & Median & 7.90 & 7.87 & 7.88 & 7.92 & 7.85 & 7.98 & 8.16 & 7.85 & 7.79\\
+
+\multirow{-3}{*}{\raggedleft\arraybackslash 13.92} & Upper & 34.28 & 34.97 & 33.34 & 34.87 & 30.89 & 32.95 & 36.09 & 31.62 & 31.39\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & Lower & 4.69 & 4.50 & 4.59 & 4.60 & 4.68 & 4.51 & 4.61 & 4.63 & 4.55\\
+
+ & Median & 11.53 & 11.33 & 11.61 & 11.25 & 11.40 & 11.46 & 11.40 & 11.42 & 11.58\\
+
+\rowcolor{gray!6}  \multirow{-3}{*}{\raggedleft\arraybackslash 21.41} & Upper & 46.51 & 46.19 & 49.87 & 47.37 & 45.40 & 47.04 & 49.18 & 45.04 & 47.44\\
+\bottomrule
+\end{tabu}}
+\end{table}
+
+\subsubsection{Medidas de ajuste}
+
+En el cuadro \ref{tab:fit_table} se presentan, para cada escenario de
+simulación, los valores de la mediana y los percentiles 0.025 y 0.975
+para la prueba Chi-Cuadrado, el RMSEA, el SRMR y el CFI. Las
+estimaciones de la prueba Chi-Cuadrado sugieren que los modelos no
+poseen un buen ajuste, pues su valor mediano es bastante superior a 0.05
+y, además, los intervalos que contienen estas probabilidades son
+bastante amplios. El RMSEA, por su parte, parece presentar mayores
+problemas en el tamaño de muestra de 50 para todos los niveles de
+kurtosis, pues este es el único escenario de simulación en donde la cota
+superior llega a ser estrictamente superior a 0.10. El otro indicador de
+interés es el SRMR, donde de manera similar a lo que ocurre con el
+RMSEA, las peores mediciones se obtienen en el tamaño de muestra de 50,
+pues en todos los demás casos es menor o igual a 0.08 con excepción del
+tamaño de muestra 100 con kurtosis de 21.41. Finalmente, el CFI sugiere
+que, a mayor amaño de muestra, myor será el ajuste, pues conforme se
+aumenta la cantidad de datos el límite inferior de las estimaciones se
+vuelve cada vez más alto, y a partir del tamaño de muestra de 120 se
+puede decir que los modelos poseen un buen ajuste, independientemente
+del nivel de kurtosis.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-17}\label{tab:fit_table}Goodness of fit measures by simulation scenario}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{7}{9}\selectfont
+\begin{tabu} to \linewidth {>{\raggedleft\arraybackslash}p{.05cm}>{\raggedleft\arraybackslash}p{.9cm}|>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}>{\raggedleft\arraybackslash}p{.65cm}}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{3}{c}{Chi-Square p-value} & \multicolumn{3}{c}{RMSEA} & \multicolumn{3}{c}{SRMR} & \multicolumn{3}{c}{CFI} \\
+\cmidrule(l{3pt}r{3pt}){3-5} \cmidrule(l{3pt}r{3pt}){6-8} \cmidrule(l{3pt}r{3pt}){9-11} \cmidrule(l{3pt}r{3pt}){12-14}
+n & Kurtosis & Median & Lower & Upper & Median & Lower & Upper & Median & Lower & Upper & Median & Lower & Upper\\
+\midrule
+\rowcolor{gray!6}   & 0.00 & \multicolumn{1}{r}{0.41} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.96} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.12} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.11} & \multicolumn{1}{r}{0.99} & \multicolumn{1}{r}{0.78} & \multicolumn{1}{r}{1.00}\\
+
+ & 0.62 & \multicolumn{1}{r}{0.41} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.96} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.12} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.11} & \multicolumn{1}{r}{0.99} & \multicolumn{1}{r}{0.78} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}   & 6.65 & \multicolumn{1}{r}{0.39} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.96} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.13} & \multicolumn{1}{r}{0.09} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.12} & \multicolumn{1}{r}{0.98} & \multicolumn{1}{r}{0.77} & \multicolumn{1}{r}{1.00}\\
+
+ & 13.92 & \multicolumn{1}{r}{0.40} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.13} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.12} & \multicolumn{1}{r}{0.98} & \multicolumn{1}{r}{0.78} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}  \multirow{-5}{.05cm}{\raggedleft\arraybackslash 50} & 21.41 & \multicolumn{1}{r}{0.40} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.98} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.14} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.12} & \multicolumn{1}{r}{0.99} & \multicolumn{1}{r}{0.76} & \multicolumn{1}{r}{1.00}\\
+\cmidrule{1-14}
+ & 0.00 & \multicolumn{1}{r}{0.44} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.87} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}   & 0.62 & \multicolumn{1}{r}{0.45} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.88} & \multicolumn{1}{r}{1.00}\\
+
+ & 6.65 & \multicolumn{1}{r}{0.46} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.96} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.09} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.87} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}   & 13.92 & \multicolumn{1}{r}{0.43} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.09} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.86} & \multicolumn{1}{r}{1.00}\\
+
+\multirow{-5}{.05cm}{\raggedleft\arraybackslash 100} & 21.41 & \multicolumn{1}{r}{0.42} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.98} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.10} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.09} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.85} & \multicolumn{1}{r}{1.00}\\
+\cmidrule{1-14}
+\rowcolor{gray!6}   & 0.00 & \multicolumn{1}{r}{0.44} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.90} & \multicolumn{1}{r}{1.00}\\
+
+ & 0.62 & \multicolumn{1}{r}{0.46} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.07} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.90} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}   & 6.65 & \multicolumn{1}{r}{0.43} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.96} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.89} & \multicolumn{1}{r}{1.00}\\
+
+ & 13.92 & \multicolumn{1}{r}{0.42} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.98} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.89} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}  \multirow{-5}{.05cm}{\raggedleft\arraybackslash 120} & 21.41 & \multicolumn{1}{r}{0.43} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.98} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.09} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.08} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.87} & \multicolumn{1}{r}{1.00}\\
+\cmidrule{1-14}
+ & 0.00 & \multicolumn{1}{r}{0.47} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.96} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.94} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}   & 0.62 & \multicolumn{1}{r}{0.49} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.94} & \multicolumn{1}{r}{1.00}\\
+
+ & 6.65 & \multicolumn{1}{r}{0.45} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.93} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}   & 13.92 & \multicolumn{1}{r}{0.44} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.07} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.92} & \multicolumn{1}{r}{1.00}\\
+
+\multirow{-5}{.05cm}{\raggedleft\arraybackslash 200} & 21.41 & \multicolumn{1}{r}{0.44} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.98} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.07} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.92} & \multicolumn{1}{r}{1.00}\\
+\cmidrule{1-14}
+\rowcolor{gray!6}   & 0.00 & \multicolumn{1}{r}{0.48} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.98} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.05} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.05} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.96} & \multicolumn{1}{r}{1.00}\\
+
+ & 0.62 & \multicolumn{1}{r}{0.47} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.05} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.05} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.96} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}   & 6.65 & \multicolumn{1}{r}{0.48} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.05} & \multicolumn{1}{r}{0.03} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.05} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.96} & \multicolumn{1}{r}{1.00}\\
+
+ & 13.92 & \multicolumn{1}{r}{0.44} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.97} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.05} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.05} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.95} & \multicolumn{1}{r}{1.00}\\
+
+\rowcolor{gray!6}  \multirow{-5}{.05cm}{\raggedleft\arraybackslash 300} & 21.41 & \multicolumn{1}{r}{0.41} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.98} & \multicolumn{1}{r}{0.01} & \multicolumn{1}{r}{0.00} & \multicolumn{1}{r}{0.06} & \multicolumn{1}{r}{0.04} & \multicolumn{1}{r}{0.02} & \multicolumn{1}{r}{0.05} & \multicolumn{1}{r}{1.00} & \multicolumn{1}{r}{0.94} & \multicolumn{1}{r}{1.00}\\
+\bottomrule
+\end{tabu}}
+\end{table}
+
+\subsubsection{Estimación del modelo de medición}
+
+El cuadro \ref{tab:estimates_table} muestra las estimaciones de las
+cargas factoriales del modelo de medición en cada uno de los escenarios
+de simulación. Para cada una de las variables indicadoras, los valores
+medianos estimados en el ajuste de los modelos con los datos simulados
+son muy estables, pues la diferencia decimal es ínfima; y además, todas
+las cargas estimadas resultan ser significativas. Algo de particular
+interés es comparar estas cargas factoriales estimadas con las que se
+definieron en el modelo de medición poblacional. Los valores estimados
+son, de manera general, alrededor de 0.20 veces menores que las
+definidas en el modelo de medición poblacional; sin embargo, las cargas
+factoriales de ambos modelos son considerablemente altas en el contexto
+de la investigación social, por lo que las conclusiones obtenidas serían
+escencialmente las mismas.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-18}\label{tab:estimates_table}Measure model estimates by simulation scenario}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{7}{9}\selectfont
+\begin{tabu} to \linewidth {>{\raggedleft\arraybackslash}p{.05cm}>{\raggedleft\arraybackslash}p{.9cm}|>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{3}{c}{CA} & \multicolumn{3}{c}{PHC} & \multicolumn{3}{c}{VE} \\
+\cmidrule(l{3pt}r{3pt}){3-5} \cmidrule(l{3pt}r{3pt}){6-8} \cmidrule(l{3pt}r{3pt}){9-11}
+n & Kurtosis & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
+\midrule
+\rowcolor{gray!6}   & 0.00 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.60}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.55}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.61}}\\
+
+ & 0.62 & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.55}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.63}}\\
+
+\rowcolor{gray!6}   & 6.65 & \multicolumn{1}{r}{\textcolor{black}{0.67}} & \multicolumn{1}{r}{\textcolor{black}{0.60}} & \multicolumn{1}{r}{\textcolor{black}{0.58}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.55}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+
+ & 13.92 & \multicolumn{1}{r}{\textcolor{black}{0.67}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.63}}\\
+
+\rowcolor{gray!6}  \multirow{-5}{.05cm}{\raggedleft\arraybackslash 50} & 21.41 & \multicolumn{1}{r}{\textcolor{black}{0.68}} & \multicolumn{1}{r}{\textcolor{black}{0.60}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.63}}\\
+\cmidrule{1-11}
+ & 0.00 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.61}}\\
+
+\rowcolor{gray!6}   & 0.62 & \multicolumn{1}{r}{\textcolor{black}{0.67}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.55}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+
+ & 6.65 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+
+\rowcolor{gray!6}   & 13.92 & \multicolumn{1}{r}{\textcolor{black}{0.67}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.61}}\\
+
+\multirow{-5}{.05cm}{\raggedleft\arraybackslash 100} & 21.41 & \multicolumn{1}{r}{\textcolor{black}{0.67}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.57}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & 0.00 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.55}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.61}}\\
+
+ & 0.62 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.55}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.61}}\\
+
+\rowcolor{gray!6}   & 6.65 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.60}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.61}}\\
+
+ & 13.92 & \multicolumn{1}{r}{\textcolor{black}{0.67}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+
+\rowcolor{gray!6}  \multirow{-5}{.05cm}{\raggedleft\arraybackslash 120} & 21.41 & \multicolumn{1}{r}{\textcolor{black}{0.67}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.63}}\\
+\cmidrule{1-11}
+ & 0.00 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+
+\rowcolor{gray!6}   & 0.62 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.61}}\\
+
+ & 6.65 & \multicolumn{1}{r}{\textcolor{black}{0.67}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.55}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+
+\rowcolor{gray!6}   & 13.92 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+
+\multirow{-5}{.05cm}{\raggedleft\arraybackslash 200} & 21.41 & \multicolumn{1}{r}{\textcolor{black}{0.67}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+\cmidrule{1-11}
+\rowcolor{gray!6}   & 0.00 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.61}}\\
+
+ & 0.62 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.61}}\\
+
+\rowcolor{gray!6}   & 6.65 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+
+ & 13.92 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.61}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+
+\rowcolor{gray!6}  \multirow{-5}{.05cm}{\raggedleft\arraybackslash 300} & 21.41 & \multicolumn{1}{r}{\textcolor{black}{0.66}} & \multicolumn{1}{r}{\textcolor{black}{0.62}} & \multicolumn{1}{r}{\textcolor{black}{0.59}} & \multicolumn{1}{r}{\textcolor{black}{0.65}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.64}} & \multicolumn{1}{r}{\textcolor{black}{0.56}} & \multicolumn{1}{r}{\textcolor{black}{0.63}} & \multicolumn{1}{r}{\textcolor{black}{0.62}}\\
+\bottomrule
+\end{tabu}}
+\end{table}
+
+\subsubsection{Estimación del modelo estructural}
+
+El cuadro \ref{tab:structural_table} muestra las estimaciones de las
+cargas factoriales del modelo estructural en cada uno de los escenarios
+de simulación. De manera similar a lo comentado para le modelo de
+medición, los valores medianos estimados en el ajuste de los modelos con
+los datos simulados son muy estables, pues la diferencia decimal es
+pequeña; y además, pero en este caso no todas las cargas resultan ser
+significativas. Al comparar estas cargas factoriales estimadas con las
+que se definieron en el modelo de medición poblacional, los valores
+estimados son muy cercanos a los establecidos en el modelo de medición
+poblacional por lo que las conclusiones obtenidas serían las mismas.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-19}\label{tab:structural_table}Structural model estimates by simulation scenario}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{7}{9}\selectfont
+\begin{tabu} to \linewidth {>{\raggedleft\arraybackslash}p{.05cm}>{\raggedleft\arraybackslash}p{.9cm}|>{\raggedleft}X>{\raggedleft}X}
+\toprule
+n & Kurtosis & VE = CA & VE = PHC\\
+\midrule
+\rowcolor{gray!6}   & 0.00 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{red}{ 0.37}}\\
+
+ & 0.62 & \multicolumn{1}{r}{\textcolor{red}{0.00}} & \multicolumn{1}{r}{\textcolor{red}{0.37}}\\
+
+\rowcolor{gray!6}   & 6.65 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{red}{ 0.38}}\\
+
+ & 13.92 & \multicolumn{1}{r}{\textcolor{red}{0.00}} & \multicolumn{1}{r}{\textcolor{red}{0.36}}\\
+
+\rowcolor{gray!6}  \multirow{-5}{.05cm}{\raggedleft\arraybackslash 50} & 21.41 & \multicolumn{1}{r}{\textcolor{red}{0.00}} & \multicolumn{1}{r}{\textcolor{red}{0.35}}\\
+\cmidrule{1-4}
+ & 0.00 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+\rowcolor{gray!6}   & 0.62 & \multicolumn{1}{r}{\textcolor{red}{0.00}} & \multicolumn{1}{r}{\textcolor{black}{0.38}}\\
+
+ & 6.65 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.37}}\\
+
+\rowcolor{gray!6}   & 13.92 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.37}}\\
+
+\multirow{-5}{.05cm}{\raggedleft\arraybackslash 100} & 21.41 & \multicolumn{1}{r}{\textcolor{red}{0.00}} & \multicolumn{1}{r}{\textcolor{black}{0.37}}\\
+\cmidrule{1-4}
+\rowcolor{gray!6}   & 0.00 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+ & 0.62 & \multicolumn{1}{r}{\textcolor{red}{-0.02}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+\rowcolor{gray!6}   & 6.65 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+ & 13.92 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+\rowcolor{gray!6}  \multirow{-5}{.05cm}{\raggedleft\arraybackslash 120} & 21.41 & \multicolumn{1}{r}{\textcolor{red}{0.00}} & \multicolumn{1}{r}{\textcolor{black}{0.37}}\\
+\cmidrule{1-4}
+ & 0.00 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+\rowcolor{gray!6}   & 0.62 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+ & 6.65 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+\rowcolor{gray!6}   & 13.92 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+\multirow{-5}{.05cm}{\raggedleft\arraybackslash 200} & 21.41 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.37}}\\
+\cmidrule{1-4}
+\rowcolor{gray!6}   & 0.00 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+ & 0.62 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+\rowcolor{gray!6}   & 6.65 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+ & 13.92 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+
+\rowcolor{gray!6}  \multirow{-5}{.05cm}{\raggedleft\arraybackslash 300} & 21.41 & \multicolumn{1}{r}{\textcolor{red}{-0.01}} & \multicolumn{1}{r}{\textcolor{black}{ 0.38}}\\
+\bottomrule
+\end{tabu}}
+\end{table}
+
 \section{Conclusions}
 
 \subsection{Introducción}

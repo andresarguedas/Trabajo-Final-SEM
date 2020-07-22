@@ -1,43 +1,77 @@
-\subsection{Generación de datos con kurtosis}
-
-Los datos fueron simulados mediante la función `simulateData()` del paquete `lavaan` [@lavaan], el cual utiliza el método propuesto por @Vale1983 para la simulación de datos no normales multivariados. Este método, comúnmente conocido como VM, se basa en el método propuesto por @Fleishman1978, el cual, con base en una variable aleatoria distribuida como una normal estándar, permite simular una variable con un promedio, variancia, asimetría y kurtosis dada. El método VM permite especificar, adicionalmente, correlaciones entre las variables a estimar. Para utilizar el método de Fleishman, para generar una cierta variable aleatoria $Y$, se utiliza la siguiente ecuación:
-
-\begin{equation} \label{eq:defY}
-  Y = a + bX + cX^2 + d X^3
-\end{equation}
-
-donde $X \sim \mathcal{N} (0,1)$. Es decir, se puede generar una variable no normal $Y$, con sus primeros cuatro momentos iguales a valores especificados, con base en los valores $a$, $b$, $c$ y $d$ de la ecuación \ref{eq:defY}, con base en una variable normal estándar $X$ hasta su tercer potencia. Luego, para poder obtener los valores de $a$, $b$, $c$ y $d$, se necesitan resolver las siguientes ecuaciones de forma simultánea:
-
-\begin{align*}
-  b^2 + 6bd + 2c^2 + 15d^2 -1 & = 0 \\
-  2c (b^2 + 24bd + 105d^2 + 2) - \gamma_1 & = 0 \\
-  24 \left(bd + c^2 (1 + b^2 + 28bd) + d^2 (12 + 48bd + 141c^2 + 225d^2) \right) - \gamma_2 & = 0
-\end{align*}
-
-donde $\gamma_1$ es la asimetría deseada y $\gamma_2$ es la kurtosis deseada, además se define $a = -c$. Con base en las constantes calculadas $a$, $b$, $c$ y $d$, además de una variable normal estándar, se puede simular variables no normales. Para poder generalizar el método de Fleishman a variables aleatorias multivariantes, Vale y Maurelli proponen una generalización. Esta se basa, para el caso bivariado, en la generación de dos variables aleatorias independientes, $X_1, X_2 \sim \mathcal{N} (0,1)$, para la cuales se obtienen las constantes $a$, $b$, $c$ y $d$, para cada una de dichas variables, como se describe en el método de Fleishman, obteniendo así el vector $w^\prime_1 = (a_1, b_1, c_1, d_1)$, para el caso de $X_1$, y el vector $w^\prime_2 = (a_2, b_2, c_2, d_2)$, para el caso de $X_2$. Además, se definen los vectores $x_1^\prime = (1, X_1, X_1^2, X_1^3)$ y $x_2^\prime = (1, X_2, X_2^2, X_2^3)$. Por lo tanto, se pueden crear variables no normales, $Y_1$ y $Y_2$, como:
-
-\begin{align*}
-  Y_1 & = w_1^\prime x_1 \\
-  Y_2 & = w_2^\prime x_2
-\end{align*}
-
-donde se puede verificar que:
-
-\begin{align*}
-  r_{Y_1, Y_2} = & \rho_{X_1, X_2} (b_1 b_2 + 3b_1 d_2 + 3d_1 b_2 + 9 d_1 d_2) \\
-  & + \rho_{X_1, X_2}^2 (2 c_1 c_2) + \rho_{X_1, X_2}^3 (6 d_1 d_2)
-\end{align*}
-
-Y resolviendo esta ecuación en términos de $\rho_{X_1, X_2}$ se puede obtener una matriz de correlaciones para generar datos normales multivariados, que pueden ser transformados en variables no normales mediante el método de Fleishman.
-
 \subsection{Modelo a estimar}
 
-El modelo teórico utilizada para realizar las simulaciones es el presentado por @SuraFonseca2020, basado en datos de 155 estudiantes de la Universidad de Costa Rica, obtenidos de la Prueba de Habilidades Cuantitativas (PHC) del Instituto de Investigaciones Psicológicos (IIP) de dicha universidad y de un cuestionario autoadministrado aplicado a estos estudiantes. El modelo estimado está compuesto por dos variables exógenas (capital y habilidades cuantitativas) y una variable endógena (habilidades visoespaciales). Con respecto a estas variables: el capital se refiere al acceso y tenencia de ciertos bienes en los hogares de los estudiantes; las habilidades cuantitativas se refieren a la puntuación de los estudiantes en la prueba mencionada anteriormente; y las habilidades visoespaciales se refieren a la capacidad de los estudiantes para poder trabajar con objetos tridimensionales abstractos y poder manipularlos en la imaginación. Para cada una de estas variables latentes, se utilizó el método de parcelas para obtener tres variables indicadoras para cada uno de los constructos. Los resultados de la estimación de dicho modelo, presentados por @SuraFonseca2020, se presentan en la Figura \ref{fig:mod_teorico}.
+El modelo teórico utilizado para realizar las simulaciones es el presentado por @SuraFonseca2020, basado en datos de 155 estudiantes de la Universidad de Costa Rica, obtenidos de la Prueba de Habilidades Cuantitativas (PHC) del Instituto de Investigaciones Psicológicos (IIP) de dicha universidad y de un cuestionario autoadministrado aplicado a estos estudiantes. El modelo estimado está compuesto por dos variables exógenas (capital y habilidades cuantitativas) y una variable endógena (habilidades visoespaciales). Con respecto a estas variables: el capital se refiere al acceso y tenencia de ciertos bienes en los hogares de los estudiantes; las habilidades cuantitativas se refieren a la puntuación de los estudiantes en la prueba mencionada anteriormente; y las habilidades visoespaciales se refieren a la capacidad de los estudiantes para poder trabajar con objetos tridimensionales abstractos y poder manipularlos en la imaginación. Para cada una de estas variables latentes, se utilizó el método de parcelas para obtener tres variables indicadoras para cada uno de los constructos. Tanto el modelo teórico como los resultados de la estimación de dicho modelo, presentados por @SuraFonseca2020, se presentan en las Figuras \ref{fig:mod_teorico} y \ref{fig:mod_estimado}, respectivamente.
 
 \begin{figure}[!h]
 \centering
-\caption{Modelo estimado sobre las habilidades cuantitativas}
+\caption{Theoretical model for analyzing cuantitative abilites}
 \label{fig:mod_teorico}
+\begin{tikzpicture}
+    [
+    basic/.style={draw, text centered},
+    circ/.style={basic, circle, minimum size=2em, inner sep=1.5pt},
+    rect/.style={basic, text height=1em, text depth=.5em, minimum width=1.5em},
+    >={Stealth[]}
+    ]
+
+    % Variables latentes
+    \node [circ] (ve) {VE};
+    \node [circ, above left=1.5cm and 0.8cm of ve] (ca) {CA};
+    \node [circ, below left=1.5cm and 0.8cm of ve] (phc) {PHC};
+    \draw [->] (ca) -- node[fill=white] {$\gamma_1$} (ve);
+    \draw [->] (phc) -- node[fill=white] {$\gamma_2$} (ve);
+    % Variancia de VE
+    \node [left=of ve] (delta) {$\zeta$};
+    \draw [->] (delta) -- (ve);
+    % Variables indicadoras de VE
+    \node [rect, above right=1cm and 2cm of ve.center] (pve1) {PVE1};
+    \node [rect, right=2cm of ve.center] (pve2) {PVE2};
+    \node [rect, below right=1cm and 2cm of ve.center] (pve3) {PVE3};
+    \draw [->] (ve) -- node[fill=white] {$\lambda_1$} (pve1.west);
+    \draw [->] (ve) -- node[fill=white] {$\lambda_2$} (pve2.west);
+    \draw [->] (ve) -- node[fill=white] {$\lambda_3$} (pve3.west);
+    % Variancia de variables indicadoras de VE
+    \node [right=of pve1] (epve1) {$\varepsilon_1$};
+    \node [right=of pve2] (epve2) {$\varepsilon_2$};
+    \node [right=of pve3] (epve3) {$\varepsilon_3$};
+    \draw [->] (epve1) -- (pve1);
+    \draw [->] (epve2) -- (pve2);
+    \draw [->] (epve3) -- (pve3);
+    % Variables indicadoras de CA
+    \node [rect, above left=1cm and 2cm of ca.center] (pc1) {PC1};
+    \node [rect, left=2cm of ca.center] (pc2) {PC2};
+    \node [rect, below left=1cm and 2cm of ca.center] (pc3) {PC3};
+    \draw [->] (ca) -- node[fill=white] {$\lambda_4$} (pc1.east);
+    \draw [->] (ca) -- node[fill=white] {$\lambda_5$} (pc2.east);
+    \draw [->] (ca) -- node[fill=white] {$\lambda_6$} (pc3.east);
+    % Variancia de variables indicadoras de CA
+    \node [left=of pc1] (epc1) {$\delta_1$};
+    \node [left=of pc2] (epc2) {$\delta_2$};
+    \node [left=of pc3] (epc3) {$\delta_3$};
+    \draw [->] (epc1) -- (pc1);
+    \draw [->] (epc2) -- (pc2);
+    \draw [->] (epc3) -- (pc3);
+    % Variables indicadoras de PHC
+    \node [rect, above left=1cm and 2cm of phc.center] (phc1) {PHC1};
+    \node [rect, left=2cm of phc.center] (phc2) {PHC2};
+    \node [rect, below left=1cm and 2cm of phc.center] (phc3) {PHC3};
+    \draw [->] (phc) -- node[fill=white] {$\lambda_7$} (phc1.east);
+    \draw [->] (phc) -- node[fill=white] {$\lambda_8$} (phc2.east);
+    \draw [->] (phc) -- node[fill=white] {$\lambda_9$} (phc3.east);
+    % Variancia de variables indicadoras de CA
+    \node [left=of phc1] (ephc1) {$\delta_4$};
+    \node [left=of phc2] (ephc2) {$\delta_5$};
+    \node [left=of phc3] (ephc3) {$\delta_6$};
+    \draw [->] (ephc1) -- (phc1);
+    \draw [->] (ephc2) -- (phc2);
+    \draw [->] (ephc3) -- (phc3);
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\caption{Estimated model for analyzing cuantitative abilites}
+\label{fig:mod_estimado}
 \begin{tikzpicture}
         [
     basic/.style={draw, text centered},
@@ -107,7 +141,7 @@ La simulación de los datos, junto con la estimación de los modelos, se realiz�
 Para poder realizar la simulación deben seguirse varios pasos. Lo primero es definir el modelo teórico poblacional que van a seguir los datos simulados, como se describió en la sección anterior este modelo cuenta con dos variables exógenas y una endógena, cada una con tres variables indicadoras. Los datos se generan mediante la función `simulateData()` la cuál requiere especificar varios argumentos, uno de ellos es el modelo poblacional. Los otros dos argumentos a especificar son el tamaño de muestra deseado y el nivel de kurtosis de interés, la definición de estos escenarios se muestran en el cuadro \ref{tab:escenarios}:
 
 ```{r, echo=FALSE}
-cuadro <- expand.grid(kurtosis=c(0, 0.62, 6.65, 21.41, 13.92), n=c(50, 100, 120, 200, 300))
+cuadro <- expand.grid(kurtosis=c(0, 0.62, 6.65, 13.92, 21.41), n=c(50, 100, 120, 200, 300))
 
 cbind(cuadro[1:5,], cuadro[6:10,], cuadro[11:15,], cuadro[16:20,], cuadro[21:25,]) %>% 
   kable(., "latex", booktabs=T,caption="\\label{tab:escenarios}Escenarios de simulación") %>% 
@@ -117,6 +151,126 @@ footnote(general = "Elaboración propia a partir del estudio de la Universidad d
 ```
 
 Con estos escenarios definidos, se generaron entonces, para cada combinación de tamaño de muestra y kurtosis un total de 2000 conjuntos de datos para cada uno. Una vez que se obtuvieron estos conjuntos de datos, el siguiente paso es realizar la estimación de los SEM con cada uno de ellos; para ello es necesario definir un modelo sin los valores de las cargas factoriales, pues se busca conocer las estimaciones a partir de los datos generados.
+
+\subsection{Generación de datos con kurtosis}
+
+Los datos fueron simulados mediante la función `simulateData()` del paquete `lavaan` [@lavaan], la cual permite simular datos con base en un modelo de ecuaciones estructurales dados. Los argumentos comúnmente utlizados para esta función son:
+
+  - `model`: se utiliza para especificar el modelo a utilizar para simular los datos, normalmente presentado en formato de un modelo de `lavaan`
+  - `sample.nobs`: se utiliza para especificar la cantidad de datos a simular; en el caso de esta investigación, se utilizaron los tamaños de muestra establecidos para cada escenario de simulación
+  - `skewness`: se utiliza para especificar la asimetría de las variables indicadoras, ya sea un valor común para todas las variables, o definiendo un valor para cada variable por separado; en el caso de esta investigación, dado que solamente se está estudiando el efecto de la kurtosis, se definió la asimetría de todas las variables indicadoras en 0 para todos los escenarios de simulación
+  - `kurtosis`: se utiliza para especificar la kurtosis de las variables indicadoras, al igual que la asimetría, puede ser un valor común para todas las variables o definirse para cada variable por separado; en el caso de esta investigación, este valor es igual al valor de la kurtosis definido para cada uno de los escenarios de simulación
+
+Con respecto al método utilizado por `simulateData()` para simular observaciones de las variables indicadoras, este es el método propuesto por @Vale1983 para la simulación de datos no normales multivariados, con una asimetría y kurtosis dados. Este método, comúnmente conocido como VM, se basa en el método propuesto por @Fleishman1978, el cual, con base en una variable aleatoria distribuida como una normal estándar, permite simular una variable con un promedio, variancia, asimetría y kurtosis dada. El método VM permite especificar, adicionalmente, correlaciones entre las variables a estimar. Para utilizar el método de Fleishman, para generar una cierta variable aleatoria $Y$, se utiliza la siguiente ecuación:
+\begin{equation} \label{eq:defY}
+  Y = a + bX + cX^2 + d X^3
+\end{equation}
+donde $X \sim \mathcal{N} (0,1)$. Es decir, se puede generar una variable no normal $Y$, con sus primeros cuatro momentos iguales a valores especificados, con base en los valores $a$, $b$, $c$ y $d$ de la ecuación \ref{eq:defY}, con base en una variable normal estándar $X$ hasta su tercer potencia. Luego, para poder obtener los valores de $a$, $b$, $c$ y $d$, se necesitan resolver las siguientes ecuaciones de forma simultánea:
+\begin{align*}
+  b^2 + 6bd + 2c^2 + 15d^2 -1 & = 0 \\
+  2c (b^2 + 24bd + 105d^2 + 2) - \gamma_1 & = 0 \\
+  24 \left(bd + c^2 (1 + b^2 + 28bd) + d^2 (12 + 48bd + 141c^2 + 225d^2) \right) - \gamma_2 & = 0
+\end{align*}
+donde $\gamma_1$ es la asimetría deseada y $\gamma_2$ es la kurtosis deseada, además se define $a = -c$. Con base en las constantes calculadas $a$, $b$, $c$ y $d$, además de una variable normal estándar, se puede simular variables no normales. Para poder generalizar el método de Fleishman a variables aleatorias multivariantes, Vale y Maurelli proponen una generalización. Esta se basa, para el caso bivariado, en la generación de dos variables aleatorias independientes, $X_1, X_2 \sim \mathcal{N} (0,1)$, para la cuales se obtienen las constantes $a$, $b$, $c$ y $d$, para cada una de dichas variables, como se describe en el método de Fleishman, obteniendo así el vector $w^\prime_1 = (a_1, b_1, c_1, d_1)$, para el caso de $X_1$, y el vector $w^\prime_2 = (a_2, b_2, c_2, d_2)$, para el caso de $X_2$. Además, se definen los vectores $x_1^\prime = (1, X_1, X_1^2, X_1^3)$ y $x_2^\prime = (1, X_2, X_2^2, X_2^3)$. Por lo tanto, se pueden crear variables no normales, $Y_1$ y $Y_2$, como:
+\begin{align*}
+  Y_1 & = w_1^\prime x_1 \\
+  Y_2 & = w_2^\prime x_2
+\end{align*}
+donde se puede verificar que:
+\begin{align*}
+  r_{Y_1, Y_2} = & \rho_{X_1, X_2} (b_1 b_2 + 3b_1 d_2 + 3d_1 b_2 + 9 d_1 d_2) \\
+  & + \rho_{X_1, X_2}^2 (2 c_1 c_2) + \rho_{X_1, X_2}^3 (6 d_1 d_2)
+\end{align*}
+Y resolviendo esta ecuación en términos de $\rho_{X_1, X_2}$ se puede obtener una matriz de correlaciones para generar datos normales multivariados, que pueden ser transformados en variables no normales mediante el método de Fleishman. Con base en el procedimiento presentado anteriormente, la función `simulateData()` parte de una serie de variables multinormales y permite al usuario especificar un valor para la asimetría y la kurtosis de las variables indicadoras, ya sea un valor distinto para cada variable, o un valor general para todas estas. Partiendo que el modelo téorico a utilizar es el presentado en la Figura \ref{fig:mod_teorico}, se puede escribir dicho modelo en forma de ecuación, tal que:
+\begin{align*}
+    VE                        & = \gamma_1 CA + \gamma_2 PHC + \zeta                                              \\
+    \begin{pmatrix}
+        PC1  \\
+        PC2  \\
+        PC3  \\
+        PHC1 \\
+        PHC2 \\
+        PHC3
+    \end{pmatrix} & = \begin{pmatrix}
+        \lambda_4 & 0         \\
+        \lambda_5 & 0         \\
+        \lambda_6 & 0         \\
+        0         & \lambda_7 \\
+        0         & \lambda_8 \\
+        0         & \lambda_9 \\
+    \end{pmatrix} \begin{pmatrix}
+        CA \\
+        PHC
+    \end{pmatrix} + \begin{pmatrix}
+        \delta_1 \\
+        \delta_2 \\
+        \delta_3 \\
+        \delta_4 \\
+        \delta_5 \\
+        \delta_6
+    \end{pmatrix} \\
+    \begin{pmatrix}
+        PVE1 \\
+        PVE2 \\
+        PVE3
+    \end{pmatrix} & = \begin{pmatrix}
+        \lambda_1 \\
+        \lambda_2 \\
+        \lambda_3
+    \end{pmatrix} \begin{pmatrix}
+        VE
+    \end{pmatrix} + \begin{pmatrix}
+        \varepsilon_1 \\
+        \varepsilon_2 \\
+        \varepsilon_3
+    \end{pmatrix}
+\end{align*}
+Sin pérdida de generalidad, podemos asumir que $\zeta \sim \mathcal{N} (0,1)$ y que $CA$ y $PHC$ tienen una distribución normal multivariada estándar, es decir:
+\[
+    (CA, PHC) \sim \mathcal{N} \left(\mu = (0,0), \Sigma = \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix} \right)
+\]
+Por otro lado, podemos asumir que $VE$ se distribuye de forma normal, pero no sabemos sus parámetros, por lo que podemos calcular su valor esperado:
+\begin{align*}
+    E(VE) & = E(\gamma_1 CA) + E(\gamma_2 PHC) + E(\zeta) \\
+          & = \gamma_1 E(CA) + \gamma_2 E(PHC) + 0        \\
+          & = \gamma_1 * 0 + \gamma_2 * 0                 \\
+          & = 0
+\end{align*}
+y su variancia:
+\begin{align*}
+    Var(VE) & = Var(\gamma_1 CA) + Var(\gamma_2 PHC) + Var(\zeta) \\
+            & = \gamma_1^2 Var(VA) + \gamma_2^2 Var(PHC) + 1      \\
+            & = \gamma_1^2 * 1 + \gamma_2^2 * 1 + 1               \\
+            & = \gamma_1^2 + \gamma_2^2 + 1
+\end{align*}
+Es decir, tenemos que $VE \sim \mathcal{N} (0, \gamma_1^2 + \gamma_2^2 + 1)$. Con respecto a las covariancias entre $VE$ y $CA$ tenemos que:
+\begin{align*}
+    Cov(VE, CA) & = Cov(\gamma_1 CA + \gamma_2 PHC + \zeta, CA)                   \\
+                & = Cov(\gamma_1 CA, CA) + Cov(\gamma_2 PHC, CA) + Cov(\zeta, CA) \\
+                & = \gamma_1 Cov(CA, CA) + \gamma_2 Cov(PHC, CA) + 0              \\
+                & = \gamma_1 Var(CA) + \gamma_2 * 0                               \\
+                & = \gamma_1 * 1 = \gamma_1
+\end{align*}
+Con respecto a la covariancia entre $VE$ y $PHC$, tenemos que:
+\begin{align*}
+    Cov(VE, PHC) & = Cov(\gamma_1 CA + \gamma_2 PHC + \zeta, PHC)                     \\
+                 & = Cov(\gamma_1 CA, PHC) + Cov(\gamma_2 PHC, PHC) + Cov(\zeta, PHC) \\
+                 & = \gamma_1 Cov(CA, PHC) + \gamma_2 Cov(PHC, PHC) + 0               \\
+                 & = \gamma_1 * 0 + \gamma_2 Var(PHC)                                 \\
+                 & = \gamma_2 * 1 = \gamma_2
+\end{align*}
+Por lo tanto, juntando todos los resultados, tenemos que:
+\[
+    (CA, PHC, VE) \sim \mathcal{N} \left(\mu = (0, 0, 0), \Sigma = \begin{pmatrix}
+        1         & 0         & \lambda_1                     \\
+        0         & 1         & \lambda_2                     \\
+        \lambda_1 & \lambda_2 & 1 + \lambda_1^2 + \lambda_2^2
+    \end{pmatrix} \right)
+\]
+Y con base en este resultado podemos simular los valores de las variables latentes y, con las cargas factoriales teóricas, simular los datos de las variables indicadoras, aplicando el método VM para obtener variables observadas con un asimetría y kurtosis dados. Por último, es importante resaltar que las estimaciones puntuales de la kurtosis obtenidas en los datos simulados mediante el método de Vale y Maurelli, tienden a ser menores, y con una variancia elevada, comparado con el valor deseado, sobre todo si la kurtosis es alta. Lo anterior ha sido estudiado en otras investigaciones [@OlveraAstivia2015], pero dado que no hay otro método sencillo para la estimación de variables correlacionadas con kurtosis, se decidió utilizar el método de Vale y Maurelli, sabiendo que los resultados obtenidos de la kurtosis en las variables observadas pueden diferir del valor que se quería originalmente.
 
 \subsection{Medidas de bondad de ajuste}
 

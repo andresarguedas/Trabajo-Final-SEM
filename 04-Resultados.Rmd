@@ -1,9 +1,8 @@
-\subsection{Introducción}
-
-
 \subsection{Análisis exploratorio}
 
-Como se mencionó anteriormente, la función `simulateData()` del paquete `lavaan` permite simular conjuntos de datos a partir de un SEM de referencia, que en este caso es el propuesto por @SuraFonseca2020; y cuyos datos pueden tener un determinado nivel de kurtosis especificado por el usuario mediante el argumento `kurtosis`. Como el nivel especificado de kurtosis solo se alcanza en tamaños de muestra muy superiores a los que son de interés en esta investigación, es importante analizar los niveles de kurtosis que realmente se obtuvieron en las simulaciones. Para ello, se calculó la kurtosis de cada variable indicadora en cada una de las 2000 iteraciones de cada escenario de simulación. Esta comparación se hace calculando la mediana y los percentiles 0.025 y 0.950 para los datos simulados.
+Como se mencionó anteriormente, la función `simulateData()` del paquete `lavaan` permite simular conjuntos de datos a partir de un SEM de referencia, que en este caso es el propuesto por @SuraFonseca2020; y cuyos datos pueden tener un determinado nivel de kurtosis especificado por el usuario mediante el argumento `kurtosis`. Como el nivel especificado de kurtosis solo se alcanza en tamaños de muestra muy superiores a los que son de interés en esta investigación, es importante analizar los niveles de kurtosis que realmente se obtuvieron en las simulaciones. Para ello, se calculó la kurtosis de cada variable indicadora en cada una de las 2000 iteraciones de cada escenario de simulación. Esta comparación se hace calculando la mediana y los percentiles 0.025 (2,5%) y 0.975 (97,5%) para los datos simulados, obteniendo así un intervalo con un 95% de los resultados de todas las simulaciones para cada escenario. Los Cuadros \ref{tab:n50_table}, \ref{tab:n100_table}, \ref{tab:n120_table}, \ref{tab:n200_table} y \ref{tab:n300_table} presentan dichas medidas de resumen para los casos en los cuales el tamaño de muestra es de 50, 100, 120, 200y 300, respectivamente.
+
+De forma general, se puede notar que, sin importar el tamaño de muestra utilizado, conforme aumenta el valor de la kurtosis, la variabilidad de las estimaciones de la kurtosis también aumenta. Con respecto a lo mencionado anteriormente, pero ahora dentro de cada uno de los distintos tamaños de muestra, se puede notar que, para un mismo valor deseado de la kurtosis, con respecto el tamaño de muestra aumenta, se reduce el ancho del intervalo y, adicionalmente, la estimación de la mediana se acerca más al valor deseado. Aun así, tal como lo presentan @OlveraAstivia2015, las estimaciones de la kurtosis son, por lo general, menores al valor deseado. Lo anterior empeora al utilizar un valor relativamente grande para la kurtosis, como los casos donde esta es de 6,65, 13,92 o 21,31, donde aún con un tamaño de muestra relativamente grande, como 200 o 300, las estimaciones son considerablmente menores que el valor deseado y tienen una gran variabilidad. Lo anterior hace que la kurtosis en las variables indicadoras simuladas sea más precisa en muestras más grandes, y sobretodo con valores pequeños deseados de la kurtosis. En conclusión, al momento de analizar los resultados presentados en las siguientes secciones, es importante recordar que los valores de la kurtosis obtenidos en las variables indicadoras son, en general, menores que el valor del escenario de simulación y pueden tener una gran variabilidad.
 
 ```{r}
 load("resumen_kurtosis.RData")
@@ -46,12 +45,10 @@ diff_n50 <- df_n50 %>%
   mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
 ```
 
-El cuadro \ref{tab:n50_table} muestra los resultados obtenidos al definir un tamaño de muestra de 50. Con este tamaño de muestra y `r paste(diff_n50$diff, collapse = ", ")`. 
-
 ```{r}
  df_n50 %>% 
   kable(., "latex", booktabs=T, escape = F, longtable=F, 
-        caption = "\\label{tab:n50_table}Kurtosis range for each variable by spicified Kurtosis and n=50", linesep="", digits = 2) %>% 
+        caption = "\\label{tab:n50_table}Kurtosis range for each variable by specified Kurtosis and n=50", linesep="", digits = 2) %>% 
   kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
                 repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
   collapse_rows(1, latex_hline = "major") %>% 
@@ -98,12 +95,10 @@ diff_n100 <- df_n100 %>%
   mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
 ```
 
-De manera similar, el cuadro \ref{tab:n100_table} muestra los resultados obtenidos al definir un tamaño de muestra de 100. Con este tamaño de muestra y `r paste(diff_n100$diff, collapse = ", ")`. 
-
 ```{r}
  df_n100 %>% 
   kable(., "latex", booktabs=T, escape = F, longtable=F, 
-        caption = "\\label{tab:n100_table}Kurtosis range for each variable by spicified Kurtosis and n=100", linesep="", digits = 2) %>% 
+        caption = "\\label{tab:n100_table}Kurtosis range for each variable by specified Kurtosis and n=100", linesep="", digits = 2) %>% 
   kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
                 repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
   collapse_rows(1, latex_hline = "major") %>% 
@@ -150,12 +145,10 @@ diff_n120 <- df_n120 %>%
   mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
 ```
 
-Por su parte, el cuadro \ref{tab:n120_table} muestra los resultados obtenidos al definir un tamaño de muestra de 120. Con este tamaño de muestra y `r paste(diff_n120$diff, collapse = ", ")`. 
-
 ```{r}
  df_n120 %>% 
   kable(., "latex", booktabs=T, escape = F, longtable=F, 
-        caption = "\\label{tab:n120_table}Kurtosis range for each variable by spicified Kurtosis and n=120", linesep="", digits = 2) %>% 
+        caption = "\\label{tab:n120_table}Kurtosis range for each variable by specified Kurtosis and n=120", linesep="", digits = 2) %>% 
   kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
                 repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
   collapse_rows(1, latex_hline = "major") %>% 
@@ -202,12 +195,10 @@ diff_n200 <- df_n200 %>%
   mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
 ```
 
-De manera análoga, el cuadro \ref{tab:n200_table} muestra los resultados obtenidos al definir un tamaño de muestra de 200. Con este tamaño de muestra y `r paste(diff_n200$diff, collapse = ", ")`. 
-
 ```{r}
  df_n200 %>% 
   kable(., "latex", booktabs=T, escape = F, longtable=F, 
-        caption = "\\label{tab:n200_table}Kurtosis range for each variable by spicified Kurtosis and n=200", linesep="", digits = 2) %>% 
+        caption = "\\label{tab:n200_table}Kurtosis range for each variable by specified Kurtosis and n=200", linesep="", digits = 2) %>% 
   kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
                 repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
   collapse_rows(1, latex_hline = "major") %>% 
@@ -254,12 +245,10 @@ diff_n300 <- df_n300 %>%
   mutate(diff=paste("definiendo kurtosis =", Kurtosis, "se obtienen en promedio valores", abs(Kurtosis-val), ifelse(val<Kurtosis, "veces menores", "veces mayores"), sep=" "))
 ```
 
-Finalmente, el cuadro \ref{tab:n300_table} muestra los resultados obtenidos al definir un tamaño de muestra de 300. Con este tamaño de muestra y `r paste(diff_n300$diff, collapse = ", ")`. 
-
 ```{r}
  df_n300 %>% 
   kable(., "latex", booktabs=T, escape = F, longtable=F, 
-        caption = "\\label{tab:n300_table}Kurtosis range for each variable by spicified Kurtosis and n=300", linesep="", digits = 2) %>% 
+        caption = "\\label{tab:n300_table}Kurtosis range for each variable by specified Kurtosis and n=300", linesep="", digits = 2) %>% 
   kable_styling(latex_options = c("striped", "scale_down", "repeat_header", "hold_position"), 
                 repeat_header_text = "(cont.)", full_width = T, font_size = 8.5) %>% 
   collapse_rows(1, latex_hline = "major") %>% 

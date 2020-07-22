@@ -23,6 +23,7 @@ library(carlians)
 requeridos(knitr, kableExtra, lavaan, ggplot2, tidyr, PerformanceAnalytics, ggpubr, dplyr)
 ```
 
+```{=latex}
 \begin{title}
 \title[maintitle = Kurtosis effects on Estimating Structural Equation Models Over Different Sample Sizes,
        secondtitle = Efectos de la Kurtosis en la estimación de Modelos de Ecuaciones Estructurales bajo distintos tamaños de muestra,
@@ -50,6 +51,7 @@ requeridos(knitr, kableExtra, lavaan, ggplot2, tidyr, PerformanceAnalytics, ggpu
                 city = San José,
                 country = Costa Rica]
 \end{institutions}
+```
 
 \begin{mainabstract}
  Insert your abstract here.

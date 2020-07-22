@@ -44,7 +44,7 @@
   urlcolor=blue,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{graphicx}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -118,12 +118,6 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newenvironment{cslreferences}%
-  {\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
-  {\par}
 
 \author{}
 \date{\vspace{-2.5em}}
@@ -322,77 +316,9 @@ serán descritos más adelante.
 
 \section{Methodology}
 
-\subsection{Generación de datos con kurtosis}
-
-Los datos fueron simulados mediante la función \texttt{simulateData()}
-del paquete \texttt{lavaan} (Rosseel,
-\protect\hyperlink{ref-lavaan}{2012}), el cual utiliza el método
-propuesto por Vale \& Maurelli (\protect\hyperlink{ref-Vale1983}{1983})
-para la simulación de datos no normales multivariados. Este método,
-comúnmente conocido como VM, se basa en el método propuesto por
-Fleishman (\protect\hyperlink{ref-Fleishman1978}{1978}), el cual, con
-base en una variable aleatoria distribuida como una normal estándar,
-permite simular una variable con un promedio, variancia, asimetría y
-kurtosis dada. El método VM permite especificar, adicionalmente,
-correlaciones entre las variables a estimar. Para utilizar el método de
-Fleishman, para generar una cierta variable aleatoria \(Y\), se utiliza
-la siguiente ecuación:
-
-\begin{equation} \label{eq:defY}
-  Y = a + bX + cX^2 + d X^3
-\end{equation}
-
-donde \(X \sim \mathcal{N} (0,1)\). Es decir, se puede generar una
-variable no normal \(Y\), con sus primeros cuatro momentos iguales a
-valores especificados, con base en los valores \(a\), \(b\), \(c\) y
-\(d\) de la ecuación \ref{eq:defY}, con base en una variable normal
-estándar \(X\) hasta su tercer potencia. Luego, para poder obtener los
-valores de \(a\), \(b\), \(c\) y \(d\), se necesitan resolver las
-siguientes ecuaciones de forma simultánea:
-
-\begin{align*}
-  b^2 + 6bd + 2c^2 + 15d^2 -1 & = 0 \\
-  2c (b^2 + 24bd + 105d^2 + 2) - \gamma_1 & = 0 \\
-  24 \left(bd + c^2 (1 + b^2 + 28bd) + d^2 (12 + 48bd + 141c^2 + 225d^2) \right) - \gamma_2 & = 0
-\end{align*}
-
-donde \(\gamma_1\) es la asimetría deseada y \(\gamma_2\) es la kurtosis
-deseada, además se define \(a = -c\). Con base en las constantes
-calculadas \(a\), \(b\), \(c\) y \(d\), además de una variable normal
-estándar, se puede simular variables no normales. Para poder generalizar
-el método de Fleishman a variables aleatorias multivariantes, Vale y
-Maurelli proponen una generalización. Esta se basa, para el caso
-bivariado, en la generación de dos variables aleatorias independientes,
-\(X_1, X_2 \sim \mathcal{N} (0,1)\), para la cuales se obtienen las
-constantes \(a\), \(b\), \(c\) y \(d\), para cada una de dichas
-variables, como se describe en el método de Fleishman, obteniendo así el
-vector \(w^\prime_1 = (a_1, b_1, c_1, d_1)\), para el caso de \(X_1\), y
-el vector \(w^\prime_2 = (a_2, b_2, c_2, d_2)\), para el caso de
-\(X_2\). Además, se definen los vectores
-\(x_1^\prime = (1, X_1, X_1^2, X_1^3)\) y
-\(x_2^\prime = (1, X_2, X_2^2, X_2^3)\). Por lo tanto, se pueden crear
-variables no normales, \(Y_1\) y \(Y_2\), como:
-
-\begin{align*}
-  Y_1 & = w_1^\prime x_1 \\
-  Y_2 & = w_2^\prime x_2
-\end{align*}
-
-donde se puede verificar que:
-
-\begin{align*}
-  r_{Y_1, Y_2} = & \rho_{X_1, X_2} (b_1 b_2 + 3b_1 d_2 + 3d_1 b_2 + 9 d_1 d_2) \\
-  & + \rho_{X_1, X_2}^2 (2 c_1 c_2) + \rho_{X_1, X_2}^3 (6 d_1 d_2)
-\end{align*}
-
-Y resolviendo esta ecuación en términos de \(\rho_{X_1, X_2}\) se puede
-obtener una matriz de correlaciones para generar datos normales
-multivariados, que pueden ser transformados en variables no normales
-mediante el método de Fleishman.
-
 \subsection{Modelo a estimar}
 
-El modelo teórico utilizada para realizar las simulaciones es el
+El modelo teórico utilizado para realizar las simulaciones es el
 presentado por Sura-Fonseca
 (\protect\hyperlink{ref-SuraFonseca2020}{2020}), basado en datos de 155
 estudiantes de la Universidad de Costa Rica, obtenidos de la Prueba de
@@ -409,15 +335,81 @@ refieren a la capacidad de los estudiantes para poder trabajar con
 objetos tridimensionales abstractos y poder manipularlos en la
 imaginación. Para cada una de estas variables latentes, se utilizó el
 método de parcelas para obtener tres variables indicadoras para cada uno
-de los constructos. Los resultados de la estimación de dicho modelo,
-presentados por Sura-Fonseca
-(\protect\hyperlink{ref-SuraFonseca2020}{2020}), se presentan en la
-Figura \ref{fig:mod_teorico}.
+de los constructos. Tanto el modelo teórico como los resultados de la
+estimación de dicho modelo, presentados por Sura-Fonseca
+(\protect\hyperlink{ref-SuraFonseca2020}{2020}), se presentan en las
+Figuras \ref{fig:mod_teorico} y \ref{fig:mod_estimado}, respectivamente.
 
 \begin{figure}[!h]
 \centering
-\caption{Modelo estimado sobre las habilidades cuantitativas}
+\caption{Theoretical model for analyzing cuantitative abilites}
 \label{fig:mod_teorico}
+\begin{tikzpicture}
+    [
+    basic/.style={draw, text centered},
+    circ/.style={basic, circle, minimum size=2em, inner sep=1.5pt},
+    rect/.style={basic, text height=1em, text depth=.5em, minimum width=1.5em},
+    >={Stealth[]}
+    ]
+
+    % Variables latentes
+    \node [circ] (ve) {VE};
+    \node [circ, above left=1.5cm and 0.8cm of ve] (ca) {CA};
+    \node [circ, below left=1.5cm and 0.8cm of ve] (phc) {PHC};
+    \draw [->] (ca) -- node[fill=white] {$\gamma_1$} (ve);
+    \draw [->] (phc) -- node[fill=white] {$\gamma_2$} (ve);
+    % Variancia de VE
+    \node [left=of ve] (delta) {$\zeta$};
+    \draw [->] (delta) -- (ve);
+    % Variables indicadoras de VE
+    \node [rect, above right=1cm and 2cm of ve.center] (pve1) {PVE1};
+    \node [rect, right=2cm of ve.center] (pve2) {PVE2};
+    \node [rect, below right=1cm and 2cm of ve.center] (pve3) {PVE3};
+    \draw [->] (ve) -- node[fill=white] {$\lambda_1$} (pve1.west);
+    \draw [->] (ve) -- node[fill=white] {$\lambda_2$} (pve2.west);
+    \draw [->] (ve) -- node[fill=white] {$\lambda_3$} (pve3.west);
+    % Variancia de variables indicadoras de VE
+    \node [right=of pve1] (epve1) {$\varepsilon_1$};
+    \node [right=of pve2] (epve2) {$\varepsilon_2$};
+    \node [right=of pve3] (epve3) {$\varepsilon_3$};
+    \draw [->] (epve1) -- (pve1);
+    \draw [->] (epve2) -- (pve2);
+    \draw [->] (epve3) -- (pve3);
+    % Variables indicadoras de CA
+    \node [rect, above left=1cm and 2cm of ca.center] (pc1) {PC1};
+    \node [rect, left=2cm of ca.center] (pc2) {PC2};
+    \node [rect, below left=1cm and 2cm of ca.center] (pc3) {PC3};
+    \draw [->] (ca) -- node[fill=white] {$\lambda_4$} (pc1.east);
+    \draw [->] (ca) -- node[fill=white] {$\lambda_5$} (pc2.east);
+    \draw [->] (ca) -- node[fill=white] {$\lambda_6$} (pc3.east);
+    % Variancia de variables indicadoras de CA
+    \node [left=of pc1] (epc1) {$\delta_1$};
+    \node [left=of pc2] (epc2) {$\delta_2$};
+    \node [left=of pc3] (epc3) {$\delta_3$};
+    \draw [->] (epc1) -- (pc1);
+    \draw [->] (epc2) -- (pc2);
+    \draw [->] (epc3) -- (pc3);
+    % Variables indicadoras de PHC
+    \node [rect, above left=1cm and 2cm of phc.center] (phc1) {PHC1};
+    \node [rect, left=2cm of phc.center] (phc2) {PHC2};
+    \node [rect, below left=1cm and 2cm of phc.center] (phc3) {PHC3};
+    \draw [->] (phc) -- node[fill=white] {$\lambda_7$} (phc1.east);
+    \draw [->] (phc) -- node[fill=white] {$\lambda_8$} (phc2.east);
+    \draw [->] (phc) -- node[fill=white] {$\lambda_9$} (phc3.east);
+    % Variancia de variables indicadoras de CA
+    \node [left=of phc1] (ephc1) {$\delta_4$};
+    \node [left=of phc2] (ephc2) {$\delta_5$};
+    \node [left=of phc3] (ephc3) {$\delta_6$};
+    \draw [->] (ephc1) -- (phc1);
+    \draw [->] (ephc2) -- (phc2);
+    \draw [->] (ephc3) -- (phc3);
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\caption{Estimated model for analyzing cuantitative abilites}
+\label{fig:mod_estimado}
 \begin{tikzpicture}
         [
     basic/.style={draw, text centered},
@@ -520,8 +512,8 @@ kurtosis & n & kurtosis & n & kurtosis & n & kurtosis & n & kurtosis & n\\
 \rowcolor{gray!6}  0.00 & 50 & 0.00 & 100 & 0.00 & 120 & 0.00 & 200 & 0.00 & 300\\
 0.62 & 50 & 0.62 & 100 & 0.62 & 120 & 0.62 & 200 & 0.62 & 300\\
 \rowcolor{gray!6}  6.65 & 50 & 6.65 & 100 & 6.65 & 120 & 6.65 & 200 & 6.65 & 300\\
-21.41 & 50 & 21.41 & 100 & 21.41 & 120 & 21.41 & 200 & 21.41 & 300\\
-\rowcolor{gray!6}  13.92 & 50 & 13.92 & 100 & 13.92 & 120 & 13.92 & 200 & 13.92 & 300\\
+13.92 & 50 & 13.92 & 100 & 13.92 & 120 & 13.92 & 200 & 13.92 & 300\\
+\rowcolor{gray!6}  21.41 & 50 & 21.41 & 100 & 21.41 & 120 & 21.41 & 200 & 21.41 & 300\\
 \bottomrule
 \multicolumn{10}{l}{\textit{Fuente:} Elaboración propia a partir del estudio de la Universidad de California (2008)}\\
 \end{tabu}}
@@ -534,6 +526,194 @@ datos, el siguiente paso es realizar la estimación de los SEM con cada
 uno de ellos; para ello es necesario definir un modelo sin los valores
 de las cargas factoriales, pues se busca conocer las estimaciones a
 partir de los datos generados.
+
+\subsection{Generación de datos con kurtosis}
+
+Los datos fueron simulados mediante la función \texttt{simulateData()}
+del paquete \texttt{lavaan} (Rosseel,
+\protect\hyperlink{ref-lavaan}{2012}), la cual permite simular datos con
+base en un modelo de ecuaciones estructurales dados. Los argumentos
+comúnmente utlizados para esta función son:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{model}: se utiliza para especificar el modelo a utilizar para
+  simular los datos, normalmente presentado en formato de un modelo de
+  \texttt{lavaan}
+\item
+  \texttt{sample.nobs}: se utiliza para especificar la cantidad de datos
+  a simular; en el caso de esta investigación, se utilizaron los tamaños
+  de muestra establecidos para cada escenario de simulación
+\item
+  \texttt{skewness}: se utiliza para especificar la asimetría de las
+  variables indicadoras, ya sea un valor común para todas las variables,
+  o definiendo un valor para cada variable por separado; en el caso de
+  esta investigación, dado que solamente se está estudiando el efecto de
+  la kurtosis, se definió la asimetría de todas las variables
+  indicadoras en 0 para todos los escenarios de simulación
+\item
+  \texttt{kurtosis}: se utiliza para especificar la kurtosis de las
+  variables indicadoras, al igual que la asimetría, puede ser un valor
+  común para todas las variables o definirse para cada variable por
+  separado; en el caso de esta investigación, este valor es igual al
+  valor de la kurtosis definido para cada uno de los escenarios de
+  simulación
+\end{itemize}
+
+Con respecto al método utilizado por \texttt{simulateData()} para
+simular observaciones de las variables indicadoras, este es el método
+propuesto por Vale \& Maurelli (\protect\hyperlink{ref-Vale1983}{1983})
+para la simulación de datos no normales multivariados, con una asimetría
+y kurtosis dados. Este método, comúnmente conocido como VM, se basa en
+el método propuesto por Fleishman
+(\protect\hyperlink{ref-Fleishman1978}{1978}), el cual, con base en una
+variable aleatoria distribuida como una normal estándar, permite simular
+una variable con un promedio, variancia, asimetría y kurtosis dada. El
+método VM permite especificar, adicionalmente, correlaciones entre las
+variables a estimar. Para utilizar el método de Fleishman, para generar
+una cierta variable aleatoria \(Y\), se utiliza la siguiente ecuación:
+\begin{equation} \label{eq:defY}
+  Y = a + bX + cX^2 + d X^3
+\end{equation} donde \(X \sim \mathcal{N} (0,1)\). Es decir, se puede
+generar una variable no normal \(Y\), con sus primeros cuatro momentos
+iguales a valores especificados, con base en los valores \(a\), \(b\),
+\(c\) y \(d\) de la ecuación \ref{eq:defY}, con base en una variable
+normal estándar \(X\) hasta su tercer potencia. Luego, para poder
+obtener los valores de \(a\), \(b\), \(c\) y \(d\), se necesitan
+resolver las siguientes ecuaciones de forma simultánea: \begin{align*}
+  b^2 + 6bd + 2c^2 + 15d^2 -1 & = 0 \\
+  2c (b^2 + 24bd + 105d^2 + 2) - \gamma_1 & = 0 \\
+  24 \left(bd + c^2 (1 + b^2 + 28bd) + d^2 (12 + 48bd + 141c^2 + 225d^2) \right) - \gamma_2 & = 0
+\end{align*} donde \(\gamma_1\) es la asimetría deseada y \(\gamma_2\)
+es la kurtosis deseada, además se define \(a = -c\). Con base en las
+constantes calculadas \(a\), \(b\), \(c\) y \(d\), además de una
+variable normal estándar, se puede simular variables no normales. Para
+poder generalizar el método de Fleishman a variables aleatorias
+multivariantes, Vale y Maurelli proponen una generalización. Esta se
+basa, para el caso bivariado, en la generación de dos variables
+aleatorias independientes, \(X_1, X_2 \sim \mathcal{N} (0,1)\), para la
+cuales se obtienen las constantes \(a\), \(b\), \(c\) y \(d\), para cada
+una de dichas variables, como se describe en el método de Fleishman,
+obteniendo así el vector \(w^\prime_1 = (a_1, b_1, c_1, d_1)\), para el
+caso de \(X_1\), y el vector \(w^\prime_2 = (a_2, b_2, c_2, d_2)\), para
+el caso de \(X_2\). Además, se definen los vectores
+\(x_1^\prime = (1, X_1, X_1^2, X_1^3)\) y
+\(x_2^\prime = (1, X_2, X_2^2, X_2^3)\). Por lo tanto, se pueden crear
+variables no normales, \(Y_1\) y \(Y_2\), como: \begin{align*}
+  Y_1 & = w_1^\prime x_1 \\
+  Y_2 & = w_2^\prime x_2
+\end{align*} donde se puede verificar que: \begin{align*}
+  r_{Y_1, Y_2} = & \rho_{X_1, X_2} (b_1 b_2 + 3b_1 d_2 + 3d_1 b_2 + 9 d_1 d_2) \\
+  & + \rho_{X_1, X_2}^2 (2 c_1 c_2) + \rho_{X_1, X_2}^3 (6 d_1 d_2)
+\end{align*} Y resolviendo esta ecuación en términos de
+\(\rho_{X_1, X_2}\) se puede obtener una matriz de correlaciones para
+generar datos normales multivariados, que pueden ser transformados en
+variables no normales mediante el método de Fleishman. Con base en el
+procedimiento presentado anteriormente, la función
+\texttt{simulateData()} parte de una serie de variables multinormales y
+permite al usuario especificar un valor para la asimetría y la kurtosis
+de las variables indicadoras, ya sea un valor distinto para cada
+variable, o un valor general para todas estas. Partiendo que el modelo
+téorico a utilizar es el presentado en la Figura \ref{fig:mod_teorico},
+se puede escribir dicho modelo en forma de ecuación, tal que:
+\begin{align*}
+    VE                        & = \gamma_1 CA + \gamma_2 PHC + \zeta                                              \\
+    \begin{pmatrix}
+        PC1  \\
+        PC2  \\
+        PC3  \\
+        PHC1 \\
+        PHC2 \\
+        PHC3
+    \end{pmatrix} & = \begin{pmatrix}
+        \lambda_4 & 0         \\
+        \lambda_5 & 0         \\
+        \lambda_6 & 0         \\
+        0         & \lambda_7 \\
+        0         & \lambda_8 \\
+        0         & \lambda_9 \\
+    \end{pmatrix} \begin{pmatrix}
+        CA \\
+        PHC
+    \end{pmatrix} + \begin{pmatrix}
+        \delta_1 \\
+        \delta_2 \\
+        \delta_3 \\
+        \delta_4 \\
+        \delta_5 \\
+        \delta_6
+    \end{pmatrix} \\
+    \begin{pmatrix}
+        PVE1 \\
+        PVE2 \\
+        PVE3
+    \end{pmatrix} & = \begin{pmatrix}
+        \lambda_1 \\
+        \lambda_2 \\
+        \lambda_3
+    \end{pmatrix} \begin{pmatrix}
+        VE
+    \end{pmatrix} + \begin{pmatrix}
+        \varepsilon_1 \\
+        \varepsilon_2 \\
+        \varepsilon_3
+    \end{pmatrix}
+\end{align*} Sin pérdida de generalidad, podemos asumir que
+\(\zeta \sim \mathcal{N} (0,1)\) y que \(CA\) y \(PHC\) tienen una
+distribución normal multivariada estándar, es decir: \[
+    (CA, PHC) \sim \mathcal{N} \left(\mu = (0,0), \Sigma = \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix} \right)
+\] Por otro lado, podemos asumir que \(VE\) se distribuye de forma
+normal, pero no sabemos sus parámetros, por lo que podemos calcular su
+valor esperado: \begin{align*}
+    E(VE) & = E(\gamma_1 CA) + E(\gamma_2 PHC) + E(\zeta) \\
+          & = \gamma_1 E(CA) + \gamma_2 E(PHC) + 0        \\
+          & = \gamma_1 * 0 + \gamma_2 * 0                 \\
+          & = 0
+\end{align*} y su variancia: \begin{align*}
+    Var(VE) & = Var(\gamma_1 CA) + Var(\gamma_2 PHC) + Var(\zeta) \\
+            & = \gamma_1^2 Var(VA) + \gamma_2^2 Var(PHC) + 1      \\
+            & = \gamma_1^2 * 1 + \gamma_2^2 * 1 + 1               \\
+            & = \gamma_1^2 + \gamma_2^2 + 1
+\end{align*} Es decir, tenemos que
+\(VE \sim \mathcal{N} (0, \gamma_1^2 + \gamma_2^2 + 1)\). Con respecto a
+las covariancias entre \(VE\) y \(CA\) tenemos que: \begin{align*}
+    Cov(VE, CA) & = Cov(\gamma_1 CA + \gamma_2 PHC + \zeta, CA)                   \\
+                & = Cov(\gamma_1 CA, CA) + Cov(\gamma_2 PHC, CA) + Cov(\zeta, CA) \\
+                & = \gamma_1 Cov(CA, CA) + \gamma_2 Cov(PHC, CA) + 0              \\
+                & = \gamma_1 Var(CA) + \gamma_2 * 0                               \\
+                & = \gamma_1 * 1 = \gamma_1
+\end{align*} Con respecto a la covariancia entre \(VE\) y \(PHC\),
+tenemos que: \begin{align*}
+    Cov(VE, PHC) & = Cov(\gamma_1 CA + \gamma_2 PHC + \zeta, PHC)                     \\
+                 & = Cov(\gamma_1 CA, PHC) + Cov(\gamma_2 PHC, PHC) + Cov(\zeta, PHC) \\
+                 & = \gamma_1 Cov(CA, PHC) + \gamma_2 Cov(PHC, PHC) + 0               \\
+                 & = \gamma_1 * 0 + \gamma_2 Var(PHC)                                 \\
+                 & = \gamma_2 * 1 = \gamma_2
+\end{align*} Por lo tanto, juntando todos los resultados, tenemos que:
+\[
+    (CA, PHC, VE) \sim \mathcal{N} \left(\mu = (0, 0, 0), \Sigma = \begin{pmatrix}
+        1         & 0         & \lambda_1                     \\
+        0         & 1         & \lambda_2                     \\
+        \lambda_1 & \lambda_2 & 1 + \lambda_1^2 + \lambda_2^2
+    \end{pmatrix} \right)
+\] Y con base en este resultado podemos simular los valores de las
+variables latentes y, con las cargas factoriales teóricas, simular los
+datos de las variables indicadoras, aplicando el método VM para obtener
+variables observadas con un asimetría y kurtosis dados. Por último, es
+importante resaltar que las estimaciones puntuales de la kurtosis
+obtenidas en los datos simulados mediante el método de Vale y Maurelli,
+tienden a ser menores, y con una variancia elevada, comparado con el
+valor deseado, sobre todo si la kurtosis es alta. Lo anterior ha sido
+estudiado en otras investigaciones (Olvera Astivia \& Zumbo,
+\protect\hyperlink{ref-OlveraAstivia2015}{2015}), pero dado que no hay
+otro método sencillo para la estimación de variables correlacionadas con
+kurtosis, se decidió utilizar el método de Vale y Maurelli, sabiendo que
+los resultados obtenidos de la kurtosis en las variables observadas
+pueden diferir del valor que se quería originalmente.
 
 \subsection{Medidas de bondad de ajuste}
 
@@ -614,8 +794,6 @@ ajuste cuando es menor que 0.9 (Kenny,
 
 \section{Results}
 
-\subsection{Introducción}
-
 \subsection{Análisis exploratorio}
 
 Como se mencionó anteriormente, la función \texttt{simulateData()} del
@@ -629,21 +807,39 @@ son de interés en esta investigación, es importante analizar los niveles
 de kurtosis que realmente se obtuvieron en las simulaciones. Para ello,
 se calculó la kurtosis de cada variable indicadora en cada una de las
 2000 iteraciones de cada escenario de simulación. Esta comparación se
-hace calculando la mediana y los percentiles 0.025 y 0.950 para los
-datos simulados.
+hace calculando la mediana y los percentiles 0.025 (2,5\%) y 0.975
+(97,5\%) para los datos simulados, obteniendo así un intervalo con un
+95\% de los resultados de todas las simulaciones para cada escenario.
+Los Cuadros \ref{tab:n50_table}, \ref{tab:n100_table},
+\ref{tab:n120_table}, \ref{tab:n200_table} y \ref{tab:n300_table}
+presentan dichas medidas de resumen para los casos en los cuales el
+tamaño de muestra es de 50, 100, 120, 200y 300, respectivamente.
 
-El cuadro \ref{tab:n50_table} muestra los resultados obtenidos al
-definir un tamaño de muestra de 50. Con este tamaño de muestra y
-definiendo kurtosis = 0 se obtienen en promedio valores 0.23 veces
-menores, definiendo kurtosis = 0.62 se obtienen en promedio valores 0.08
-veces menores, definiendo kurtosis = 6.65 se obtienen en promedio
-valores 2.03 veces menores, definiendo kurtosis = 13.92 se obtienen en
-promedio valores 3.64 veces menores, definiendo kurtosis = 21.41 se
-obtienen en promedio valores 5.19 veces menores.
+De forma general, se puede notar que, sin importar el tamaño de muestra
+utilizado, conforme aumenta el valor de la kurtosis, la variabilidad de
+las estimaciones de la kurtosis también aumenta. Con respecto a lo
+mencionado anteriormente, pero ahora dentro de cada uno de los distintos
+tamaños de muestra, se puede notar que, para un mismo valor deseado de
+la kurtosis, con respecto el tamaño de muestra aumenta, se reduce el
+ancho del intervalo y, adicionalmente, la estimación de la mediana se
+acerca más al valor deseado. Aun así, tal como lo presentan Olvera
+Astivia \& Zumbo (\protect\hyperlink{ref-OlveraAstivia2015}{2015}), las
+estimaciones de la kurtosis son, por lo general, menores al valor
+deseado. Lo anterior empeora al utilizar un valor relativamente grande
+para la kurtosis, como los casos donde esta es de 6,65, 13,92 o 21,31,
+donde aún con un tamaño de muestra relativamente grande, como 200 o 300,
+las estimaciones son considerablmente menores que el valor deseado y
+tienen una gran variabilidad. Lo anterior hace que la kurtosis en las
+variables indicadoras simuladas sea más precisa en muestras más grandes,
+y sobretodo con valores pequeños deseados de la kurtosis. En conclusión,
+al momento de analizar los resultados presentados en las siguientes
+secciones, es importante recordar que los valores de la kurtosis
+obtenidos en las variables indicadoras son, en general, menores que el
+valor del escenario de simulación y pueden tener una gran variabilidad.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-8}\label{tab:n50_table}Kurtosis range for each variable by spicified Kurtosis and n=50}
+\caption{\label{tab:unnamed-chunk-8}\label{tab:n50_table}Kurtosis range for each variable by specified Kurtosis and n=50}
 \centering
 \resizebox{\linewidth}{!}{
 \fontsize{8.5}{10.5}\selectfont
@@ -684,18 +880,9 @@ Kurtosis & Measure & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
 \end{tabu}}
 \end{table}
 
-De manera similar, el cuadro \ref{tab:n100_table} muestra los resultados
-obtenidos al definir un tamaño de muestra de 100. Con este tamaño de
-muestra y definiendo kurtosis = 0 se obtienen en promedio valores 0.13
-veces menores, definiendo kurtosis = 0.62 se obtienen en promedio
-valores 0.27 veces menores, definiendo kurtosis = 6.65 se obtienen en
-promedio valores 2.97 veces menores, definiendo kurtosis = 13.92 se
-obtienen en promedio valores 5.35 veces menores, definiendo kurtosis =
-21.41 se obtienen en promedio valores 7.52 veces menores.
-
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-10}\label{tab:n100_table}Kurtosis range for each variable by spicified Kurtosis and n=100}
+\caption{\label{tab:unnamed-chunk-10}\label{tab:n100_table}Kurtosis range for each variable by specified Kurtosis and n=100}
 \centering
 \resizebox{\linewidth}{!}{
 \fontsize{8.5}{10.5}\selectfont
@@ -736,18 +923,9 @@ Kurtosis & Measure & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
 \end{tabu}}
 \end{table}
 
-Por su parte, el cuadro \ref{tab:n120_table} muestra los resultados
-obtenidos al definir un tamaño de muestra de 120. Con este tamaño de
-muestra y definiendo kurtosis = 0 se obtienen en promedio valores 0.11
-veces menores, definiendo kurtosis = 0.62 se obtienen en promedio
-valores 0.32 veces menores, definiendo kurtosis = 6.65 se obtienen en
-promedio valores 3.18 veces menores, definiendo kurtosis = 13.92 se
-obtienen en promedio valores 5.89 veces menores, definiendo kurtosis =
-21.41 se obtienen en promedio valores 8.24 veces menores.
-
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-12}\label{tab:n120_table}Kurtosis range for each variable by spicified Kurtosis and n=120}
+\caption{\label{tab:unnamed-chunk-12}\label{tab:n120_table}Kurtosis range for each variable by specified Kurtosis and n=120}
 \centering
 \resizebox{\linewidth}{!}{
 \fontsize{8.5}{10.5}\selectfont
@@ -788,18 +966,9 @@ Kurtosis & Measure & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
 \end{tabu}}
 \end{table}
 
-De manera análoga, el cuadro \ref{tab:n200_table} muestra los resultados
-obtenidos al definir un tamaño de muestra de 200. Con este tamaño de
-muestra y definiendo kurtosis = 0 se obtienen en promedio valores 0.07
-veces menores, definiendo kurtosis = 0.62 se obtienen en promedio
-valores 0.41 veces menores, definiendo kurtosis = 6.65 se obtienen en
-promedio valores 3.77 veces menores, definiendo kurtosis = 13.92 se
-obtienen en promedio valores 7 veces menores, definiendo kurtosis =
-21.41 se obtienen en promedio valores 10.03 veces menores.
-
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-14}\label{tab:n200_table}Kurtosis range for each variable by spicified Kurtosis and n=200}
+\caption{\label{tab:unnamed-chunk-14}\label{tab:n200_table}Kurtosis range for each variable by specified Kurtosis and n=200}
 \centering
 \resizebox{\linewidth}{!}{
 \fontsize{8.5}{10.5}\selectfont
@@ -840,18 +1009,9 @@ Kurtosis & Measure & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9\\
 \end{tabu}}
 \end{table}
 
-Finalmente, el cuadro \ref{tab:n300_table} muestra los resultados
-obtenidos al definir un tamaño de muestra de 300. Con este tamaño de
-muestra y definiendo kurtosis = 0 se obtienen en promedio valores 0.05
-veces menores, definiendo kurtosis = 0.62 se obtienen en promedio
-valores 0.45 veces menores, definiendo kurtosis = 6.65 se obtienen en
-promedio valores 4.22 veces menores, definiendo kurtosis = 13.92 se
-obtienen en promedio valores 7.91 veces menores, definiendo kurtosis =
-21.41 se obtienen en promedio valores 11.44 veces menores.
-
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-16}\label{tab:n300_table}Kurtosis range for each variable by spicified Kurtosis and n=300}
+\caption{\label{tab:unnamed-chunk-16}\label{tab:n300_table}Kurtosis range for each variable by specified Kurtosis and n=300}
 \centering
 \resizebox{\linewidth}{!}{
 \fontsize{8.5}{10.5}\selectfont
@@ -1138,18 +1298,61 @@ n & Kurtosis & VE = CA & VE = PHC\\
 
 \section{Conclusions}
 
-\subsection{Introducción}
-
 \subsection{Conclusiones}
 
+Para empezar, es importante resaltar que los modelos estimados para cada
+uno de los escenarios de simulación, por lo general, presentaron un mal
+ajuste, con base en las medidas de ajuste utilizadas pero, al comparar
+las estimaciones de las cargas factoriales, estas fueron relativamente
+similares a las del modelo teórico. Esto se puede interpretar como que,
+al tener los datos simulados niveles de kurtosis tan variables, el
+ajuste del modelo es, por lo general, malo pero por esta misma
+variabilidad, pueden existir casos extremos donde el ajuste es muy bueno
+(kurtosis más pequeña que la deseada) o muy malo (kurtosis más grande
+que la deseada).
+
+Con respecto a las diferencias entre el ajuste del modelo y las
+estimaciones de las cargas factoriales, el método utilizado para simular
+los datos mantiene el mismo promedio que los datos multinormales
+originales, pero cambiando la asimetría y la kurtosis. De esta forma,
+los promedios de las variables indicadoras deberían ser iguales a si
+estos se estimaran con kurtosis cero, pero su variabilidad estimada debe
+cambiar conforme la kurtosis aumenta. Por lo anterior, aunque en
+promedio las estimaciones son similares a las teóricas, la variabilidad
+estimada para cada una de estas variables indicadoras puede ser mucho
+más grande que el estimado teóricamente, lo cual explica que las
+estimaciones de las cargas factoriales sean parecidas pero el modelo
+tenga un mal ajuste.
+
 \subsection{Recomendaciones}
+
+La principal recomendación, como se ha mencionado a lo largo del
+artículo, es utilizar otro método para la estimación de datos simulados
+con kurtosis, para poder obtener valores más consistentes y cercanos a
+los deseados en los escenarios de simulación. En el caso de Olvera
+Astivia \& Zumbo (\protect\hyperlink{ref-OlveraAstivia2015}{2015}) se
+recomienda utilizar el método de Headrick, el cual es una modificación
+al método de Vale y Maurelli que utiliza cinco inecuaciones en lugar de
+tres, para obtener valores más cercanos de la kurtosis, aunque todavía
+sesgados negativamente. Aunque este método está implementado en R, al
+tener que obtener el resultado de cinco inecuaciones de forma
+simultánea, y mediante métodos numéricos, las soluciones se vuelven poco
+estables y el método puede no converger, por lo que otra forma de poder
+dar solución a este método podría dar mejores resultados de kurtosis.
+
+Por otro lado, al utilizar un modelo téorico relativamente simple, el
+énfasis de esta investigación se centra sobre todo en las estimaciones
+de las cargas factoriales y de las relaciones entre los constructos. En
+caso de utilizar otro modelo teórico más complejo como, por ejemplo,
+estimando interceptos, correlaciones o análisis multigrupo, dichas
+estimaciones pueden presentar distintos resultados dependiendo de los
+escenarios de simulación presentados.
 
 \section{Appendices}
 
 \section*{References}
 
 \hypertarget{refs}{}
-\begin{cslreferences}
 \leavevmode\hypertarget{ref-Andreassen2006}{}%
 Andreassen, T. W., Lorentzen, B. G., \& Olsson, U. H. (2006). The impact
 of non-normality and estimation methods in SEM on satisfaction research
@@ -1216,6 +1419,13 @@ of the model. \emph{British Journal of Mathematical and Statistical
 Psychology}, \emph{45}(1), 19-30.
 \url{https://doi.org/10.1111/j.2044-8317.1992.tb00975.x}
 
+\leavevmode\hypertarget{ref-OlveraAstivia2015}{}%
+Olvera Astivia, O. L., \& Zumbo, B. D. (2015). A Cautionary Note on the
+Use of the Vale and Maurelli Method to Generate Multivariate, Nonnormal
+Data for Simulation Purposes. \emph{Educational and Psychological
+Measurement}, \emph{75}(4), 541-567.
+\url{https://doi.org/10.1177/0013164414548894}
+
 \leavevmode\hypertarget{ref-PerformanceAnalytics}{}%
 Peterson, B. G., \& Carl, P. (2020). \emph{PerformanceAnalytics:
 Econometric Tools for Performance and Risk Analysis}. Recuperado de
@@ -1269,6 +1479,5 @@ Recuperado de \url{https://CRAN.R-project.org/package=tidyr}
 Zhu, H. (2019). \emph{kableExtra: Construct Complex Table with 'kable'
 and Pipe Syntax}. Recuperado de
 \url{https://CRAN.R-project.org/package=kableExtra}
-\end{cslreferences}
 
 \end{document}
